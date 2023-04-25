@@ -43,8 +43,8 @@ const position = [
 function App() {
     return (
         <div>
-            <Map position={position}/>
-            {/*<Sign/>*/}
+            {/*<Map position={position}/>*/}
+            <Sign/>
         </div>
     )
 }
