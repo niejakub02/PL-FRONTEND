@@ -11,8 +11,6 @@ const LogIn = () => {
                 <Button variant="outlined" className='submit_button' margin="normal">Sign in</Button>
                 <p className="register_btn">Don’t have an <strong>account</strong> yet?</p>
             </div>
-            <img src="assets/login_bg.svg"
-                 className='login_bg'/>
         </>
     )
 }

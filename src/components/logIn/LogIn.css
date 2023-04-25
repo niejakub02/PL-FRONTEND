@@ -1,14 +1,3 @@
-.login_bg {
-    width: 80%;
-    height: 400px;
-    position: absolute;
-    z-index: -1;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-}
-
 .box_login {
     width: clamp(250px, 25%, 350px);
     height: 250px;

@@ -1,5 +1,5 @@
 import Map from "./components/map/Map.jsx";
-import LogIn from "./components/logIn/LogIn.jsx";
+import Sign from "./components/sign/Sign.jsx";
 
 import './App.css';
 
@@ -42,9 +42,9 @@ const position = [
 
 function App() {
     return (
-        <div className='app'>
-            {/*<Map position={position}/>*/}
-            <LogIn/>
+        <div>
+            <Map position={position}/>
+            {/*<Sign/>*/}
         </div>
     )
 }
