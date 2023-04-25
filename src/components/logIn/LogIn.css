@@ -1,0 +1,41 @@
+.login_bg {
+    width: 80%;
+    height: 400px;
+    position: absolute;
+    z-index: -1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+.box_login {
+    width: clamp(250px, 25%, 350px);
+    height: 250px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+
+    z-index: 1;
+}
+
+.submit_button {
+    border-color: black;
+    color: black;
+}
+
+.standard-basic {
+    width: 60%;
+    margin: 0 !important;
+}
+
+.register_btn {
+    margin-top: 5px;
+}

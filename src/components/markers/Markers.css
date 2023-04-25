@@ -1,0 +1,50 @@
+.head_information_human {
+    display: flex;
+    flex-direction: inherit;
+    align-items: center;
+    margin-bottom: 10px;
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.information_human {
+    width: 100%;
+    height: 100%;
+    padding-left: 20px;
+}
+
+.avatar_human {
+    border: 4px solid #2DAE27;
+    border-radius: 100%;
+    padding: 3px;
+}
+
+.information_human p {
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    width: 100px;
+    height: 27px;
+    background: #2DAE27;
+    color: white;
+    border-radius: 74px;
+    border: none;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.description_human {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.description_human p, ul {
+    width: 100%;
+    padding: 0;
+}
