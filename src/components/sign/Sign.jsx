@@ -1,11 +1,11 @@
-import LogIn from "../logIn/LogIn.jsx";
+import SignIn from "../signIn/SignIn.jsx";
 import SingUp from "../singUp/SingUp.jsx";
 import './Sign.css';
 
 const Sign = () => {
     return (
         <div className='sign'>
-            <LogIn />
+            <SignIn/>
             {/*<SingUp/>*/}
             <img src="assets/login_bg.svg"
                  className='login_bg'/>

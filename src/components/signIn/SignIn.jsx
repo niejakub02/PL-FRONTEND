@@ -1,8 +1,8 @@
 import {Button, TextField} from "@mui/material";
 
-import './LogIn.css'
+import '../sign/Sign.css';
 
-const LogIn = () => {
+const SignIn = () => {
     return (
         <>
             <div className='box_login'>
@@ -15,4 +15,4 @@ const LogIn = () => {
     )
 }
 
-export default LogIn;
+export default SignIn;

@@ -1,5 +1,5 @@
 import {Button, TextField} from "@mui/material";
-import '../logIn/LogIn.css';
+import '../sign/Sign.css';
 
 const SingUp = () => {
     return (
