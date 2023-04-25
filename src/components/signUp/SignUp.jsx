@@ -1,7 +1,7 @@
 import {Button, TextField} from "@mui/material";
 import '../sign/Sign.css';
 
-const SingUp = () => {
+const SignUp = () => {
     return (
         <>
             <div className='box_login'>
@@ -18,4 +18,4 @@ const SingUp = () => {
     )
 }
 
-export default SingUp;
+export default SignUp;
