@@ -1,7 +1,10 @@
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Map from "./components/map/Map.jsx";
 import Sign from "./components/sign/Sign.jsx";
 
 import './App.css';
+import SignUp from "./components/signUp/SignUp.jsx";
+import SignIn from "./components/signIn/SignIn.jsx";
 
 // Sample database
 const position = [
@@ -42,10 +45,17 @@ const position = [
 
 function App() {
     return (
-        <div>
-            {/*<Map position={position}/>*/}
-            <Sign/>
-        </div>
+        <Router>
+            <div>
+                <Routes>
+                    <Route path='/' element={<Map position={position}/>}/>
+                    <Route path='auth' element={<Sign/>}>
+                        <Route path='signIn' element={<SignIn/>}/>
+                        <Route path='signUp' element={<SignUp/>}/>
+                    </Route>
+                </Routes>
+            </div>
+        </Router>
     )
 }
 

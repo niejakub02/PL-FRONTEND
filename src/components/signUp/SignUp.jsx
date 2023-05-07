@@ -1,4 +1,6 @@
+import {Link} from "react-router-dom";
 import {Button, TextField} from "@mui/material";
+
 import '../sign/Sign.css';
 
 const SignUp = () => {
@@ -12,7 +14,7 @@ const SignUp = () => {
                 <TextField id="standard-basic" label="Repeat Password" variant="standard"
                            className='standard-basic' margin="normal"/>
                 <Button variant="outlined" className='submit_button' margin="normal">Sign up</Button>
-                <p className="register_btn">Do you have an <strong>account</strong> already?</p>
+                <p className="register_btn">Do you have an <Link to='../signIn'>account</Link> already?</p>
             </div>
         </>
     )

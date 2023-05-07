@@ -69,3 +69,9 @@
     font-size: 35px;
     font-weight: bold;
 }
+
+.box_login a{
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
