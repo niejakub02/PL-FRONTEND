@@ -13,7 +13,7 @@ const SignUp = () => {
                            className='standard-basic' margin="normal"/>
                 <TextField id="standard-basic" label="Repeat Password" variant="standard"
                            className='standard-basic' margin="normal"/>
-                <Button variant="outlined" className='submit_button' margin="normal">Sign up</Button>
+                <Button variant="outlined" className='submit_button' margin="normal"><Link to='../signIn'>Sign up</Link></Button>
                 <p className="register_btn">Do you have an <Link to='../signIn'>account</Link> already?</p>
             </div>
         </>
