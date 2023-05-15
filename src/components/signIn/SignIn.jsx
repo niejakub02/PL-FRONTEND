@@ -9,7 +9,7 @@ const SignIn = () => {
             <div className='box_login'>
                 <TextField id="standard-basic" label="Username" variant="standard" className='standard-basic' margin="normal"/>
                 <TextField id="standard-basic" label="Password" variant="standard" className='standard-basic' margin="normal"/>
-                <Button variant="outlined" className='submit_button' margin="normal">Sign in</Button>
+                <Button variant="outlined" className='submit_button' margin="normal"><Link to='../'>Sign in</Link></Button>
                 <p className="register_btn">Don’t have an <Link to='../signUp'>account</Link> yet?</p>
             </div>
         </>

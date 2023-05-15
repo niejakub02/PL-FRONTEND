@@ -1,0 +1,115 @@
+.all_contacts {
+    width: 100%;
+    height: calc(100% - 50px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.no-contacts {
+    width: 70%;
+    height: 80%;
+    justify-self: center;
+    color: #CCCCCC;
+    flex-direction: column;
+    text-align: center;
+}
+
+.no-contacts img {
+    width: 50%;
+    margin-bottom: 10px;
+}
+
+.people {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.one_person {
+    width: 100%;
+    height: 70px;
+    background: #EEEEEE;
+    border-radius: 10px;
+    margin-top: 10px;
+    padding: 30px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.25);
+}
+
+.information_friend {
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.one_person p {
+    margin: 0;
+    padding: 0;
+    width: fit-content;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    border-radius: 50%;
+    border: 2px solid black;
+    padding: 3px;
+    box-sizing: border-box;
+    margin-right: 10px;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.markers {
+    width: 106px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.markers img:hover {
+    cursor: pointer;
+}
+
+.search_contacts {
+    width: 100%;
+    height: 65px;
+    padding-right: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border: solid 1px #DFDFDF;
+}
+
+.search_contacts input {
+    width: 90%;
+    height: 100%;
+    border: none;
+    padding-left: 10px;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 15px;
+}
+
+.search_contacts legend {
+    margin-left: 20px;
+}
+
+.search_contacts img {
+    cursor: pointer;
+}

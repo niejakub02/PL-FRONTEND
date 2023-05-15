@@ -1,4 +1,23 @@
-.map {
+.box_home {
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.map_wrapper {
+    width: 100%;
+    height: 40vh;
+    border-radius: 10px;
+    padding: 10px;
+    border: solid 1px #DFDFDF;
+}
+
+.hint {
+    flex-direction: column;
+    text-align: center;
 }
