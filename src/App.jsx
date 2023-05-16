@@ -4,32 +4,33 @@ import SignUp from "./components/signUp/SignUp.jsx";
 import SignIn from "./components/signIn/SignIn.jsx";
 import Home from "./components/home/Home.jsx";
 import Settings from "./components/settings/Settings.jsx";
-import { position, countries, chat, friends } from "./Database.jsx";
+import { position, countries, chat, friends, languages } from "./Database.jsx";
 import "./App.css";
 
 function App() {
     return (
         <Router>
-            <div>
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <Home
-                                position={position}
-                                countries={countries}
-                                chat={chat}
-                                friends={friends}
-                            />
-                        }
-                    />
-                    <Route path="/" element={<Sign />}>
-                        <Route path="signIn" element={<SignIn />} />
-                        <Route path="signUp" element={<SignUp />} />
-                    </Route>
-                    <Route path="settings" element={<Settings />} />
-                </Routes>
-            </div>
+            <Routes>
+                <Route
+                    path="/"
+                    element={
+                        <Home
+                            position={position}
+                            countries={countries}
+                            chat={chat}
+                            friends={friends}
+                        />
+                    }
+                />
+                <Route path="/" element={<Sign />}>
+                    <Route path="signIn" element={<SignIn />} />
+                    <Route path="signUp" element={<SignUp />} />
+                </Route>
+                <Route
+                    path="settings"
+                    element={<Settings languages={languages} />}
+                />
+            </Routes>
         </Router>
     );
 }

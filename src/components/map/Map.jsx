@@ -16,13 +16,13 @@ const Map = (props) => {
         <div className="box_home">
             <div className="filter full_width">
                 <Autocomplete
+                    className="autocomplete_countries"
                     multiple
                     id="tags-outlined"
                     options={props.countries}
                     getOptionLabel={(option) => option.title}
                     filterSelectedOptions
                     onChange={onChangeEvent}
-                    readOnly={selectedOptions.length === 2}
                     renderInput={(params) => (
                         <TextField
                             {...params}

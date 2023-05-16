@@ -21,3 +21,11 @@
     flex-direction: column;
     text-align: center;
 }
+
+.autocomplete_countries{
+    width: 100%;
+}
+
+.autocomplete_countries button{
+    width: 35px;
+}

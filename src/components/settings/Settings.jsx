@@ -5,7 +5,8 @@ import Autocomplete from "@mui/material/Autocomplete";
 import "../sign/Sign.css";
 import "./Settings.css";
 
-const Settings = () => {
+const Settings = (props) => {
+    const languages = props.languages;
     return (
         <div className="main_sign">
             <Header show={1} />
@@ -19,7 +20,7 @@ const Settings = () => {
                         <div className="dots" />
                     </div>
                     <div className="boxes">
-                        <BoxesSettings
+                        <BoxSettings
                             type={
                                 <div className="avatar">
                                     <img src="https://i.pinimg.com/originals/a3/28/e0/a328e0a4361c2b157f1253f2ef69d608.jpg" />
@@ -27,11 +28,11 @@ const Settings = () => {
                             }
                             name={"Avatar"}
                         />
-                        <BoxesSettings
+                        <BoxSettings
                             type={<input type="text" value="ANIA" disabled />}
                             name={"FIRST NAME"}
                         />
-                        <BoxesSettings
+                        <BoxSettings
                             type={
                                 <input
                                     type="text"
@@ -41,11 +42,11 @@ const Settings = () => {
                             }
                             name={"LAST NAME"}
                         />
-                        <BoxesSettings
+                        <BoxSettings
                             type={<input type="number" value="20" disabled />}
                             name={"AGE"}
                         />
-                        <BoxesSettings
+                        <BoxSettings
                             type={
                                 <Autocomplete
                                     size="small"
@@ -56,18 +57,18 @@ const Settings = () => {
                                     getOptionLabel={(option) => option.title}
                                     defaultValue={[languages[0]]}
                                     filterSelectedOptions
+                                    readOnly
                                     renderInput={(params) => (
                                         <TextField
                                             {...params}
                                             placeholder="SEARCH"
                                         />
                                     )}
-                                    readOnly
                                 />
                             }
                             name={"LANGUAGES"}
                         />
-                        <BoxesSettings
+                        <BoxSettings
                             type={
                                 <textarea
                                     type="text"
@@ -97,7 +98,7 @@ const ButtonChange = () => {
     );
 };
 
-const BoxesSettings = (props) => {
+const BoxSettings = (props) => {
     return (
         <div className="block_settings flexCC">
             {props.type}
@@ -106,15 +107,5 @@ const BoxesSettings = (props) => {
         </div>
     );
 };
-
-export const languages = [
-    { id: 0, title: "Poland" },
-    { id: 1, title: "Italy" },
-    { id: 2, title: "Germany" },
-    { id: 3, title: "France" },
-    { id: 4, title: "China" },
-    { id: 5, title: "Austria" },
-    { id: 6, title: "Mexico" },
-];
 
 export default Settings;

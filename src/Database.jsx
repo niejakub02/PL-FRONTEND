@@ -49,9 +49,19 @@ export const countries = [
 ];
 
 export const chat = [
-    { id_message: 0, id1: 0, id2: 3, message: "Hi! 1" },
+    { id_message: 0, id1: 0, id2: 3, message: "Hi!" },
     { id_message: 1, id1: 3, id2: 0, message: "Hi!" },
     { id_message: 2, id1: 3, id2: 0, message: "How are you?" },
+];
+
+export const languages = [
+    { id: 0, title: "Polish" },
+    { id: 1, title: "English" },
+    { id: 2, title: "Spanish" },
+    { id: 3, title: "French" },
+    { id: 4, title: "Russian" },
+    { id: 5, title: "Turkish" },
+    { id: 6, title: "Japanese" },
 ];
 
 export const friends = [
