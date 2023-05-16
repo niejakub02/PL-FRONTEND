@@ -1,0 +1,104 @@
+.settings {
+    width: 40%;
+    height: 80vh;
+    min-width: 400px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.button_change {
+    width: 100px;
+    height: 35px;
+    background: white;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    color: #CCC;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 10px;
+}
+
+.button_change img{
+    height: 50%;
+    opacity: 0.5;
+}
+
+.block_settings {
+    width: 100%;
+    border-bottom: solid 1px #DFDFDF;
+    padding: 25px;
+    box-sizing: border-box;
+    position: relative;
+    flex-wrap: wrap;
+}
+
+.name_settings {
+    position: absolute;
+    left: 15px;
+    bottom: 10px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.block_settings input{
+    width: 30%;
+    background: none;
+    border: none;
+    color: #9c9c9c;
+}
+
+.block_settings input{
+    width: 30%;
+    background: none;
+    border: none;
+    color: #9c9c9c;
+}
+
+.block_settings textarea{
+    width: 90%;
+    height: 100px;
+    background: none;
+    border: none;
+    color: #9c9c9c;
+} 
+
+.boxes{
+    overflow: auto;
+}
+
+.save {
+    display: flex;
+    padding: 10px 25px;
+    box-sizing: border-box;
+    justify-content: end;
+    align-items: center;
+    border-top: solid 1px #DFDFDF;
+}
+
+.autocomplete {
+    width: 70%;
+    margin-bottom: 5px;
+}
+
+.autocomplete button{
+    width: 35px;
+}
+
+.block_settings input:focus {
+    outline: none;
+    color: black;
+}
+
+.block_settings textarea:focus {
+    outline: none;
+    color: black;
+}
+
+/* .block_settings img:hover{
+    cursor: pointer;
+} */
