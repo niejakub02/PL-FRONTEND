@@ -13,8 +13,17 @@ const Contacts = (props) => {
         </div>
     );
     return (
-        <div className="all_contacts">
-            {!count ? noContacts : <AllContacts friends={props.friends} />}
+        <div className="contacts">
+            <div className="header">
+                <div className="logo_main flexCC">
+                    <img src="../assets/user.svg" />
+                    <p>CONTACTS</p>
+                </div>
+                <div className="dots" />
+            </div>
+            <div className="all_contacts">
+                {!count ? noContacts : <AllContacts friends={props.friends} />}
+            </div>
         </div>
     );
 };
@@ -29,7 +38,10 @@ const AllContacts = (props) => {
                 sx={{ width: "100%" }}
                 InputProps={{
                     endAdornment: (
-                        <InputAdornment position="end">
+                        <InputAdornment
+                            position="end"
+                            className="search_contacts"
+                        >
                             <img src="../assets/search.svg" />
                         </InputAdornment>
                     ),

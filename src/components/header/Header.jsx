@@ -1,13 +1,17 @@
 import "./Header.css";
 import { Link } from "react-router-dom";
+import { Badge } from "@mui/material";
 
 const Header = (props) => {
-    // show 0 1 2
     const show = props.show;
+    const notifications = 1;
+
     const button = (
         <>
             <div className="button_header">
-                <img src="../assets/bell.svg" />
+                <Badge color="primary" variant={notifications ? "dot" : null}>
+                    <img src="../assets/bell.svg" />
+                </Badge>
                 {show == 2 ? (
                     <img src="../assets/profile.svg" />
                 ) : (
@@ -18,6 +22,7 @@ const Header = (props) => {
             </div>
         </>
     );
+
     return (
         <div className="logo">
             <div className="text_logo">
