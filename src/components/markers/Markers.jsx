@@ -4,7 +4,7 @@ import { Avatar, Button, Rating } from "@mui/material";
 import "./Markers.css";
 
 const Markers = ({ position }) => {
-    const markers = position.map((el, i) => {
+    const markers = position.map((el) => {
         return (
             <Marker position={[el.lat, el.lng]} key={el.id}>
                 <Popup>
@@ -24,8 +24,8 @@ const Markers = ({ position }) => {
                     <div className="description_human">
                         <p>{el.description}</p>
                         <ul>
-                            {el.help_list.map((list) => {
-                                return <li>{list}</li>;
+                            {el.help_list.map((list, i) => {
+                                return <li key={i}>{list}</li>;
                             })}
                         </ul>
                         <button>REACH OUT</button>

@@ -7,19 +7,10 @@
 .chat {
     position: absolute;
     bottom: 0;
-    /*width: 100%;*/
-    /*height: calc(100% - 50px);*/
-    /*height: 80%;*/
     box-sizing: border-box;
     padding: 0 20px;
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*justify-content: end;*/
-    /*gap: 10px;*/
-    /*overflow: auto;*/
     list-style-type: none;
     overflow: auto;
-    /*height: 100%;*/
     max-height: 100%;
 }
 
@@ -29,22 +20,21 @@
     border-radius: 5px;
     padding: 5px;
     font-size: 15px;
-    /*display: inline-block;*/
 }
 
 .ot_message {
-    background: #EEEEEE;
+    background: #eeeeee;
 }
 
 .my_message {
-    background: #DCDCDC;
+    background: #dcdcdc;
     margin-right: 0;
     margin-left: auto;
 }
 
 .panel {
     width: 100%;
-    border-top: solid 1px #DFDFDF;
+    border-top: solid 1px #dfdfdf;
     padding: 10px;
     box-sizing: border-box;
     display: flex;
@@ -55,17 +45,20 @@
 .panel input {
     width: 70%;
     height: 40px;
-    border: solid 1px #DFDFDF;
+    border: solid 1px #dfdfdf;
     border-radius: 10px;
     padding: 0 15px;
     font-size: 15px;
+    background: none;
+    outline: none;
 }
 
 .panel button {
     width: 20%;
     height: 40px;
     background: white;
-    border: solid 1px black;
+    opacity: 0.8;
     border-radius: 10px;
     color: black;
+    border: 1px solid #000000de;
 }

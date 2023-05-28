@@ -12,7 +12,7 @@
     width: 70%;
     height: 80%;
     justify-self: center;
-    color: #CCCCCC;
+    color: #cccccc;
     flex-direction: column;
     text-align: center;
 }
@@ -26,15 +26,18 @@
     width: 100%;
     height: 100%;
     overflow: auto;
+    padding: 3px 3px 0 0;
+    box-sizing: border-box;
+    margin-top: 5px;
 }
 
 .one_person {
     width: 100%;
     height: 70px;
-    background: #EEEEEE;
+    background: #eeeeee;
     border-radius: 10px;
-    margin-top: 10px;
-    padding: 30px;
+    margin-bottom: 12px;
+    padding: 0 30px;
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
@@ -57,20 +60,12 @@
 }
 
 .avatar {
-    width: 50px;
-    height: 50px;
-    min-width: 50px;
     border-radius: 50%;
     border: 2px solid black;
+    background: none;
     padding: 3px;
     box-sizing: border-box;
     margin-right: 10px;
-}
-
-.avatar img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
 }
 
 .markers {
@@ -93,7 +88,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    border: solid 1px #DFDFDF;
+    border: solid 1px #dfdfdf;
 }
 
 .search_contacts input {

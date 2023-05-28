@@ -1,4 +1,4 @@
-import { InputAdornment, TextField } from "@mui/material";
+import { InputAdornment, TextField, Avatar } from "@mui/material";
 import "./Contacts.css";
 
 const Contacts = (props) => {
@@ -26,18 +26,22 @@ const AllContacts = (props) => {
             <TextField
                 variant="outlined"
                 label="Search contacts"
-                sx={{ width: '100%' }}
+                sx={{ width: "100%" }}
                 InputProps={{
-                    endAdornment: <InputAdornment position="end"><img src="../assets/search.svg" /></InputAdornment>,
+                    endAdornment: (
+                        <InputAdornment position="end">
+                            <img src="../assets/search.svg" />
+                        </InputAdornment>
+                    ),
                 }}
             />
             <div className="people">
-                {friends.map((el) => {
+                {friends.map((el, i) => {
                     return (
-                        <div className="one_person " key={el.id}>
+                        <div className="one_person " key={i + el.id}>
                             <div className="flexCC">
                                 <div className="avatar">
-                                    <img src={el.img} />
+                                    <Avatar alt={el.name} src={el.img} />
                                 </div>
                                 <p>{el.name}</p>
                             </div>

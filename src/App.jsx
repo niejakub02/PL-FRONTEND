@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Sign from "./components/sign/Sign.jsx";
+import Sign from "./pages/sign/Sign";
 import SignUp from "./components/signUp/SignUp.jsx";
 import SignIn from "./components/signIn/SignIn.jsx";
-import Home from "./components/home/Home.jsx";
-import Settings from "./components/settings/Settings.jsx";
+import Home from "./pages/home/Home.jsx";
+import Settings from "./pages/settings/Settings.jsx";
 import { position, countries, chat, friends, languages } from "./Database.jsx";
 import "./App.css";
 
