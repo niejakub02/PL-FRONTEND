@@ -1,3 +1,4 @@
+import { InputAdornment, TextField } from "@mui/material";
 import "./Contacts.css";
 
 const Contacts = (props) => {
@@ -22,11 +23,14 @@ const AllContacts = (props) => {
     const friends = props.friends;
     return (
         <>
-            <fieldset className="search_contacts">
-                <legend>Search contacts</legend>
-                <input type="text" placeholder="SEARCH" />
-                <img src="../assets/search.svg" />
-            </fieldset>
+            <TextField
+                variant="outlined"
+                label="Search contacts"
+                sx={{ width: '100%' }}
+                InputProps={{
+                    endAdornment: <InputAdornment position="end"><img src="../assets/search.svg" /></InputAdornment>,
+                }}
+            />
             <div className="people">
                 {friends.map((el) => {
                     return (

@@ -4,10 +4,13 @@ import { Switch } from "@mui/material";
 import InitMap from "../initMap/initMap.jsx";
 import "./Map.css";
 import { useState } from "react";
+import { autocompleteOptions } from "../../utils/mockData.js";
+import { sortBy } from "lodash";
 
 const Map = (props) => {
     const [selectedOptions, setSelectedOptions] = useState([]);
-
+    const autocompleteOptionsSorted = sortBy(autocompleteOptions, ['type', 'value']);
+    
     const onChangeEvent = (event, value) => {
         setSelectedOptions(value);
     };
@@ -18,9 +21,11 @@ const Map = (props) => {
                 <Autocomplete
                     className="autocomplete_countries"
                     multiple
+                    limitTags={2}
                     id="tags-outlined"
-                    options={props.countries}
-                    getOptionLabel={(option) => option.title}
+                    options={autocompleteOptionsSorted}
+                    groupBy={option => option.type}
+                    getOptionLabel={(option) => option.type === 'CITY' ? `📍 ${option.value}` : `🌐 ${option.value}`}
                     filterSelectedOptions
                     onChange={onChangeEvent}
                     renderInput={(params) => (
