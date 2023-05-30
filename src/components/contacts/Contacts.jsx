@@ -1,4 +1,4 @@
-import { InputAdornment, TextField } from "@mui/material";
+import { InputAdornment, TextField, Avatar } from "@mui/material";
 import "./Contacts.css";
 
 const Contacts = (props) => {
@@ -13,8 +13,17 @@ const Contacts = (props) => {
         </div>
     );
     return (
-        <div className="all_contacts">
-            {!count ? noContacts : <AllContacts friends={props.friends} />}
+        <div className="contacts">
+            <div className="header">
+                <div className="logo_main flexCC">
+                    <img src="../assets/user.svg" />
+                    <p>CONTACTS</p>
+                </div>
+                <div className="dots" />
+            </div>
+            <div className="all_contacts">
+                {!count ? noContacts : <AllContacts friends={props.friends} />}
+            </div>
         </div>
     );
 };
@@ -26,18 +35,25 @@ const AllContacts = (props) => {
             <TextField
                 variant="outlined"
                 label="Search contacts"
-                sx={{ width: '100%' }}
+                sx={{ width: "100%" }}
                 InputProps={{
-                    endAdornment: <InputAdornment position="end"><img src="../assets/search.svg" /></InputAdornment>,
+                    endAdornment: (
+                        <InputAdornment
+                            position="end"
+                            className="search_contacts"
+                        >
+                            <img src="../assets/search.svg" />
+                        </InputAdornment>
+                    ),
                 }}
             />
             <div className="people">
-                {friends.map((el) => {
+                {friends.map((el, i) => {
                     return (
-                        <div className="one_person " key={el.id}>
+                        <div className="one_person " key={i + el.id}>
                             <div className="flexCC">
                                 <div className="avatar">
-                                    <img src={el.img} />
+                                    <Avatar alt={el.name} src={el.img} />
                                 </div>
                                 <p>{el.name}</p>
                             </div>

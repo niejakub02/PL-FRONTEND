@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button, TextField } from "@mui/material";
 
-import "../sign/Sign.css";
+import "../../pages/sign/Sign";
 
 const SignUp = () => {
     return (

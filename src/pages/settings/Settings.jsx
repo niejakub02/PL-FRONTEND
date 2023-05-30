@@ -1,15 +1,14 @@
-import Header from "../header/Header.jsx";
-import { Button, TextField } from "@mui/material";
-import { Link, Outlet } from "react-router-dom";
+import Header from "../../components/header/Header.jsx";
+import { Avatar, TextField } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
-import "../sign/Sign.css";
+import "../../pages/sign/Sign.css";
 import "./Settings.css";
 
 const Settings = (props) => {
     const languages = props.languages;
     return (
         <div className="main_sign">
-            <Header show={1} />
+            <Header show={2} />
             <div className="sign">
                 <div className="settings">
                     <div className="header">
@@ -23,7 +22,10 @@ const Settings = (props) => {
                         <BoxSettings
                             type={
                                 <div className="avatar">
-                                    <img src="https://i.pinimg.com/originals/a3/28/e0/a328e0a4361c2b157f1253f2ef69d608.jpg" />
+                                    <Avatar
+                                        alt="ANIA"
+                                        src="https://i.pinimg.com/originals/a3/28/e0/a328e0a4361c2b157f1253f2ef69d608.jpg"
+                                    />
                                 </div>
                             }
                             name={"Avatar"}

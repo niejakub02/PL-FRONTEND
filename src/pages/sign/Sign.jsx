@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 
 import "./Sign.css";
-import Header from "../header/Header.jsx";
+import Header from "../../components/header/Header.jsx";
 
 const Sign = () => {
     return (
