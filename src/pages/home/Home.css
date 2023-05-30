@@ -101,7 +101,7 @@
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 570px) {
     .home {
         height: auto;
         grid-template-columns: auto;
@@ -126,5 +126,9 @@
     .logo {
         grid-column: 1 / 2;
         grid-row: 1;
+    }
+
+    .notification {
+        width: 100%;
     }
 }

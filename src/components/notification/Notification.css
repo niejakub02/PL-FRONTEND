@@ -1,7 +1,6 @@
 .notification {
     max-height: 350px;
     width: 500px;
-    min-width: 300px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     display: flex;
     flex-direction: column;
@@ -43,7 +42,7 @@
 
 .one_person_notification::after {
     content: "";
-    width: 200px;
+    width: 250px;
     height: 1px;
     background: #dfdfdf;
     position: absolute;
@@ -53,7 +52,7 @@
 }
 
 .markers_notification {
-    width: 53px;
+    width: 60px;
     height: 100%;
     display: flex;
     justify-content: space-between;
