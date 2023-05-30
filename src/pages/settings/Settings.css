@@ -1,6 +1,5 @@
 .settings {
     width: 40%;
-    height: 80vh;
     min-width: 400px;
     background: white;
     border-radius: 10px;
@@ -8,30 +7,33 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    background: #F5F5F5;
+    background: #f5f5f5;
+}
+
+.settings_height {
+    height: 80vh;
 }
 
 .button_change {
     width: 100px;
     height: 35px;
     background: none;
-    border: 1px solid #CCC;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    color: #CCC;
+    color: #ccc;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    margin: 10px;
 }
 
-.button_change img{
+.button_change img {
     height: 50%;
     opacity: 0.5;
 }
 
 .block_settings {
     width: 100%;
-    border-bottom: solid 1px #DFDFDF;
+    border-bottom: solid 1px #dfdfdf;
     padding: 25px;
     box-sizing: border-box;
     position: relative;
@@ -46,39 +48,40 @@
     font-weight: bold;
 }
 
-.block_settings input{
+.block_settings input {
     width: 30%;
     background: none;
     border: none;
     color: #9c9c9c;
 }
 
-.block_settings input{
+.block_settings input {
     width: 30%;
     background: none;
     border: none;
     color: #9c9c9c;
 }
 
-.block_settings textarea{
+.block_settings textarea {
     width: 90%;
     height: 100px;
     background: none;
     border: none;
     color: #9c9c9c;
-} 
+}
 
-.boxes{
+.boxes {
     overflow: auto;
 }
 
 .save {
+    height: 50px;
     display: flex;
     padding: 10px 25px;
     box-sizing: border-box;
     justify-content: end;
     align-items: center;
-    border-top: solid 1px #DFDFDF;
+    border-top: solid 1px #dfdfdf;
 }
 
 .autocomplete {
@@ -86,7 +89,7 @@
     margin-bottom: 5px;
 }
 
-.autocomplete button{
+.autocomplete button {
     width: 35px;
 }
 

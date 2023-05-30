@@ -10,7 +10,7 @@ const Settings = (props) => {
         <div className="main_sign">
             <Header show={2} />
             <div className="sign">
-                <div className="settings">
+                <div className="settings settings_height">
                     <div className="header">
                         <div className="logo_main flexCC">
                             <img src="../assets/settings.svg" />
