@@ -1,42 +1,70 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import { Avatar, Dialog } from "@mui/material";
+import "../contacts/Contacts.css";
+import "./Modal.css";
 
-const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-};
-
-const KeepMountedModal = () => {
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
+const ModalComponent = ({ open, setOpen, friends }) => {
     const handleClose = () => setOpen(false);
 
     return (
         <div>
-            <Button onClick={handleOpen}>Open modal</Button>
-            <Modal
-                keepMounted
+            <Dialog
                 open={open}
                 onClose={handleClose}
-                aria-labelledby="keep-mounted-modal-title"
-                aria-describedby="keep-mounted-modal-description"
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
             >
-                <Box sx={style}>
-                    <p>Hi</p>
-                </Box>
-            </Modal>
+                <Notification friends={friends} handleClose={handleClose} />
+            </Dialog>
         </div>
     );
 };
 
-export default KeepMountedModal;
+const Notification = ({ friends, handleClose }) => {
+    return (
+        <div className="notification">
+            <div className="header">
+                <div className="logo_notification flexCC">
+                    <img src="../assets/notification.svg" />
+                    <p>NOTIFICATIONS</p>
+                </div>
+                <img
+                    src="../assets/exit.svg"
+                    onClick={handleClose}
+                    className="exit_button"
+                />
+            </div>
+            <div className="all_people">
+                {friends.map((el) => {
+                    return <OnePersonNotification friend={el} key={el.id} />;
+                })}
+            </div>
+            <div className="save">
+                <button className="button_accept buttons_notification">
+                    ACCEPT ALL
+                </button>
+                <button className="buttons_notification">REJECT ALL</button>
+            </div>
+        </div>
+    );
+};
+
+const OnePersonNotification = ({ friend }) => {
+    return (
+        <div className="one_person_notification" key={friend.id}>
+            <div className="flexCC notification_inf">
+                <div className="avatar">
+                    <Avatar alt={friend.name} src={friend.img} />
+                </div>
+                <p style={{ fontSize: "11px" }}>
+                    <b>PERSON {friend.id + 1}</b> IS TRYING TO REACH OUT TO YOU
+                </p>
+            </div>
+            <div className="markers_notification">
+                <img src="../assets/ok.svg" />
+                <img src="../assets/no.svg" />
+            </div>
+        </div>
+    );
+};
+
+export default ModalComponent;
