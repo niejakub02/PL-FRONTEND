@@ -1,15 +1,18 @@
 import { useState } from "react";
-import { Avatar, Rating } from "@mui/material";
-import "../contacts/Contacts.css";
-import "../notification/Notification.css";
+import { Rating } from "@mui/material";
+import AvatarBox from "../avatar/Avatar";
+
+import "../../pages/sign/Sign.css";
+import "../modal/Modal.css";
 import "./Review.css";
 
 const Review = ({ friends, handleClose }) => {
     const [value, setValue] = useState(0);
+
     return (
-        <div className="modal_review">
+        <div className="box_modal">
             <div className="header">
-                <div className="logo_notification flexCC">
+                <div className="logo_modal_box flexCC">
                     <img src="../assets/review.svg" />
                     <p>REVIEW</p>
                 </div>
@@ -20,15 +23,13 @@ const Review = ({ friends, handleClose }) => {
                 />
             </div>
             <div className="review">
-                <div className="full_width review_inf">
+                <div className="full_width review_personal_information">
                     <div className="flexCC">
-                        <div className="avatar">
-                            <Avatar
-                                alt={friends[0].name}
-                                src={friends[0].img}
-                            />
-                        </div>
-                        <p style={{ fontSize: "15px" }}>
+                        <AvatarBox
+                            name={friends[0].name}
+                            img={friends[0].img}
+                        />
+                        <p>
                             {friends[0].name} | met <b>17-07-2023</b>
                         </p>
                     </div>
@@ -44,10 +45,8 @@ const Review = ({ friends, handleClose }) => {
                     placeholder={`What are your thoughts about ${friends[0].name}?`}
                 ></textarea>
             </div>
-            <div className="save">
-                <button className="button_accept buttons_notification">
-                    Send
-                </button>
+            <div className="panel_buttons">
+                <button className="buttons">Send</button>
             </div>
         </div>
     );

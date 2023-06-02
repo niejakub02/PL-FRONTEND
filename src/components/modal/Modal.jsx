@@ -1,10 +1,6 @@
 import { Dialog } from "@mui/material";
-import Notification from "../notification/Notification";
-import Review from "../review/Review";
 
-const ModalComponent = ({ open, setOpen, friends }) => {
-    const handleClose = () => setOpen(false);
-
+const ModalComponent = ({ open, handleClose, children }) => {
     return (
         <div>
             <Dialog
@@ -12,10 +8,8 @@ const ModalComponent = ({ open, setOpen, friends }) => {
                 onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
-                className="modal"
             >
-                {/* <Notification friends={friends} handleClose={handleClose} /> */}
-                <Review friends={friends} handleClose={handleClose} />
+                {children}
             </Dialog>
         </div>
     );
