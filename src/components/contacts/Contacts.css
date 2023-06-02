@@ -74,15 +74,6 @@
     text-overflow: ellipsis;
 }
 
-.avatar {
-    border-radius: 50%;
-    border: 2px solid black;
-    background: none;
-    padding: 3px;
-    box-sizing: border-box;
-    margin-right: 10px;
-}
-
 .markers {
     width: 106px;
     height: 100%;

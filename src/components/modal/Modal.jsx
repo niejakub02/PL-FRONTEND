@@ -1,9 +1,6 @@
 import { Dialog } from "@mui/material";
-import Notification from "../notification/Notification";
 
-const ModalComponent = ({ open, setOpen, friends }) => {
-    const handleClose = () => setOpen(false);
-
+const ModalComponent = ({ open, handleClose, children }) => {
     return (
         <div>
             <Dialog
@@ -12,7 +9,7 @@ const ModalComponent = ({ open, setOpen, friends }) => {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <Notification friends={friends} handleClose={handleClose} />
+                {children}
             </Dialog>
         </div>
     );

@@ -1,4 +1,5 @@
-import { InputAdornment, TextField, Avatar } from "@mui/material";
+import { InputAdornment, TextField } from "@mui/material";
+import AvatarBox from "../avatar/Avatar";
 import "./Contacts.css";
 
 const Contacts = (props) => {
@@ -52,9 +53,7 @@ const AllContacts = (props) => {
                     return (
                         <div className="one_person " key={i + el.id}>
                             <div className="flexCC">
-                                <div className="avatar">
-                                    <Avatar alt={el.name} src={el.img} />
-                                </div>
+                                <AvatarBox name={el.name} img={el.img} />
                                 <p>{el.name}</p>
                             </div>
                             <div className="markers">

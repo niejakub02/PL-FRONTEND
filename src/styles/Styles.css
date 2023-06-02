@@ -1,0 +1,63 @@
+.overflow {
+    overflow: auto;
+}
+
+.panel_buttons {
+    height: 50px;
+    display: flex;
+    padding: 10px 25px;
+    box-sizing: border-box;
+    justify-content: end;
+    align-items: center;
+    border-top: solid 1px #dfdfdf;
+}
+
+.dots {
+    width: 7px;
+    height: 7px;
+    background: #ccc;
+    border-radius: 50%;
+    position: relative;
+    margin-right: 15px;
+}
+
+.dots::before {
+    content: "";
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: black;
+    position: absolute;
+    left: -13px;
+}
+
+.dots::after {
+    content: "";
+    display: block;
+    width: 7px;
+    height: 7px;
+    background: #b6beb6;
+    border-radius: 50%;
+    opacity: 0.3;
+    position: absolute;
+    left: 13px;
+}
+
+.buttons {
+    width: 100px;
+    height: 35px;
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-left: 5px;
+}
+
+.buttons img {
+    height: 50%;
+    opacity: 0.5;
+}

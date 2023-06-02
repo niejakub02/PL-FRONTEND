@@ -1,0 +1,29 @@
+.review {
+    padding: 10px 25px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.review_personal_information {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.review textarea {
+    width: 100%;
+    height: 150px;
+    max-height: 150px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: solid 2px #dfdfdf;
+    border-radius: 10px;
+    outline: none;
+    resize: none;
+}
+
+.review p {
+    font-size: 15px;
+}

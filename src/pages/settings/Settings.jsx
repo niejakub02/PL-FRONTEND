@@ -1,6 +1,8 @@
 import Header from "../../components/header/Header.jsx";
-import { Avatar, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
+import AvatarBox from "../../components/avatar/Avatar.jsx";
 import Autocomplete from "@mui/material/Autocomplete";
+import "../../styles/Styles.css";
 import "../../pages/sign/Sign.css";
 import "./Settings.css";
 
@@ -8,9 +10,9 @@ const Settings = (props) => {
     const languages = props.languages;
     return (
         <div className="main_sign">
-            <Header show={2} />
+            <Header show={2} handleOpen={props.handleOpen} />
             <div className="sign">
-                <div className="settings settings_height">
+                <div className="settings">
                     <div className="header">
                         <div className="logo_main flexCC">
                             <img src="../assets/settings.svg" />
@@ -18,17 +20,17 @@ const Settings = (props) => {
                         </div>
                         <div className="dots" />
                     </div>
-                    <div className="boxes">
+                    <div className="overflow">
                         <BoxSettings
                             type={
-                                <div className="avatar">
-                                    <Avatar
-                                        alt="ANIA"
-                                        src="https://i.pinimg.com/originals/a3/28/e0/a328e0a4361c2b157f1253f2ef69d608.jpg"
-                                    />
-                                </div>
+                                <AvatarBox
+                                    name={"ANIA"}
+                                    img={
+                                        "https://i.pinimg.com/originals/a3/28/e0/a328e0a4361c2b157f1253f2ef69d608.jpg"
+                                    }
+                                />
                             }
-                            name={"Avatar"}
+                            name={"AVATAR"}
                         />
                         <BoxSettings
                             type={<input type="text" value="ANIA" disabled />}
@@ -52,7 +54,7 @@ const Settings = (props) => {
                             type={
                                 <Autocomplete
                                     size="small"
-                                    className="autocomplete"
+                                    className="autocomplete_languages"
                                     multiple
                                     id="tags-outlined"
                                     options={languages}
@@ -81,22 +83,14 @@ const Settings = (props) => {
                             name={"DESCRIPTION"}
                         />
                     </div>
-                    <div className="save">
-                        <button className="button_change">Save</button>
+                    <div className="panel_buttons">
+                        <button className="buttons">Save</button>
                     </div>
                 </div>
+
                 <img src="../assets/login_bg.svg" className="login_bg" />
             </div>
         </div>
-    );
-};
-
-const ButtonChange = () => {
-    return (
-        <button className="button_change">
-            <p>CHANGE</p>
-            <img src="../assets/pencil.png" />
-        </button>
     );
 };
 
@@ -104,7 +98,10 @@ const BoxSettings = (props) => {
     return (
         <div className="block_settings flexCC">
             {props.type}
-            <ButtonChange />
+            <button className="buttons">
+                <p>CHANGE</p>
+                <img src="../assets/pencil.png" />
+            </button>
             <p className="name_settings">{props.name}</p>
         </div>
     );

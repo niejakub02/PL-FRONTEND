@@ -41,38 +41,6 @@
     justify-content: space-around;
 }
 
-.dots {
-    width: 7px;
-    height: 7px;
-    background: #ccc;
-    border-radius: 50%;
-    position: relative;
-    margin-right: 15px;
-}
-
-.dots::before {
-    content: "";
-    display: block;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: black;
-    position: absolute;
-    left: -13px;
-}
-
-.dots::after {
-    content: "";
-    display: block;
-    width: 7px;
-    height: 7px;
-    background: #b6beb6;
-    border-radius: 50%;
-    opacity: 0.3;
-    position: absolute;
-    left: 13px;
-}
-
 @media (max-width: 920px) {
     .home {
         height: auto;
