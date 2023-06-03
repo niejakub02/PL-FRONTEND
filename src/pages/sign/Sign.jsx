@@ -1,15 +1,16 @@
 import { Outlet } from "react-router-dom";
-
-import "./Sign.css";
 import Header from "../../components/header/Header.jsx";
+
+import "../../styles/Styles.css";
+import "./Sign.css";
 
 const Sign = () => {
     return (
-        <div className="main_sign">
+        <div className="container flexCC">
             <Header show={0} />
-            <div className="sign">
+            <div className="box">
                 <Outlet />
-                <img src="../assets/login_bg.svg" className="login_bg" />
+                <img src="../assets/login_bg.svg" className="img_bg" />
             </div>
         </div>
     );

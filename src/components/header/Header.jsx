@@ -1,9 +1,10 @@
-import "./Header.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Badge } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+
+import "./Header.css";
 
 const Header = ({ show, handleOpen }) => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -14,31 +15,7 @@ const Header = ({ show, handleOpen }) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
-
     const notifications = 1;
-    const profile =
-        show == 2 ? (
-            <MenuItem className="profile" onClick={handleClose}>
-                PROFILE
-            </MenuItem>
-        ) : (
-            <Link to="settings">
-                <MenuItem className="profile" onClick={handleClose}>
-                    PROFILE
-                </MenuItem>
-            </Link>
-        );
-    const logout =
-        show == 2 ? (
-            <Link to="../signIn">
-                <MenuItem onClick={handleClose}>LOGOUT</MenuItem>
-            </Link>
-        ) : (
-            <Link to="signIn">
-                <MenuItem onClick={handleClose}>LOGOUT</MenuItem>
-            </Link>
-        );
-
     const button = (
         <>
             <div className="button_header">
@@ -65,8 +42,14 @@ const Header = ({ show, handleOpen }) => {
                     transformOrigin={{ horizontal: "right", vertical: "top" }}
                     anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                 >
-                    {profile}
-                    {logout}
+                    <Link to="../settings">
+                        <MenuItem className="profile" onClick={handleClose}>
+                            PROFILE
+                        </MenuItem>
+                    </Link>
+                    <Link to="../signIn">
+                        <MenuItem onClick={handleClose}>LOGOUT</MenuItem>
+                    </Link>
                 </Menu>
             </div>
         </>
@@ -76,13 +59,9 @@ const Header = ({ show, handleOpen }) => {
         <>
             <div className="logo">
                 <div className="text_logo">
-                    {show == 0 ? (
+                    <Link to={show != 0 ? "/" : null}>
                         <img src="../assets/logo.png" />
-                    ) : (
-                        <Link to="/">
-                            <img src="../assets/logo.png" />
-                        </Link>
-                    )}
+                    </Link>
                     <p>M8map</p>
                 </div>
                 {show != 0 ? button : null}

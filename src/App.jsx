@@ -10,6 +10,7 @@ import Notification from "../src/components/notification/Notification";
 import Review from "../src/components/review/Review";
 import { position, countries, chat, friends, languages } from "./Database.jsx";
 import "./App.css";
+import Profile from "./pages/profile/Profile";
 
 function App() {
     const [open, setOpen] = useState(false);
@@ -51,6 +52,16 @@ function App() {
                             <Settings
                                 languages={languages}
                                 handleOpen={handleOpen}
+                            />
+                        }
+                    />
+                    <Route
+                        path="profile"
+                        element={
+                            <Profile
+                                languages={languages}
+                                handleOpen={handleOpen}
+                                person={friends[0]}
                             />
                         }
                     />

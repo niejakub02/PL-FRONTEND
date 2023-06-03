@@ -1,39 +1,21 @@
 import { TextField } from "@mui/material";
-import AvatarBox from "../../components/avatar/Avatar.jsx";
 import Autocomplete from "@mui/material/Autocomplete";
-import "../../styles/Styles.css";
-import "../../pages/sign/Sign.css";
-import "./Settings.css";
 import Wrapper from "../../components/wrapper/Wrapper.jsx";
+import AvatarBox from "../../components/avatar/Avatar.jsx";
+import "../../styles/Styles.css";
+import "../settings/Settings.jsx";
 
-const Settings = (props) => {
-    const languages = props.languages;
+const Profile = ({ languages, handleOpen, person }) => {
     return (
-        <Wrapper handleOpen={props.handleOpen} type={"SETTINGS"}>
+        <Wrapper handleOpen={handleOpen} type={"PROFILE"}>
             <div className="overflow">
                 <BoxSettings
-                    type={
-                        <AvatarBox
-                            name={"ANIA"}
-                            img={
-                                "https://i.pinimg.com/originals/a3/28/e0/a328e0a4361c2b157f1253f2ef69d608.jpg"
-                            }
-                        />
-                    }
+                    type={<AvatarBox name={person.name} img={person.img} />}
                     name={"AVATAR"}
                 />
-                <BoxSettings
-                    type={<input type="text" value="ANIA" disabled />}
-                    name={"FIRST NAME"}
-                />
-                <BoxSettings
-                    type={<input type="text" value="BLAZKOVICZ" disabled />}
-                    name={"LAST NAME"}
-                />
-                <BoxSettings
-                    type={<input type="number" value="20" disabled />}
-                    name={"AGE"}
-                />
+                <BoxSettings type={<p>{person.name}</p>} name={"FIRST NAME"} />
+                <BoxSettings type={<p>{"BLAZKOVICZ"}</p>} name={"LAST NAME"} />
+                <BoxSettings type={<p>{"20"}</p>} name={"AGE"} />
                 <BoxSettings
                     type={
                         <Autocomplete
@@ -68,17 +50,13 @@ const Settings = (props) => {
     );
 };
 
-const BoxSettings = (props) => {
+const BoxSettings = ({ name, type }) => {
     return (
         <div className="block_settings flexCC">
-            {props.type}
-            <button className="buttons">
-                <p>CHANGE</p>
-                <img src="../assets/pencil.png" />
-            </button>
-            <p className="name_settings">{props.name}</p>
+            {type}
+            <p className="name_settings">{name}</p>
         </div>
     );
 };
 
-export default Settings;
+export default Profile;
