@@ -7,7 +7,7 @@ import "./Notification.css";
 const Notification = ({ friends, handleClose }) => {
     return (
         <div className="box_modal">
-            <div className="header">
+            <div className="box_header">
                 <div className="logo_modal_box flexCC">
                     <img src="../assets/notification.svg" />
                     <p>NOTIFICATIONS</p>

@@ -15,8 +15,8 @@ const Contacts = (props) => {
     );
     return (
         <div className="contacts">
-            <div className="header">
-                <div className="logo_main flexCC">
+            <div className="box_header">
+                <div className="logo_header flexCC">
                     <img src="../assets/user.svg" />
                     <p>CONTACTS</p>
                 </div>

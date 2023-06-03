@@ -16,7 +16,7 @@ const TabPanel = (props) => {
 
     return (
         <div className="block_map">
-            <div className="header">
+            <div className="box_header">
                 <Box>
                     <Tabs
                         value={value}
@@ -31,7 +31,7 @@ const TabPanel = (props) => {
                                 </>
                             }
                             onClick={() => setIsMap(true)}
-                            className={`logo_main ${
+                            className={`logo_header ${
                                 isMap ? "active" : "not_active"
                             }`}
                         />
@@ -43,7 +43,7 @@ const TabPanel = (props) => {
                                 </>
                             }
                             onClick={() => setIsMap(false)}
-                            className={`logo_main ${
+                            className={`logo_header ${
                                 !isMap ? "active" : "not_active"
                             }`}
                         />

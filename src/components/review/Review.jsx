@@ -11,7 +11,7 @@ const Review = ({ friends, handleClose }) => {
 
     return (
         <div className="box_modal">
-            <div className="header">
+            <div className="box_header">
                 <div className="logo_modal_box flexCC">
                     <img src="../assets/review.svg" />
                     <p>REVIEW</p>
