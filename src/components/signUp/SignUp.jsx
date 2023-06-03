@@ -1,10 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { Button, TextField } from "@mui/material";
 
 import "../sign/Sign.css";
 import client from "../../utils/API";
 
 const SignUp = () => {
+    const setIsLoading = useOutletContext();
     const navigate = useNavigate();
 
     const submitHandler = (e) => {
@@ -17,23 +18,23 @@ const SignUp = () => {
             Password: e.target.password.value
         });
 
-        // setIsLoading(true);
+        setIsLoading(true);
         // if (e.target.password.value !== e.target.repeatedPassword.value) {
         //     toast("Passwords don't match", { type: 'error' });
         //     setIsLoading(false);
         //     return;
         // }    
 
-        // client.post('User/SignUpUser', {
-        //     Email: e.target.username.value,
-        //     Password: e.target.password.value
-        // })
-        //     .then(res => {
-        //         navigate("/SignIn")
-        //     })
-        // // .finally(() => {
-        // //     setIsLoading(false);
-        // // })
+        client.post('User/SignUpUser', {
+            Email: e.target.username.value,
+            Password: e.target.password.value
+        })
+            .then(res => {
+                navigate("/SignIn")
+            })
+            .finally(() => {
+                setIsLoading(false);
+            })
     }
 
     return (

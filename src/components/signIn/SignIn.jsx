@@ -1,15 +1,17 @@
-import { Link, useNavigate } from "react-router-dom";
-import { Button, TextField } from "@mui/material";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
+import { Backdrop, Button, CircularProgress, TextField } from "@mui/material";
 
 import "../sign/Sign.css";
 import client from "../../utils/API";
+import { useState } from "react";
 
 const SignIn = () => {
+    const setIsLoading = useOutletContext();
     const navigate = useNavigate();
 
     const submitHandler = (e) => {
         e.preventDefault();
-        // setIsLoading(true);
+        setIsLoading(true);
 
         client.post('User/SignInUser', {
             Email: e.target.username.value, // TO BE CHANGED TO USERNAME
@@ -19,9 +21,9 @@ const SignIn = () => {
                 localStorage.setItem("access_token", res.data);
                 navigate("/")
             })
-        // .finally(() => {
-        //     setIsLoading(false);
-        // })
+            .finally(() => {
+                setIsLoading(false);
+            })
     }
 
     return (
