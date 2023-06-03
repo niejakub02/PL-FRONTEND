@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Badge } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -7,6 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import "./Header.css";
 
 const Header = ({ show, handleOpen }) => {
+    const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -15,6 +16,9 @@ const Header = ({ show, handleOpen }) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    const handleLogout = () => {
+        localStorage.removeItem("access_token");
+    }
     const notifications = 1;
     const button = (
         <>
@@ -48,7 +52,7 @@ const Header = ({ show, handleOpen }) => {
                         </MenuItem>
                     </Link>
                     <Link to="../signIn">
-                        <MenuItem onClick={handleClose}>LOGOUT</MenuItem>
+                        <MenuItem onClick={handleLogout}>LOGOUT</MenuItem>
                     </Link>
                 </Menu>
             </div>

@@ -1,7 +1,6 @@
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { Button, TextField } from "@mui/material";
 
-import "../sign/Sign.css";
 import client from "../../utils/API";
 import "../../pages/sign/Sign";
 
@@ -12,19 +11,13 @@ const SignUp = () => {
     const submitHandler = (e) => {
         e.preventDefault();
 
-        console.dir(e.target);
-        console.dir(e.target.username);
-        console.dir({
-            Email: e.target.username.value,
-            Password: e.target.password.value
-        });
-
         setIsLoading(true);
-        // if (e.target.password.value !== e.target.repeatedPassword.value) {
-        //     toast("Passwords don't match", { type: 'error' });
-        //     setIsLoading(false);
-        //     return;
-        // }    
+        if (e.target.password.value !== e.target.repeatedPassword.value) {
+            // toast("Passwords don't match", { type: 'error' });
+            console.log("Passwords don't match");
+            setIsLoading(false);
+            return;
+        }
 
         client.post('User/SignUpUser', {
             Email: e.target.username.value,
