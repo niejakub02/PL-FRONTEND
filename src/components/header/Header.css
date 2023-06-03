@@ -1,20 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Salsa&display=swap");
+
 .logo {
     width: 100%;
     height: 60px;
-    background: white;
+    min-height: 60px;
+    background: #f5f5f5;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     position: initial;
-    padding: 0 40px;
+    padding: 0 30px;
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    grid-column: 1 / 6;
+    grid-row: 1;
 }
 
 .logo p {
     padding: 0;
-    font-size: 35px;
-    font-weight: bold;
+    color: #000000;
+    font-family: "Salsa", cursive;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 29px;
 }
 
 .text_logo {
@@ -23,18 +33,50 @@
     align-items: center;
 }
 
-.text_logo img{
-    width: 50px;
-    height: 50px;
-    bo
+.text_logo img {
+    width: 47px;
+    height: 47px;
+}
+
+.button_header {
+    width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .button_header img {
-    width: 50px;
-    height: 33px;
-
+    height: 29px;
 }
 
-.button_header img:hover{
+.button_header img:hover {
     cursor: pointer;
+}
+
+.button_menu {
+    position: relative;
+}
+
+.menu {
+    width: 500px !important;
+}
+
+.menu a {
+    text-decoration: none;
+    color: black;
+}
+
+.profile {
+    position: relative;
+}
+
+.profile::after {
+    content: "";
+    width: 60%;
+    height: 1px;
+    background: #dfdfdf;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }

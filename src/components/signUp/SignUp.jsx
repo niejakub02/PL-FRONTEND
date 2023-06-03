@@ -3,6 +3,7 @@ import { Button, TextField } from "@mui/material";
 
 import "../sign/Sign.css";
 import client from "../../utils/API";
+import "../../pages/sign/Sign";
 
 const SignUp = () => {
     const setIsLoading = useOutletContext();

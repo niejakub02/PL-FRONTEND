@@ -1,0 +1,59 @@
+.autocomplete_languages {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.autocomplete_languages button {
+    width: 35px;
+}
+
+.name_settings {
+    position: absolute;
+    left: 15px;
+    bottom: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    color: black !important;
+}
+
+.block_settings {
+    width: 100%;
+    border-bottom: solid 1px #dfdfdf;
+    padding: 25px;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.block_settings input {
+    width: 30%;
+    background: none;
+    border: none;
+    color: #9c9c9c;
+}
+
+.block_settings input:focus {
+    outline: none;
+    color: black;
+}
+
+.block_settings p {
+    background: none;
+    border: none;
+    color: #9c9c9c;
+}
+
+.block_settings textarea {
+    width: 90%;
+    height: 100px;
+    background: none;
+    border: none;
+    color: #9c9c9c;
+    resize: none;
+    text-align: justify;
+}
+
+.block_settings textarea:focus {
+    outline: none;
+    color: black;
+}
