@@ -11,6 +11,7 @@ import Review from "../src/components/review/Review";
 import { position, countries, chat, friends, languages } from "./Database.jsx";
 import "./App.css";
 import Profile from "./pages/profile/Profile";
+import ProtectedRoute from "./utils/ProtectedRoute";
 
 function App() {
     const [open, setOpen] = useState(false);
@@ -30,41 +31,44 @@ function App() {
             </ModalComponent>
             <Router>
                 <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <Home
-                                position={position}
-                                countries={countries}
-                                chat={chat}
-                                friends={friends}
-                                handleOpen={handleOpen}
-                            />
-                        }
-                    />
-                    <Route path="/" element={<Sign />}>
+                    <Route element={<Sign />}>
                         <Route path="signIn" element={<SignIn />} />
                         <Route path="signUp" element={<SignUp />} />
                     </Route>
-                    <Route
-                        path="settings"
-                        element={
-                            <Settings
-                                languages={languages}
-                                handleOpen={handleOpen}
-                            />
-                        }
-                    />
-                    <Route
-                        path="profile"
-                        element={
-                            <Profile
-                                languages={languages}
-                                handleOpen={handleOpen}
-                                person={friends[0]}
-                            />
-                        }
-                    />
+
+                    <Route element={<ProtectedRoute />}>
+                        <Route
+                            path="/"
+                            element={
+                                <Home
+                                    position={position}
+                                    countries={countries}
+                                    chat={chat}
+                                    friends={friends}
+                                    handleOpen={handleOpen}
+                                />
+                            }
+                        />
+                        <Route
+                            path="settings"
+                            element={
+                                <Settings
+                                    languages={languages}
+                                    handleOpen={handleOpen}
+                                />
+                            }
+                        />
+                        <Route
+                            path="profile"
+                            element={
+                                <Profile
+                                    languages={languages}
+                                    handleOpen={handleOpen}
+                                    person={friends[0]}
+                                />
+                            }
+                        />
+                    </Route>
                 </Routes>
             </Router>
         </>
