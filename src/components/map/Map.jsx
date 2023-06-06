@@ -19,17 +19,10 @@ const Map = ({
 
     const map = useRef();
     useEffect(() => {
-        console.log("1");
         setPositionMap(map.current.getBoundingClientRect());
     }, []);
 
-    // useEffect(() => {
-    //     setPositionMap(map.current.getBoundingClientRect());
-    //     console.log("Window");
-    // }, [window.innerWidth, window.innerHeight]);
-
     useEffect(() => {
-        console.log("=>");
         setPositionMapX(positionMap.left);
         setPositionMapY(positionMap.top);
     }, [positionMap]);
@@ -44,7 +37,7 @@ const Map = ({
     };
 
     return (
-        <div className="box_home" ref={map}>
+        <div className="box_home">
             <div className="filter full_width">
                 <Autocomplete
                     className="autocomplete_countries"
@@ -79,7 +72,7 @@ const Map = ({
                     <strong>I OFFER HELP</strong> MARKERS
                 </p>
             </div>
-            <div className="map_wrapper">
+            <div className="map_wrapper" ref={map}>
                 <InitMap
                     position={position}
                     MarkerInformation={MarkerInformation}

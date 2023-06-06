@@ -8,8 +8,6 @@
 
     z-index: 10000;
     position: absolute;
-    /* right: 0;
-    bottom: 0; */
 }
 
 .logo_popup_box {
@@ -33,6 +31,7 @@
     flex-direction: column;
     justify-content: start;
     box-sizing: border-box;
+    max-height: 250px;
 }
 
 .link {
@@ -47,7 +46,6 @@
 
 .description {
     width: 100%;
-    max-height: 200px;
     text-align: justify;
     margin-top: 10px;
 }

@@ -8,10 +8,24 @@ const PopupPerson = ({
     positionPopupY,
     positionPopupX,
 }) => {
+    const calculateX = () => {
+        const right = positionPopupX + 300;
+        const diff = window.innerWidth - right;
+
+        return diff < 0 ? positionPopupX - 300 : positionPopupX;
+    };
+
+    const calculateY = () => {
+        const right = positionPopupY + 300;
+        const diff = window.innerHeight - right;
+
+        return diff < 0 ? positionPopupY - 300 : positionPopupY;
+    };
+
     return (
         <div
             className="box_popup"
-            style={{ top: positionPopupY, left: positionPopupX }}
+            style={{ top: calculateY(), left: calculateX() }}
         >
             <div className="box_header">
                 <div className="logo_popup_box flexCC">

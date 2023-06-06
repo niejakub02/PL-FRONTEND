@@ -16,15 +16,24 @@ const Home = ({ friends, position, countries, chat, handleOpen }) => {
     const popupOpen = () => setShowPopup(true);
     const popupClose = () => setShowPopup(false);
 
+    const popupCloseClick = (event) => {
+        if (
+            showPopup &&
+            !event.target.classList.contains("leaflet-marker-icon") &&
+            !event.target.closest(".box_popup")
+        ) {
+            setShowPopup();
+        }
+    };
+
     const MarkerInformation = (e) => {
-        console.log(e);
         setPositionPopupX(e.containerPoint.x + positionMapX);
         setPositionPopupY(e.containerPoint.y + positionMapY);
         popupOpen();
     };
 
     return (
-        <div className="home">
+        <div className="home" onClick={popupCloseClick}>
             {showPopup ? (
                 <PopupPerson
                     friends={friends}
