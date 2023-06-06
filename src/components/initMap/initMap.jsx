@@ -3,7 +3,7 @@ import Markers from "../markers/Markers.jsx";
 
 import "./initMap.css";
 
-const InitMap = (props) => {
+const InitMap = ({ position, MarkerInformation }) => {
     return (
         <MapContainer
             className="map"
@@ -15,7 +15,10 @@ const InitMap = (props) => {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Markers position={props.position} />
+            <Markers
+                position={position}
+                MarkerInformation={MarkerInformation}
+            />
         </MapContainer>
     );
 };

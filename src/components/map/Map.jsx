@@ -1,22 +1,50 @@
+import { useEffect, useRef, useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { Switch } from "@mui/material";
 import InitMap from "../initMap/initMap.jsx";
-import "./Map.css";
-import { useState } from "react";
 import { autocompleteOptions } from "../../utils/mockData.js";
 import { sortBy } from "lodash";
 
-const Map = (props) => {
+import "./Map.css";
+
+const Map = ({
+    position,
+    MarkerInformation,
+    setPositionMapX,
+    setPositionMapY,
+}) => {
     const [selectedOptions, setSelectedOptions] = useState([]);
-    const autocompleteOptionsSorted = sortBy(autocompleteOptions, ['type', 'value']);
-    
+    const [positionMap, setPositionMap] = useState({});
+
+    const map = useRef();
+    useEffect(() => {
+        console.log("1");
+        setPositionMap(map.current.getBoundingClientRect());
+    }, []);
+
+    // useEffect(() => {
+    //     setPositionMap(map.current.getBoundingClientRect());
+    //     console.log("Window");
+    // }, [window.innerWidth, window.innerHeight]);
+
+    useEffect(() => {
+        console.log("=>");
+        setPositionMapX(positionMap.left);
+        setPositionMapY(positionMap.top);
+    }, [positionMap]);
+
+    const autocompleteOptionsSorted = sortBy(autocompleteOptions, [
+        "type",
+        "value",
+    ]);
+
     const onChangeEvent = (event, value) => {
         setSelectedOptions(value);
     };
 
     return (
-        <div className="box_home">
+        <div className="box_home" ref={map}>
             <div className="filter full_width">
                 <Autocomplete
                     className="autocomplete_countries"
@@ -24,8 +52,12 @@ const Map = (props) => {
                     limitTags={2}
                     id="tags-outlined"
                     options={autocompleteOptionsSorted}
-                    groupBy={option => option.type}
-                    getOptionLabel={(option) => option.type === 'CITY' ? `📍 ${option.value}` : `🌐 ${option.value}`}
+                    groupBy={(option) => option.type}
+                    getOptionLabel={(option) =>
+                        option.type === "CITY"
+                            ? `📍 ${option.value}`
+                            : `🌐 ${option.value}`
+                    }
                     filterSelectedOptions
                     onChange={onChangeEvent}
                     renderInput={(params) => (
@@ -48,7 +80,10 @@ const Map = (props) => {
                 </p>
             </div>
             <div className="map_wrapper">
-                <InitMap position={props.position} />
+                <InitMap
+                    position={position}
+                    MarkerInformation={MarkerInformation}
+                />
             </div>
             <div className="hint flexCC">
                 <p>
