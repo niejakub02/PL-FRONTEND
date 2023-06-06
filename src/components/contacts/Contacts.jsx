@@ -1,8 +1,10 @@
 import { InputAdornment, TextField } from "@mui/material";
 import AvatarBox from "../avatar/Avatar";
 import "./Contacts.css";
+import { useCallback, useRef } from "react";
+import { debounce } from "lodash";
 
-const Contacts = (props) => {
+const Contacts = ({ friends, setFriends, friendsBase }) => {
     const count = 1;
     const noContacts = (
         <div className="no-contacts flexCC">
@@ -23,20 +25,28 @@ const Contacts = (props) => {
                 <div className="dots" />
             </div>
             <div className="all_contacts">
-                {!count ? noContacts : <AllContacts friends={props.friends} />}
+                {!count ? noContacts : <AllContacts friends={friends} setFriends={setFriends} friendsBase={friendsBase} />}
             </div>
         </div>
     );
 };
 
-const AllContacts = (props) => {
-    const friends = props.friends;
+const AllContacts = ({ friends, setFriends, friendsBase }) => {
+    const searchInput = useRef(null);
+    const debouncedHandler = useCallback(debounce(() => {
+        setFriends(
+            friendsBase.current.filter(friend => friend.name.toLowerCase().includes(searchInput?.current?.value))
+        )
+    }, 300), [searchInput?.current?.value])
+
     return (
         <>
             <TextField
                 variant="outlined"
                 label="Search contacts"
                 sx={{ width: "100%" }}
+                onChange={debouncedHandler}
+                inputRef={searchInput}
                 InputProps={{
                     endAdornment: (
                         <InputAdornment

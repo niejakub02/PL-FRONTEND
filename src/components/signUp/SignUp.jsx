@@ -48,6 +48,7 @@ const SignUp = () => {
                 className="standard-basic"
                 margin="normal"
                 name="password"
+                type="password"
             />
             <TextField
                 id="standard-basic"
@@ -56,6 +57,7 @@ const SignUp = () => {
                 className="standard-basic"
                 margin="normal"
                 name="repeatedPassword"
+                type="password"
             />
             <Button
                 variant="outlined"
