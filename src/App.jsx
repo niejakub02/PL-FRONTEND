@@ -44,7 +44,6 @@ function App() {
                                     position={position}
                                     countries={countries}
                                     chat={chat}
-                                    friends={friends}
                                     handleOpen={handleOpen}
                                 />
                             }
