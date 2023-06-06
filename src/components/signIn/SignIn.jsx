@@ -42,6 +42,7 @@ const SignIn = () => {
                 className="standard-basic"
                 margin="normal"
                 name="password"
+                type="password"
             />
             <Button
                 variant="outlined"
