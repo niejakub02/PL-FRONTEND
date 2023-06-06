@@ -6,7 +6,14 @@ import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import "./TabPanel.css";
 
-const TabPanel = (props) => {
+const TabPanel = ({
+    position,
+    countries,
+    MarkerInformation,
+    chat,
+    setPositionMapX,
+    setPositionMapY,
+}) => {
     const [isMap, setIsMap] = useState(true);
     const [value, setValue] = useState(0);
 
@@ -52,9 +59,15 @@ const TabPanel = (props) => {
                 <div className="dots" />
             </div>
             {isMap ? (
-                <Map position={props.position} countries={props.countries} />
+                <Map
+                    position={position}
+                    countries={countries}
+                    MarkerInformation={MarkerInformation}
+                    setPositionMapX={setPositionMapX}
+                    setPositionMapY={setPositionMapY}
+                />
             ) : (
-                <Chat chat={props.chat} />
+                <Chat chat={chat} />
             )}
         </div>
     );
