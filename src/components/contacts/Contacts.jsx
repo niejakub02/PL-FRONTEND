@@ -1,7 +1,7 @@
 import { InputAdornment, TextField } from "@mui/material";
 import AvatarBox from "../avatar/Avatar";
 import "./Contacts.css";
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import { debounce } from "lodash";
 
 const Contacts = ({ friends, setFriends, friendsBase }) => {
@@ -15,6 +15,7 @@ const Contacts = ({ friends, setFriends, friendsBase }) => {
             </p>
         </div>
     );
+
     return (
         <div className="contacts">
             <div className="box_header">
@@ -25,7 +26,15 @@ const Contacts = ({ friends, setFriends, friendsBase }) => {
                 <div className="dots" />
             </div>
             <div className="all_contacts">
-                {!count ? noContacts : <AllContacts friends={friends} setFriends={setFriends} friendsBase={friendsBase} />}
+                {!count ? (
+                    noContacts
+                ) : (
+                    <AllContacts
+                        friends={friends}
+                        setFriends={setFriends}
+                        friendsBase={friendsBase}
+                    />
+                )}
             </div>
         </div>
     );
@@ -33,11 +42,18 @@ const Contacts = ({ friends, setFriends, friendsBase }) => {
 
 const AllContacts = ({ friends, setFriends, friendsBase }) => {
     const searchInput = useRef(null);
-    const debouncedHandler = useCallback(debounce(() => {
-        setFriends(
-            friendsBase.current.filter(friend => friend.name.toLowerCase().includes(searchInput?.current?.value))
-        )
-    }, 300), [searchInput?.current?.value])
+    const debouncedHandler = useCallback(
+        debounce(() => {
+            setFriends(
+                friendsBase.current.filter((friend) =>
+                    friend.name
+                        .toLowerCase()
+                        .includes(searchInput?.current?.value)
+                )
+            );
+        }, 300),
+        [searchInput?.current?.value]
+    );
 
     return (
         <>
@@ -59,23 +75,41 @@ const AllContacts = ({ friends, setFriends, friendsBase }) => {
                 }}
             />
             <div className="people">
-                {friends.map((el, i) => {
+                {friends.map((friend, index) => {
                     return (
-                        <div className="one_person " key={i + el.id}>
-                            <div className="flexCC">
-                                <AvatarBox name={el.name} img={el.img} />
-                                <p>{el.name}</p>
-                            </div>
-                            <div className="markers">
-                                <img src="../assets/chat2.svg" />
-                                <img src="../assets/star.svg" />
-                                <img src="../assets/tresh.svg" />
-                            </div>
-                        </div>
+                        <OneContact friend={friend} key={friend.id + index} />
                     );
                 })}
             </div>
         </>
+    );
+};
+
+const OneContact = ({ friend }) => {
+    const favorite = friend.favorite
+        ? "../assets/starMarked.svg"
+        : "../assets/star.svg";
+    const [star, setStar] = useState(favorite);
+    const changeStar = () => {
+        if (star === "../assets/star.svg") {
+            setStar("../assets/starMarked.svg");
+        } else {
+            setStar("../assets/star.svg");
+        }
+    };
+
+    return (
+        <div className="one_person ">
+            <div className="flexCC">
+                <AvatarBox name={friend.name} img={friend.img} />
+                <p>{friend.name}</p>
+            </div>
+            <div className="markers">
+                <img src="../assets/chat2.svg" />
+                <img src={star} onClick={changeStar} />
+                <img src="../assets/tresh.svg" />
+            </div>
+        </div>
     );
 };
 

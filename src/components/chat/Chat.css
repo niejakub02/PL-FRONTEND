@@ -5,6 +5,7 @@
 }
 
 .chat {
+    width: 100%;
     position: absolute;
     bottom: 0;
     box-sizing: border-box;
