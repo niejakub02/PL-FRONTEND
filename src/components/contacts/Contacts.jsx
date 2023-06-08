@@ -1,11 +1,10 @@
 import { InputAdornment, TextField } from "@mui/material";
 import AvatarBox from "../avatar/Avatar";
-import { useCallback, useRef, useState } from "react";
-import { debounce } from "lodash";
+import { useRef, useState } from "react";
 
 import "./Contacts.css";
 
-const Contacts = ({ friends, setFriends, friendsBase }) => {
+const Contacts = ({ friends, setFriends }) => {
     const noContacts = (
         <div className="no-contacts flexCC">
             <img src="../assets/no-contacts.svg" />
@@ -26,34 +25,32 @@ const Contacts = ({ friends, setFriends, friendsBase }) => {
                 <div className="dots" />
             </div>
             <div className="all_contacts">
-                {!friends.length ? (
+                {!true ? (
                     noContacts
                 ) : (
-                    <AllContacts
-                        friends={friends}
-                        setFriends={setFriends}
-                        friendsBase={friendsBase}
-                    />
+                    <AllContacts friends={friends} setFriends={setFriends} />
                 )}
             </div>
         </div>
     );
 };
 
-const AllContacts = ({ friends, setFriends, friendsBase }) => {
+const AllContacts = ({ friends, setFriends }) => {
+    const [friendsBase, setFriendsBase] = useState(friends);
     const searchInput = useRef(null);
-    const debouncedHandler = useCallback(
-        debounce(() => {
-            setFriends(
-                friendsBase.current.filter((friend) =>
-                    friend.name
-                        .toLowerCase()
-                        .includes(searchInput?.current?.value)
-                )
-            );
-        }, 300),
-        [searchInput?.current?.value]
-    );
+
+    const debouncedHandler = () => {
+        setFriends(
+            friendsBase.filter((friend) =>
+                friend.name.toLowerCase().includes(searchInput?.current?.value)
+            )
+        );
+    };
+
+    const deleteContact = (id) => {
+        setFriends((f) => f.filter((el) => el.id !== id));
+        setFriendsBase((f) => f.filter((el) => el.id !== id));
+    };
 
     return (
         <>
@@ -75,12 +72,12 @@ const AllContacts = ({ friends, setFriends, friendsBase }) => {
                 }}
             />
             <div className="people">
-                {friends.map((friend, index) => {
+                {friends.map((friend) => {
                     return (
                         <OneContact
                             friend={friend}
-                            key={friend.id + index}
-                            setFriends={setFriends}
+                            key={friend.id}
+                            deleteContact={deleteContact}
                         />
                     );
                 })}
@@ -89,7 +86,7 @@ const AllContacts = ({ friends, setFriends, friendsBase }) => {
     );
 };
 
-const OneContact = ({ friend, setFriends }) => {
+const OneContact = ({ friend, deleteContact }) => {
     const favorite = friend.favorite
         ? "../assets/starMarked.svg"
         : "../assets/star.svg";
@@ -102,10 +99,6 @@ const OneContact = ({ friend, setFriends }) => {
         }
     };
 
-    const deleteContact = () => {
-        setFriends((f) => f.filter((el) => el.id !== friend.id));
-    };
-
     return (
         <div className="one_person ">
             <div className="flexCC">
@@ -115,7 +108,10 @@ const OneContact = ({ friend, setFriends }) => {
             <div className="markers">
                 <img src="../assets/chat2.svg" />
                 <img src={star} onClick={changeStar} />
-                <img src="../assets/tresh.svg" onClick={deleteContact} />
+                <img
+                    src="../assets/tresh.svg"
+                    onClick={() => deleteContact(friend.id)}
+                />
             </div>
         </div>
     );

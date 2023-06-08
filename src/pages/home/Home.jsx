@@ -9,7 +9,6 @@ import "./Home.css";
 
 const Home = ({ position, countries, chat, handleOpen }) => {
     const [friends, setFriends] = useState(friendsMock);
-    const friendsBase = useRef(friendsMock);
 
     const [showPopup, setShowPopup] = useState(false);
     const [positionPopupX, setPositionPopupX] = useState(null);
@@ -46,11 +45,7 @@ const Home = ({ position, countries, chat, handleOpen }) => {
                 />
             ) : null}
             <Header show={1} handleOpen={handleOpen} />
-            <Contacts
-                friends={friends}
-                setFriends={setFriends}
-                friendsBase={friendsBase}
-            />
+            <Contacts friends={friends} setFriends={setFriends} />
             <TabPanel
                 position={position}
                 countries={countries}
