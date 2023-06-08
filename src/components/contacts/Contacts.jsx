@@ -1,11 +1,11 @@
 import { InputAdornment, TextField } from "@mui/material";
 import AvatarBox from "../avatar/Avatar";
-import "./Contacts.css";
 import { useCallback, useRef, useState } from "react";
 import { debounce } from "lodash";
 
+import "./Contacts.css";
+
 const Contacts = ({ friends, setFriends, friendsBase }) => {
-    const count = 1;
     const noContacts = (
         <div className="no-contacts flexCC">
             <img src="../assets/no-contacts.svg" />
@@ -26,7 +26,7 @@ const Contacts = ({ friends, setFriends, friendsBase }) => {
                 <div className="dots" />
             </div>
             <div className="all_contacts">
-                {!count ? (
+                {!friends.length ? (
                     noContacts
                 ) : (
                     <AllContacts
@@ -77,7 +77,11 @@ const AllContacts = ({ friends, setFriends, friendsBase }) => {
             <div className="people">
                 {friends.map((friend, index) => {
                     return (
-                        <OneContact friend={friend} key={friend.id + index} />
+                        <OneContact
+                            friend={friend}
+                            key={friend.id + index}
+                            setFriends={setFriends}
+                        />
                     );
                 })}
             </div>
@@ -85,7 +89,7 @@ const AllContacts = ({ friends, setFriends, friendsBase }) => {
     );
 };
 
-const OneContact = ({ friend }) => {
+const OneContact = ({ friend, setFriends }) => {
     const favorite = friend.favorite
         ? "../assets/starMarked.svg"
         : "../assets/star.svg";
@@ -98,6 +102,10 @@ const OneContact = ({ friend }) => {
         }
     };
 
+    const deleteContact = () => {
+        setFriends((f) => f.filter((el) => el.id !== friend.id));
+    };
+
     return (
         <div className="one_person ">
             <div className="flexCC">
@@ -107,7 +115,7 @@ const OneContact = ({ friend }) => {
             <div className="markers">
                 <img src="../assets/chat2.svg" />
                 <img src={star} onClick={changeStar} />
-                <img src="../assets/tresh.svg" />
+                <img src="../assets/tresh.svg" onClick={deleteContact} />
             </div>
         </div>
     );
