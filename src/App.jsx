@@ -12,6 +12,7 @@ import Review from "../src/components/review/Review";
 import Profile from "./pages/profile/Profile";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import { position, countries, friends, languages, user } from "./Database.jsx";
+
 import "./App.css";
 
 function App() {

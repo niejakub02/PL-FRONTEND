@@ -1,6 +1,4 @@
-import { InputAdornment, TextField } from "@mui/material";
-import AvatarBox from "../avatar/Avatar";
-import { useRef, useState } from "react";
+import AllContacts from "../contactsAll/AllContacts.jsx";
 
 import "./Contacts.css";
 
@@ -34,92 +32,6 @@ const Contacts = ({ friends, setFriends, showChat }) => {
                         showChat={showChat}
                     />
                 )}
-            </div>
-        </div>
-    );
-};
-
-const AllContacts = ({ friends, setFriends, showChat }) => {
-    const [friendsBase, setFriendsBase] = useState(friends);
-    const searchInput = useRef(null);
-
-    const debouncedHandler = () => {
-        setFriends(
-            friendsBase.filter((friend) =>
-                friend.name.toLowerCase().includes(searchInput?.current?.value)
-            )
-        );
-    };
-
-    const deleteContact = (id) => {
-        setFriends((f) => f.filter((el) => el.id !== id));
-        setFriendsBase((f) => f.filter((el) => el.id !== id));
-    };
-
-    return (
-        <>
-            <TextField
-                variant="outlined"
-                label="Search contacts"
-                sx={{ width: "100%" }}
-                onChange={debouncedHandler}
-                inputRef={searchInput}
-                InputProps={{
-                    endAdornment: (
-                        <InputAdornment
-                            position="end"
-                            className="search_contacts"
-                        >
-                            <img src="../assets/search.svg" />
-                        </InputAdornment>
-                    ),
-                }}
-            />
-            <div className="people">
-                {friends.map((friend) => {
-                    return (
-                        <OneContact
-                            friend={friend}
-                            key={friend.id}
-                            deleteContact={deleteContact}
-                            showChat={showChat}
-                        />
-                    );
-                })}
-            </div>
-        </>
-    );
-};
-
-const OneContact = ({ friend, deleteContact, showChat }) => {
-    const favorite = friend.favorite
-        ? "../assets/starMarked.svg"
-        : "../assets/star.svg";
-    const [star, setStar] = useState(favorite);
-    const changeStar = () => {
-        if (star === "../assets/star.svg") {
-            setStar("../assets/starMarked.svg");
-        } else {
-            setStar("../assets/star.svg");
-        }
-    };
-
-    return (
-        <div className="one_person ">
-            <div className="flexCC">
-                <AvatarBox name={friend.name} img={friend.img} />
-                <p>{friend.name}</p>
-            </div>
-            <div className="markers">
-                <img
-                    src="../assets/chat2.svg"
-                    onClick={() => showChat(friend.id)}
-                />
-                <img src={star} onClick={changeStar} />
-                <img
-                    src="../assets/tresh.svg"
-                    onClick={() => deleteContact(friend.id)}
-                />
             </div>
         </div>
     );
