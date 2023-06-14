@@ -1,35 +1,28 @@
-import { useState } from "react";
-import Chat from "../../components/chat/Chat.jsx";
-import Map from "../../components/map/Map.jsx";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
+
+import Chat from "../../components/chat/Chat.jsx";
+import Map from "../../components/map/Map.jsx";
+
 import "./TabPanel.css";
 
 const TabPanel = ({
     position,
     countries,
     MarkerInformation,
-    chat,
+    chatId,
     setPositionMapX,
     setPositionMapY,
+    isMap,
+    changeValueTabPanel,
+    valueTabPanel,
 }) => {
-    const [isMap, setIsMap] = useState(true);
-    const [value, setValue] = useState(0);
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-
     return (
         <div className="block_map">
             <div className="box_header">
                 <Box>
-                    <Tabs
-                        value={value}
-                        onChange={handleChange}
-                        //textColor="black"
-                    >
+                    <Tabs value={valueTabPanel} onChange={changeValueTabPanel}>
                         <Tab
                             label={
                                 <>
@@ -37,7 +30,6 @@ const TabPanel = ({
                                     <p>MAP</p>
                                 </>
                             }
-                            onClick={() => setIsMap(true)}
                             className={`logo_header ${
                                 isMap ? "active" : "not_active"
                             }`}
@@ -49,7 +41,6 @@ const TabPanel = ({
                                     <p>CHAT</p>
                                 </>
                             }
-                            onClick={() => setIsMap(false)}
                             className={`logo_header ${
                                 !isMap ? "active" : "not_active"
                             }`}
@@ -67,7 +58,7 @@ const TabPanel = ({
                     setPositionMapY={setPositionMapY}
                 />
             ) : (
-                <Chat chat={chat} />
+                <Chat chat_id={chatId} />
             )}
         </div>
     );

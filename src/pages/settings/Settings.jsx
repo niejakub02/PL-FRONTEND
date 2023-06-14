@@ -6,32 +6,24 @@ import "../../pages/sign/Sign.css";
 import "./Settings.css";
 import Wrapper from "../../components/wrapper/Wrapper.jsx";
 
-const Settings = (props) => {
-    const languages = props.languages;
+const Settings = ({ languages, handleOpen, user }) => {
     return (
-        <Wrapper handleOpen={props.handleOpen} type={"SETTINGS"}>
+        <Wrapper handleOpen={handleOpen} type={"SETTINGS"}>
             <div className="overflow">
                 <BoxSettings
-                    type={
-                        <AvatarBox
-                            name={"ANIA"}
-                            img={
-                                "https://i.pinimg.com/originals/a3/28/e0/a328e0a4361c2b157f1253f2ef69d608.jpg"
-                            }
-                        />
-                    }
+                    type={<AvatarBox name={user.name} img={user.avatar} />}
                     name={"AVATAR"}
                 />
                 <BoxSettings
-                    type={<input type="text" value="ANIA" disabled />}
+                    type={<input type="text" value={user.name} disabled />}
                     name={"FIRST NAME"}
                 />
                 <BoxSettings
-                    type={<input type="text" value="BLAZKOVICZ" disabled />}
+                    type={<input type="text" value={user.surname} disabled />}
                     name={"LAST NAME"}
                 />
                 <BoxSettings
-                    type={<input type="number" value="20" disabled />}
+                    type={<input type="number" value={user.age} disabled />}
                     name={"AGE"}
                 />
                 <BoxSettings
@@ -57,7 +49,7 @@ const Settings = (props) => {
                     type={
                         <textarea
                             type="text"
-                            value="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries."
+                            value={user.description}
                             disabled
                         />
                     }
