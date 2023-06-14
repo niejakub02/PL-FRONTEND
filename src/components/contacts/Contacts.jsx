@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 
 import "./Contacts.css";
 
-const Contacts = ({ friends, setFriends }) => {
+const Contacts = ({ friends, setFriends, showChat }) => {
     const noContacts = (
         <div className="no-contacts flexCC">
             <img src="../assets/no-contacts.svg" />
@@ -28,14 +28,18 @@ const Contacts = ({ friends, setFriends }) => {
                 {!true ? (
                     noContacts
                 ) : (
-                    <AllContacts friends={friends} setFriends={setFriends} />
+                    <AllContacts
+                        friends={friends}
+                        setFriends={setFriends}
+                        showChat={showChat}
+                    />
                 )}
             </div>
         </div>
     );
 };
 
-const AllContacts = ({ friends, setFriends }) => {
+const AllContacts = ({ friends, setFriends, showChat }) => {
     const [friendsBase, setFriendsBase] = useState(friends);
     const searchInput = useRef(null);
 
@@ -78,6 +82,7 @@ const AllContacts = ({ friends, setFriends }) => {
                             friend={friend}
                             key={friend.id}
                             deleteContact={deleteContact}
+                            showChat={showChat}
                         />
                     );
                 })}
@@ -86,7 +91,7 @@ const AllContacts = ({ friends, setFriends }) => {
     );
 };
 
-const OneContact = ({ friend, deleteContact }) => {
+const OneContact = ({ friend, deleteContact, showChat }) => {
     const favorite = friend.favorite
         ? "../assets/starMarked.svg"
         : "../assets/star.svg";
@@ -106,7 +111,10 @@ const OneContact = ({ friend, deleteContact }) => {
                 <p>{friend.name}</p>
             </div>
             <div className="markers">
-                <img src="../assets/chat2.svg" />
+                <img
+                    src="../assets/chat2.svg"
+                    onClick={() => showChat(friend.id)}
+                />
                 <img src={star} onClick={changeStar} />
                 <img
                     src="../assets/tresh.svg"

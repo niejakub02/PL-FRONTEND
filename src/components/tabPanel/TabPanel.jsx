@@ -10,7 +10,7 @@ const TabPanel = ({
     position,
     countries,
     MarkerInformation,
-    chat,
+    chatId,
     setPositionMapX,
     setPositionMapY,
 }) => {
@@ -67,7 +67,7 @@ const TabPanel = ({
                     setPositionMapY={setPositionMapY}
                 />
             ) : (
-                <Chat chat={chat} />
+                <Chat chat_id={chatId} />
             )}
         </div>
     );

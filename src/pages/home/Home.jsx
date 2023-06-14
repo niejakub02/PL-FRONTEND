@@ -3,11 +3,12 @@ import Contacts from "../../components/contacts/Contacts.jsx";
 import TabPanel from "../../components/tabPanel/TabPanel.jsx";
 import PopupPerson from "../../components/popup/Popup.jsx";
 import { friends as friendsMock } from "../../Database.jsx";
+import { Chat } from "../../Database.jsx";
 import { useRef, useState } from "react";
 import "../../styles/Styles.css";
 import "./Home.css";
 
-const Home = ({ position, countries, chat, handleOpen }) => {
+const Home = ({ position, countries, handleOpen }) => {
     const [friends, setFriends] = useState(friendsMock);
 
     const [showPopup, setShowPopup] = useState(false);
@@ -15,6 +16,7 @@ const Home = ({ position, countries, chat, handleOpen }) => {
     const [positionPopupY, setPositionPopupY] = useState(null);
     const [positionMapX, setPositionMapX] = useState(null);
     const [positionMapY, setPositionMapY] = useState(null);
+    const [chatId, setChatId] = useState(0);
     const popupOpen = () => setShowPopup(true);
     const popupClose = () => setShowPopup(false);
 
@@ -34,6 +36,13 @@ const Home = ({ position, countries, chat, handleOpen }) => {
         popupOpen();
     };
 
+    const showChat = (id) => {
+        const chat_id = Chat.find((el) => {
+            return el.inviting_user_id === 0 && el.invited_user_id === id;
+        });
+        setChatId(chat_id.chat_id);
+    };
+
     return (
         <div className="home" onClick={popupCloseClick}>
             {showPopup ? (
@@ -45,11 +54,15 @@ const Home = ({ position, countries, chat, handleOpen }) => {
                 />
             ) : null}
             <Header show={1} handleOpen={handleOpen} />
-            <Contacts friends={friends} setFriends={setFriends} />
+            <Contacts
+                friends={friends}
+                setFriends={setFriends}
+                showChat={showChat}
+            />
             <TabPanel
                 position={position}
                 countries={countries}
-                chat={chat}
+                chatId={chatId}
                 MarkerInformation={MarkerInformation}
                 setPositionMapX={setPositionMapX}
                 setPositionMapY={setPositionMapY}

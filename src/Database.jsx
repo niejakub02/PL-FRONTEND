@@ -48,12 +48,6 @@ export const countries = [
     { id: 6, title: "Mexico" },
 ];
 
-export const chat = [
-    { id_message: 0, id1: 0, id2: 3, message: "Hi!" },
-    { id_message: 1, id1: 3, id2: 0, message: "Hi!" },
-    { id_message: 2, id1: 3, id2: 0, message: "How are you?" },
-];
-
 export const languages = [
     { id: 0, title: "Polish" },
     { id: 1, title: "English" },
@@ -64,13 +58,22 @@ export const languages = [
     { id: 6, title: "Japanese" },
 ];
 
+export const user = {
+    user_id: 0,
+    name: "JOHN",
+    surname: "NOWAK",
+    avatar: "https://fowlertec.ca/images/about-man-img.jpg",
+    description:
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem et, in ipsa nisi possimus quae sequi tempore vitae voluptates! Deserunt explicabo in ipsum iure molestiae perspiciatis qui repellat tenetur.",
+};
+
 export const friends = [
-    {
-        id: 0,
-        name: "NIKO",
-        img: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?cs=srgb&dl=pexels-italo-melo-2379005.jpg&fm=jpg",
-        favorite: false,
-    },
+    // {
+    //     id: 0,
+    //     name: "John",
+    //     img: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?cs=srgb&dl=pexels-italo-melo-2379005.jpg&fm=jpg",
+    //     favorite: false,
+    // },
     {
         id: 1,
         name: "OLIVER",
@@ -100,5 +103,89 @@ export const friends = [
         name: "HAZEL",
         img: "https://sa1s3optim.patientpop.com/assets/images/provider/photos/2353184.jpg",
         favorite: false,
+    },
+    {
+        id: 6,
+        name: "NIKO",
+        img: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?cs=srgb&dl=pexels-italo-melo-2379005.jpg&fm=jpg",
+        favorite: false,
+    },
+];
+
+export const Messages = [
+    {
+        message_id: 0,
+        chat_id: 0,
+        content: "Hi",
+        from: 0,
+        at: 1,
+    },
+    {
+        message_id: 1,
+        chat_id: 0,
+        content: "Hi",
+        from: 1,
+        at: 0,
+    },
+    {
+        message_id: 2,
+        chat_id: 0,
+        content: "How are you?",
+        from: 0,
+        at: 1,
+    },
+    {
+        message_id: 3,
+        chat_id: 1,
+        content: "Hi!",
+        from: 0,
+        at: 2,
+    },
+    {
+        message_id: 4,
+        chat_id: 1,
+        content: "Wow",
+        from: 0,
+        at: 2,
+    },
+    {
+        message_id: 5,
+        chat_id: 5,
+        content: "Hello",
+        from: 0,
+        at: 6,
+    },
+];
+
+export const Chat = [
+    {
+        chat_id: 0,
+        inviting_user_id: 0,
+        invited_user_id: 1,
+    },
+    {
+        chat_id: 1,
+        inviting_user_id: 0,
+        invited_user_id: 2,
+    },
+    {
+        chat_id: 2,
+        inviting_user_id: 0,
+        invited_user_id: 3,
+    },
+    {
+        chat_id: 3,
+        inviting_user_id: 0,
+        invited_user_id: 4,
+    },
+    {
+        chat_id: 4,
+        inviting_user_id: 0,
+        invited_user_id: 5,
+    },
+    {
+        chat_id: 5,
+        inviting_user_id: 0,
+        invited_user_id: 6,
     },
 ];

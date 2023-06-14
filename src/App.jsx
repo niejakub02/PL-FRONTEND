@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
 import Sign from "./pages/sign/Sign";
 import SignUp from "./components/signUp/SignUp.jsx";
 import SignIn from "./components/signIn/SignIn.jsx";
@@ -8,10 +9,10 @@ import Settings from "./pages/settings/Settings.jsx";
 import ModalComponent from "../src/components/modal/Modal.jsx";
 import Notification from "../src/components/notification/Notification";
 import Review from "../src/components/review/Review";
-import { position, countries, chat, friends, languages } from "./Database.jsx";
-import "./App.css";
 import Profile from "./pages/profile/Profile";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import { position, countries, friends, languages, user } from "./Database.jsx";
+import "./App.css";
 
 function App() {
     const [open, setOpen] = useState(false);
@@ -43,7 +44,6 @@ function App() {
                                 <Home
                                     position={position}
                                     countries={countries}
-                                    chat={chat}
                                     handleOpen={handleOpen}
                                 />
                             }
@@ -54,6 +54,7 @@ function App() {
                                 <Settings
                                     languages={languages}
                                     handleOpen={handleOpen}
+                                    user={user}
                                 />
                             }
                         />
