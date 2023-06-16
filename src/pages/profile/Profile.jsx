@@ -12,17 +12,15 @@ import "../settings/Settings.jsx";
 const Profile = ({ languages, handleOpen }) => {
     const [searchParams] = useSearchParams();
     const id = searchParams.get("id");
-
-    console.log(id);
     const person = Users.find((el) => {
-        return el.id == id;
+        return el.user_id == id;
     });
-    console.log(person);
+
     return (
         <Wrapper handleOpen={handleOpen} type={"PROFILE"}>
             <div className="overflow">
                 <BoxSettings
-                    type={<AvatarBox name={person.name} img={person.img} />}
+                    type={<AvatarBox name={person.name} img={person.avatar} />}
                     name={"AVATAR"}
                 />
                 <BoxSettings

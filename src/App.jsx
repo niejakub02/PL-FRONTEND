@@ -21,8 +21,8 @@ function App() {
     const handleClose = () => setOpen(false);
 
     const idI = 0;
-    const I = Users.find((el) => el.id == idI);
-    const friends = Users.filter((el) => el.id != idI);
+    const I = Users.find((el) => el.user_id == idI);
+    const friends = Users.filter((el) => el.user_id != idI);
     const marker = Marker.filter((el) => el.user_id != idI);
 
     return (

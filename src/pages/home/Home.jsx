@@ -4,7 +4,6 @@ import Header from "../../components/header/Header.jsx";
 import Contacts from "../../components/contacts/Contacts.jsx";
 import TabPanel from "../../components/tabPanel/TabPanel.jsx";
 import PopupPerson from "../../components/popup/Popup.jsx";
-// import { friends as friendsMock } from "../../Database.jsx";
 import { Chat } from "../../Database.jsx";
 
 import "../../styles/Styles.css";
@@ -39,7 +38,7 @@ const Home = ({ position, countries, handleOpen, Users }) => {
         setPositionPopupX(e.containerPoint.x + positionMapX);
         setPositionPopupY(e.containerPoint.y + positionMapY);
         const personPopup = friends.find((el) => {
-            return el.id === id;
+            return el.user_id === id;
         });
         setIdPopup(personPopup);
         popupOpen();

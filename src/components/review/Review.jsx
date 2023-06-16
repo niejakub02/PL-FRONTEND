@@ -27,7 +27,7 @@ const Review = ({ friends, handleClose }) => {
                     <div className="flexCC">
                         <AvatarBox
                             name={friends[0].name}
-                            img={friends[0].img}
+                            img={friends[0].avatar}
                         />
                         <p>
                             {friends[0].name} | met <b>17-07-2023</b>
