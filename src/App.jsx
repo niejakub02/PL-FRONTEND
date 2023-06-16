@@ -11,7 +11,7 @@ import Notification from "../src/components/notification/Notification";
 import Review from "../src/components/review/Review";
 import Profile from "./pages/profile/Profile";
 import ProtectedRoute from "./utils/ProtectedRoute";
-import { position, countries, Users, languages } from "./Database.jsx";
+import { Marker, countries, Users, languages } from "./Database.jsx";
 
 import "./App.css";
 
@@ -23,6 +23,7 @@ function App() {
     const idI = 0;
     const I = Users.find((el) => el.id == idI);
     const friends = Users.filter((el) => el.id != idI);
+    const marker = Marker.filter((el) => el.user_id != idI);
 
     return (
         <>
@@ -48,7 +49,7 @@ function App() {
                             element={
                                 <Home
                                     Users={friends}
-                                    position={position}
+                                    position={marker}
                                     countries={countries}
                                     handleOpen={handleOpen}
                                 />

@@ -1,12 +1,12 @@
 // Sample database
-export const position = [
-    // {
-    //     // user_id: 0,
-    //     // latitude: 51.7760881,
-    //     // longitude: 19.4552,
-    //     // offers_help: true,
-    //     // city: "Lodz",
-    // },
+export const Marker = [
+    {
+        user_id: 0,
+        latitude: 51.7760881,
+        longitude: 19.4552,
+        offers_help: true,
+        city: "Lodz",
+    },
     {
         user_id: 1,
         latitude: 51.7760881,
