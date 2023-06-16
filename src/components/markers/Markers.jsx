@@ -23,7 +23,7 @@ const Markers = ({ position, MarkerInformation }) => {
     });
     const markers = position.map((el) => {
         return (
-            <div key={el.id}>
+            <div key={el.user_id}>
                 <Marker
                     position={[el.latitude, el.longitude]}
                     icon={el.offers_help ? redIcon : blueIcon}

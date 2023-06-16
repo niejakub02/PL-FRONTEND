@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import AvatarBox from "../avatar/Avatar";
 import "../../styles/Styles.css";
 import "./Popup.css";
@@ -43,10 +44,13 @@ const PopupPerson = ({
             <div className="popup full_width overflow">
                 <div className="full_width flexCC">
                     <AvatarBox name={idPopup.name} img={idPopup.img} />
-                    <div className="flexCC link">
+                    <Link
+                        to={`/profile?id=${idPopup.id}`}
+                        className="flexCC link"
+                    >
                         <p>VIEW PROFILE</p>
                         <img src="../assets/link.svg" />
-                    </div>
+                    </Link>
                 </div>
                 <p className="description">{idPopup.description}</p>
             </div>

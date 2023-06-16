@@ -41,7 +41,6 @@ const Home = ({ position, countries, handleOpen, Users }) => {
         const personPopup = friends.find((el) => {
             return el.id === id;
         });
-        console.log(id);
         setIdPopup(personPopup);
         popupOpen();
     };

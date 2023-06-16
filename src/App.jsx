@@ -71,7 +71,6 @@ function App() {
                                 <Profile
                                     languages={languages}
                                     handleOpen={handleOpen}
-                                    person={friends[0]}
                                 />
                             }
                         />
