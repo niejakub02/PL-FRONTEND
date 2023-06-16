@@ -15,7 +15,11 @@ const Wrapper = ({ children, handleOpen, type }) => {
             <div className="panel_buttons">
                 <button className="buttons">Save</button>
             </div>
-        ) : null;
+        ) : (
+            <div className="panel_buttons">
+                <button className="buttons pointer">Follow</button>
+            </div>
+        );
 
     return (
         <div className="container flexCC">

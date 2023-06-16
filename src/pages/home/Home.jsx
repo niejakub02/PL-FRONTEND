@@ -4,14 +4,13 @@ import Header from "../../components/header/Header.jsx";
 import Contacts from "../../components/contacts/Contacts.jsx";
 import TabPanel from "../../components/tabPanel/TabPanel.jsx";
 import PopupPerson from "../../components/popup/Popup.jsx";
-import { friends as friendsMock } from "../../Database.jsx";
 import { Chat } from "../../Database.jsx";
 
 import "../../styles/Styles.css";
 import "./Home.css";
 
-const Home = ({ position, countries, handleOpen }) => {
-    const [friends, setFriends] = useState(friendsMock);
+const Home = ({ position, countries, handleOpen, Users }) => {
+    const [friends, setFriends] = useState(Users);
     const [showPopup, setShowPopup] = useState(false);
     const [positionPopupX, setPositionPopupX] = useState(null);
     const [positionPopupY, setPositionPopupY] = useState(null);
@@ -20,6 +19,7 @@ const Home = ({ position, countries, handleOpen }) => {
     const [chatId, setChatId] = useState(0);
     const [isMap, setIsMap] = useState(true);
     const [valueTabPanel, setValueTabPanel] = useState(0);
+    const [idPopup, setIdPopup] = useState(null);
 
     const popupOpen = () => setShowPopup(true);
     const popupClose = () => setShowPopup(false);
@@ -34,9 +34,13 @@ const Home = ({ position, countries, handleOpen }) => {
         }
     };
 
-    const MarkerInformation = (e) => {
+    const MarkerInformation = (e, id) => {
         setPositionPopupX(e.containerPoint.x + positionMapX);
         setPositionPopupY(e.containerPoint.y + positionMapY);
+        const personPopup = friends.find((el) => {
+            return el.user_id === id;
+        });
+        setIdPopup(personPopup);
         popupOpen();
     };
 
@@ -63,6 +67,7 @@ const Home = ({ position, countries, handleOpen }) => {
                     popupClose={popupClose}
                     positionPopupX={positionPopupX}
                     positionPopupY={positionPopupY}
+                    idPopup={idPopup}
                 />
             ) : null}
             <Header show={1} handleOpen={handleOpen} />
