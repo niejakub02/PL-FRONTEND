@@ -11,7 +11,7 @@ const Settings = ({ languages, handleOpen, user }) => {
         <Wrapper handleOpen={handleOpen} type={"SETTINGS"}>
             <div className="overflow">
                 <BoxSettings
-                    type={<AvatarBox name={user.name} img={user.avatar} />}
+                    type={<AvatarBox name={user.name} img={user.img} />}
                     name={"AVATAR"}
                 />
                 <BoxSettings

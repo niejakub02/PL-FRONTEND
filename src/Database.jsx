@@ -1,11 +1,11 @@
 // Sample database
 export const position = [
     // {
-    //     user_id: 0,
-    //     latitude: 51.7760881,
-    //     longitude: 19.4552,
-    //     offers_help: true,
-    //     city: "Lodz",
+    //     // user_id: 0,
+    //     // latitude: 51.7760881,
+    //     // longitude: 19.4552,
+    //     // offers_help: true,
+    //     // city: "Lodz",
     // },
     {
         user_id: 1,
@@ -71,22 +71,16 @@ export const languages = [
     { id: 6, title: "Japanese" },
 ];
 
-export const user = {
-    user_id: 0,
-    name: "JOHN",
-    surname: "NOWAK",
-    avatar: "https://fowlertec.ca/images/about-man-img.jpg",
-    description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem et, in ipsa nisi possimus quae sequi tempore vitae voluptates! Deserunt explicabo in ipsum iure molestiae perspiciatis qui repellat tenetur.",
-};
-
-export const friends = [
-    // {
-    //     id: 0,
-    //     name: "John",
-    //     img: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?cs=srgb&dl=pexels-italo-melo-2379005.jpg&fm=jpg",
-    //     favorite: false,
-    // },
+export const Users = [
+    {
+        id: 0,
+        name: "JOHN",
+        surname: "NOWAK",
+        img: "https://fowlertec.ca/images/about-man-img.jpg",
+        description:
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem et, in ipsa nisi possimus quae sequi tempore vitae voluptates! Deserunt explicabo in ipsum iure molestiae perspiciatis qui repellat tenetur.",
+        favorite: false,
+    },
     {
         id: 1,
         name: "OLIVER",

@@ -11,7 +11,7 @@ import Notification from "../src/components/notification/Notification";
 import Review from "../src/components/review/Review";
 import Profile from "./pages/profile/Profile";
 import ProtectedRoute from "./utils/ProtectedRoute";
-import { position, countries, friends, languages, user } from "./Database.jsx";
+import { position, countries, Users, languages } from "./Database.jsx";
 
 import "./App.css";
 
@@ -19,6 +19,10 @@ function App() {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const idI = 0;
+    const I = Users.find((el) => el.id == idI);
+    const friends = Users.filter((el) => el.id != idI);
 
     return (
         <>
@@ -43,6 +47,7 @@ function App() {
                             path="/"
                             element={
                                 <Home
+                                    Users={friends}
                                     position={position}
                                     countries={countries}
                                     handleOpen={handleOpen}
@@ -55,7 +60,7 @@ function App() {
                                 <Settings
                                     languages={languages}
                                     handleOpen={handleOpen}
-                                    user={user}
+                                    user={I}
                                 />
                             }
                         />

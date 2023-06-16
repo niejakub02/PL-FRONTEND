@@ -4,14 +4,14 @@ import Header from "../../components/header/Header.jsx";
 import Contacts from "../../components/contacts/Contacts.jsx";
 import TabPanel from "../../components/tabPanel/TabPanel.jsx";
 import PopupPerson from "../../components/popup/Popup.jsx";
-import { friends as friendsMock } from "../../Database.jsx";
+// import { friends as friendsMock } from "../../Database.jsx";
 import { Chat } from "../../Database.jsx";
 
 import "../../styles/Styles.css";
 import "./Home.css";
 
-const Home = ({ position, countries, handleOpen }) => {
-    const [friends, setFriends] = useState(friendsMock);
+const Home = ({ position, countries, handleOpen, Users }) => {
+    const [friends, setFriends] = useState(Users);
     const [showPopup, setShowPopup] = useState(false);
     const [positionPopupX, setPositionPopupX] = useState(null);
     const [positionPopupY, setPositionPopupY] = useState(null);
@@ -41,6 +41,7 @@ const Home = ({ position, countries, handleOpen }) => {
         const personPopup = friends.find((el) => {
             return el.id === id;
         });
+        console.log(id);
         setIdPopup(personPopup);
         popupOpen();
     };
