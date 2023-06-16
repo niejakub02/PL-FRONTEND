@@ -2,6 +2,10 @@
     overflow: auto;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 .img_bg {
     width: 80%;
     position: absolute;

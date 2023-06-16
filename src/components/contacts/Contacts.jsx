@@ -2,7 +2,7 @@ import AllContacts from "../contactsAll/AllContacts.jsx";
 
 import "./Contacts.css";
 
-const Contacts = ({ friends, setFriends, showChat }) => {
+const Contacts = ({ friends, setFriends, showChat, handleOpenReview }) => {
     const noContacts = (
         <div className="no-contacts flexCC">
             <img src="../assets/no-contacts.svg" />
@@ -30,6 +30,7 @@ const Contacts = ({ friends, setFriends, showChat }) => {
                         friends={friends}
                         setFriends={setFriends}
                         showChat={showChat}
+                        handleOpenReview={handleOpenReview}
                     />
                 )}
             </div>

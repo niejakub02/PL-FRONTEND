@@ -10,7 +10,7 @@ import { Chat } from "../../Database.jsx";
 import "../../styles/Styles.css";
 import "./Home.css";
 
-const Home = ({ position, countries, handleOpen }) => {
+const Home = ({ position, countries, handleOpen, handleOpenReview }) => {
     const [friends, setFriends] = useState(friendsMock);
     const [showPopup, setShowPopup] = useState(false);
     const [positionPopupX, setPositionPopupX] = useState(null);
@@ -70,6 +70,7 @@ const Home = ({ position, countries, handleOpen }) => {
                 friends={friends}
                 setFriends={setFriends}
                 showChat={showChat}
+                handleOpenReview={handleOpenReview}
             />
             <TabPanel
                 position={position}

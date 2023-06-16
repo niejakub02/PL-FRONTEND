@@ -4,11 +4,19 @@ import AvatarBox from "../avatar/Avatar";
 
 import "./OneContact.css";
 
-const OneContact = ({ friend, deleteContact, showChat, chat, changeChat }) => {
-    const favorite = friend.favorite
-        ? "../assets/starMarked.svg"
-        : "../assets/star.svg";
-    const [star, setStar] = useState(favorite);
+const OneContact = ({
+    friend,
+    deleteContact,
+    showChat,
+    chat,
+    changeChat,
+    handleOpenReview,
+}) => {
+    // const favorite = friend.favorite
+    //     ? "../assets/starMarked.svg"
+    //     : "../assets/star.svg";
+    const [star, setStar] = useState("../assets/star.svg");
+
     const changeStar = () => {
         if (star === "../assets/star.svg") {
             setStar("../assets/starMarked.svg");
@@ -38,7 +46,16 @@ const OneContact = ({ friend, deleteContact, showChat, chat, changeChat }) => {
                     />
                 </div>
                 <div className="flexCC">
-                    <img src={star} onClick={changeStar} />
+                    <img
+                        src={star}
+                        onClick={() => {
+                            changeStar();
+                            {
+                                star === "../assets/star.svg" &&
+                                    handleOpenReview(friend.id);
+                            }
+                        }}
+                    />
                 </div>
                 <div className="flexCC">
                     <img

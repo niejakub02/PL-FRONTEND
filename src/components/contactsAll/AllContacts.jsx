@@ -5,7 +5,13 @@ import OneContact from "../contactOne/OneContact.jsx";
 
 import "./AllContacts.css";
 
-const AllContacts = ({ friends, setFriends, showChat }) => {
+const AllContacts = ({
+    friends,
+    setFriends,
+    showChat,
+    handleOpenReview,
+    star,
+}) => {
     const [friendsBase, setFriendsBase] = useState(friends);
     const searchInput = useRef(null);
 
@@ -56,6 +62,8 @@ const AllContacts = ({ friends, setFriends, showChat }) => {
                             showChat={showChat}
                             changeChat={changeChat}
                             chat={chat}
+                            handleOpenReview={handleOpenReview}
+                            star={star}
                         />
                     );
                 })}
