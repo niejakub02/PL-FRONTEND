@@ -20,6 +20,7 @@ const Home = ({ position, countries, handleOpen }) => {
     const [chatId, setChatId] = useState(0);
     const [isMap, setIsMap] = useState(true);
     const [valueTabPanel, setValueTabPanel] = useState(0);
+    const [idPopup, setIdPopup] = useState(null);
 
     const popupOpen = () => setShowPopup(true);
     const popupClose = () => setShowPopup(false);
@@ -34,9 +35,13 @@ const Home = ({ position, countries, handleOpen }) => {
         }
     };
 
-    const MarkerInformation = (e) => {
+    const MarkerInformation = (e, id) => {
         setPositionPopupX(e.containerPoint.x + positionMapX);
         setPositionPopupY(e.containerPoint.y + positionMapY);
+        const personPopup = friends.find((el) => {
+            return el.id === id;
+        });
+        setIdPopup(personPopup);
         popupOpen();
     };
 
@@ -63,6 +68,7 @@ const Home = ({ position, countries, handleOpen }) => {
                     popupClose={popupClose}
                     positionPopupX={positionPopupX}
                     positionPopupY={positionPopupY}
+                    idPopup={idPopup}
                 />
             ) : null}
             <Header show={1} handleOpen={handleOpen} />
