@@ -79,7 +79,7 @@ function App() {
                             element={
                                 <Settings
                                     languages={languages}
-                                    handleOpen={handleOpen}
+                                    handleOpen={handleOpenNotification}
                                     user={I}
                                 />
                             }
@@ -89,7 +89,8 @@ function App() {
                             element={
                                 <Profile
                                     languages={languages}
-                                    handleOpen={handleOpen}
+                                    handleOpen={handleOpenNotification}
+                                    person={friends[0]}
                                 />
                             }
                         />

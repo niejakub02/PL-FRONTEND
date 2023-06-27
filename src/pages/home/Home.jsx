@@ -9,8 +9,7 @@ import { Chat } from "../../Database.jsx";
 import "../../styles/Styles.css";
 import "./Home.css";
 
-
-const Home = ({ position, countries, handleOpen, Users }) => {
+const Home = ({ position, countries, handleOpen, Users, handleOpenReview }) => {
     const [friends, setFriends] = useState(Users);
     const [showPopup, setShowPopup] = useState(false);
     const [positionPopupX, setPositionPopupX] = useState(null);
