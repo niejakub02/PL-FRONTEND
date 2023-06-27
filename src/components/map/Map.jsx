@@ -5,6 +5,7 @@ import { Switch } from "@mui/material";
 import InitMap from "../initMap/initMap.jsx";
 import { autocompleteOptions } from "../../utils/mockData.js";
 import { sortBy } from "lodash";
+import { User_languages, languages } from "../../Database.jsx";
 
 import "./Map.css";
 
@@ -30,17 +31,55 @@ const Map = ({
     };
 
     const sortMarkersSelectedOptions = (markers) => {
-        if (selectedOptions.length != 0) {
+        if (selectedOptions.length !== 0) {
+            let type = [];
             let array = [];
+            let sort = [];
             selectedOptions.forEach((option, i) => {
                 array[i] = option.value;
+                type[i] = option.type;
             });
-            const sort2 = markers.filter((el) => {
-                if (array.includes(el.city)) {
-                    return el;
-                }
-            });
-            return sort2;
+            type = [...new Set(type)];
+            if (type.length === 1 && type[0] === "CITY") {
+                sort = markers.filter((el) => {
+                    if (array.includes(el.city)) {
+                        return el;
+                    }
+                });
+            }
+            if (type.length === 1 && type[0] === "LANGUAGE") {
+                sort = markers.filter((el) => {
+                    let IdLanguages = [];
+                    const languagesUserId = User_languages.filter(
+                        (l) => l.user_id === el.user_id
+                    );
+                    languagesUserId.forEach((option, i) => {
+                        IdLanguages[i] = option.language_id;
+                    });
+                    IdLanguages = [...new Set(IdLanguages)];
+                    const languagesUser = languages.filter((l) =>
+                        IdLanguages.includes(l.id)
+                    );
+                    if (
+                        //languagesUser.length !== 0 &&
+                        languagesUser.length === 1 &&
+                        array.includes(languagesUser[0].title)
+                    ) {
+                        //console.log(el);
+                        return el;
+                    } else if (languagesUser.length > 1) {
+                        const l = [];
+                        languagesUser.forEach((option, i) => {
+                            l[i] = option.value;
+                        });
+                        const newArra = [...array, ...l];
+                        if (new Set(newArra).size !== newArra.length) {
+                            return el;
+                        }
+                    }
+                });
+            }
+            return sort;
         } else {
             return markers;
         }

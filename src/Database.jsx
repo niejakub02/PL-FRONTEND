@@ -71,6 +71,16 @@ export const languages = [
     { id: 6, title: "Japanese" },
 ];
 
+export const User_languages = [
+    { marker_language_id: 0, language_id: 0, user_id: 0 },
+    { marker_language_id: 1, language_id: 0, user_id: 1 },
+    { marker_language_id: 6, language_id: 4, user_id: 1 },
+    { marker_language_id: 2, language_id: 0, user_id: 2 },
+    { marker_language_id: 3, language_id: 1, user_id: 3 },
+    { marker_language_id: 4, language_id: 1, user_id: 4 },
+    { marker_language_id: 5, language_id: 1, user_id: 5 },
+];
+
 export const Users = [
     {
         user_id: 0,
