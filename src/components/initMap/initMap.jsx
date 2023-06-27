@@ -8,7 +8,7 @@ const InitMap = ({ position, MarkerInformation }) => {
         <MapContainer
             className="map"
             center={[51.7752695, 19.4545949]}
-            zoom={15}
+            zoom={12}
             scrollWheelZoom={true}
         >
             <TileLayer

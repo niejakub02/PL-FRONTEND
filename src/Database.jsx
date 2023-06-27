@@ -5,7 +5,7 @@ export const Marker = [
         latitude: 51.7760881,
         longitude: 19.4552,
         offers_help: true,
-        city: "Lodz",
+        city: "Berlin",
     },
     {
         user_id: 1,
@@ -33,7 +33,7 @@ export const Marker = [
         latitude: 51.7760881,
         longitude: 19.49,
         offers_help: false,
-        city: "Lodz",
+        city: "Berlin",
     },
     {
         user_id: 5,

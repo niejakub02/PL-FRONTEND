@@ -16,8 +16,31 @@ const Map = ({
 }) => {
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [positionMap, setPositionMap] = useState({});
-
+    const [sortPosition, setSortPosition] = useState([]);
     const map = useRef();
+    const [needHelp, setNeedHelp] = useState(false);
+    const [offerHelp, setOfferHelp] = useState(false);
+
+    const handleChangeNeedHelp = (event) => {
+        setNeedHelp(event.target.checked);
+    };
+
+    const handleChangeOfferHelp = (event) => {
+        setOfferHelp(event.target.checked);
+    };
+
+    useEffect(() => {
+        if (offerHelp && !needHelp) {
+            const sort = position.filter((el) => !el.offers_help);
+            setSortPosition(sort);
+        } else if (needHelp && !offerHelp) {
+            const sort = position.filter((el) => el.offers_help);
+            setSortPosition(sort);
+        } else {
+            setSortPosition(position);
+        }
+    }, [offerHelp, needHelp]);
+
     useEffect(() => {
         setPositionMap(map.current.getBoundingClientRect());
     }, []);
@@ -63,18 +86,26 @@ const Map = ({
                 />
             </div>
             <div className="full_width flexCC">
-                <Switch label="NEED HELP" defaultChecked />
+                <Switch
+                    label="NEED HELP"
+                    checked={needHelp}
+                    onChange={handleChangeNeedHelp}
+                />
                 <p>
                     <strong>I NEED HELP</strong> MARKERS
                 </p>
-                <Switch label="OFFER HELP" />
+                <Switch
+                    label="OFFER HELP"
+                    checked={offerHelp}
+                    onChange={handleChangeOfferHelp}
+                />
                 <p>
                     <strong>I OFFER HELP</strong> MARKERS
                 </p>
             </div>
             <div className="map_wrapper" ref={map}>
                 <InitMap
-                    position={position}
+                    position={sortPosition}
                     MarkerInformation={MarkerInformation}
                 />
             </div>

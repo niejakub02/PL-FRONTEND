@@ -26,7 +26,7 @@ const Markers = ({ position, MarkerInformation }) => {
             <div key={el.user_id}>
                 <Marker
                     position={[el.latitude, el.longitude]}
-                    icon={el.offers_help ? redIcon : blueIcon}
+                    icon={!el.offers_help ? redIcon : blueIcon}
                     eventHandlers={{
                         click: (e) => {
                             MarkerInformation(e, el.user_id);
