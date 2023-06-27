@@ -30,54 +30,57 @@ const Map = ({
         setOfferHelp(event.target.checked);
     };
 
+    const sortMarkersByCity = (markers, options) => {
+        return markers.filter((el) => {
+            if (options.includes(el.city)) {
+                return el;
+            }
+        });
+    };
+
+    const objectToArray = (object, value) => {
+        const array = [];
+        object.forEach((el, i) => {
+            array[i] = el[value];
+        });
+        return array;
+    };
+
+    const sortMarkersByLanguages = (markers, options) => {
+        return markers.filter((el) => {
+            const languagesUserId = User_languages.filter(
+                (l) => l.user_id === el.user_id
+            );
+            let IdLanguages = objectToArray(languagesUserId, "language_id");
+            IdLanguages = [...new Set(IdLanguages)];
+            const languagesUser = languages.filter((l) =>
+                IdLanguages.includes(l.id)
+            );
+            if (languagesUser.length) {
+                const titleLanguages = objectToArray(languagesUser, "title");
+                const newArray = [...options, ...titleLanguages];
+                if (new Set(newArray).size !== newArray.length) {
+                    return el;
+                }
+            }
+        });
+    };
+
     const sortMarkersSelectedOptions = (markers) => {
         if (selectedOptions.length !== 0) {
-            let type = [];
-            let array = [];
+            const array = objectToArray(selectedOptions, "value");
+            let type = objectToArray(selectedOptions, "type");
             let sort = [];
-            selectedOptions.forEach((option, i) => {
-                array[i] = option.value;
-                type[i] = option.type;
-            });
             type = [...new Set(type)];
-            if (type.length === 1 && type[0] === "CITY") {
-                sort = markers.filter((el) => {
-                    if (array.includes(el.city)) {
-                        return el;
-                    }
-                });
-            }
-            if (type.length === 1 && type[0] === "LANGUAGE") {
-                sort = markers.filter((el) => {
-                    let IdLanguages = [];
-                    const languagesUserId = User_languages.filter(
-                        (l) => l.user_id === el.user_id
-                    );
-                    languagesUserId.forEach((option, i) => {
-                        IdLanguages[i] = option.language_id;
-                    });
-                    IdLanguages = [...new Set(IdLanguages)];
-                    const languagesUser = languages.filter((l) =>
-                        IdLanguages.includes(l.id)
-                    );
-                    if (
-                        //languagesUser.length !== 0 &&
-                        languagesUser.length === 1 &&
-                        array.includes(languagesUser[0].title)
-                    ) {
-                        //console.log(el);
-                        return el;
-                    } else if (languagesUser.length > 1) {
-                        const l = [];
-                        languagesUser.forEach((option, i) => {
-                            l[i] = option.value;
-                        });
-                        const newArra = [...array, ...l];
-                        if (new Set(newArra).size !== newArra.length) {
-                            return el;
-                        }
-                    }
-                });
+            if (type.length === 1) {
+                if (type[0] === "CITY") {
+                    sort = sortMarkersByCity(markers, array);
+                } else {
+                    sort = sortMarkersByLanguages(markers, array);
+                }
+            } else {
+                sort = sortMarkersByCity(markers, array);
+                sort = sortMarkersByLanguages(sort, array);
             }
             return sort;
         } else {
