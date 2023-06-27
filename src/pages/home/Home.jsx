@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Header from "../../components/header/Header.jsx";
 import Contacts from "../../components/contacts/Contacts.jsx";
@@ -6,11 +6,12 @@ import TabPanel from "../../components/tabPanel/TabPanel.jsx";
 import PopupPerson from "../../components/popup/Popup.jsx";
 import { Chat } from "../../Database.jsx";
 
+import client from "../../utils/API.js";
 import "../../styles/Styles.css";
 import "./Home.css";
 
 const Home = ({ position, countries, handleOpen, Users }) => {
-    const [friends, setFriends] = useState(Users);
+    const [friends, setFriends] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
     const [positionPopupX, setPositionPopupX] = useState(null);
     const [positionPopupY, setPositionPopupY] = useState(null);
@@ -20,6 +21,19 @@ const Home = ({ position, countries, handleOpen, Users }) => {
     const [isMap, setIsMap] = useState(true);
     const [valueTabPanel, setValueTabPanel] = useState(0);
     const [idPopup, setIdPopup] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        setIsLoading(true);
+        client.get('User/Contacts')
+            .then(res => {
+                console.log(res.data);
+                setFriends(res.data)
+            })
+            .finally(() => {
+                setIsLoading(false);
+            })
+    }, [])
 
     const popupOpen = () => setShowPopup(true);
     const popupClose = () => setShowPopup(false);
@@ -37,7 +51,7 @@ const Home = ({ position, countries, handleOpen, Users }) => {
     const MarkerInformation = (e, id) => {
         setPositionPopupX(e.containerPoint.x + positionMapX);
         setPositionPopupY(e.containerPoint.y + positionMapY);
-        const personPopup = friends.find((el) => {
+        const personPopup = Users.find((el) => {
             return el.user_id === id;
         });
         setIdPopup(personPopup);

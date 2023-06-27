@@ -19,7 +19,19 @@ const Map = ({
 
     const map = useRef();
     useEffect(() => {
+        const onMapClick = (e) => {
+            if (e.ctrlKey) {
+                console.log('test');
+                // TODO: dodaj marker
+            }
+        }
+
         setPositionMap(map.current.getBoundingClientRect());
+        map.current.addEventListener('click', onMapClick);
+
+        return () => {
+            map?.current?.removeEventListener('click', onMapClick);
+        }
     }, []);
 
     useEffect(() => {

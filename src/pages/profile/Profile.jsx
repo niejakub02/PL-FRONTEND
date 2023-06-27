@@ -8,61 +8,84 @@ import { Users } from "../../Database.jsx";
 
 import "../../styles/Styles.css";
 import "../settings/Settings.jsx";
+import { useEffect, useState } from "react";
+import client from "../../utils/API.js";
 
-const Profile = ({ languages, handleOpen }) => {
+const Profile = ({ handleOpen }) => {
     const [searchParams] = useSearchParams();
+    const [person, setPerson] = useState(null);
+    const [languages, setLanguages] = useState([]);
+
     const id = searchParams.get("id");
-    const person = Users.find((el) => {
-        return el.user_id == id;
-    });
+
+    const handleAdd = () => {
+        client.post(`User/${id}/invite`)
+            .then(res => {
+                console.log('SUPER');
+            })
+    }
+
+    useEffect(() => {
+        client.get('Language/Languages')
+            .then(res => {
+                setLanguages(res.data);
+                client.get(`User/${id}`)
+                    .then(res => {
+                        const userData = res.data;
+                        userData.languages = userData.languages.map(l => l.languageId)
+                        setPerson(userData)
+                    })
+            })
+    }, [])
 
     return (
-        <Wrapper handleOpen={handleOpen} type={"PROFILE"}>
-            <div className="overflow">
-                <BoxSettings
-                    type={<AvatarBox name={person.name} img={person.avatar} />}
-                    name={"AVATAR"}
-                />
-                <BoxSettings
-                    type={<p>{person.name.toUpperCase()}</p>}
-                    name={"FIRST NAME"}
-                />
-                <BoxSettings
-                    type={<p>{person.surname.toUpperCase()}</p>}
-                    name={"LAST NAME"}
-                />
-                <BoxSettings type={<p>{person.age}</p>} name={"AGE"} />
-                <BoxSettings
-                    type={
-                        <Autocomplete
-                            size="small"
-                            className="autocomplete_languages"
-                            multiple
-                            id="tags-outlined"
-                            options={languages}
-                            getOptionLabel={(option) => option.title}
-                            defaultValue={[languages[0]]}
-                            filterSelectedOptions
-                            readOnly
-                            renderInput={(params) => (
-                                <TextField {...params} placeholder="SEARCH" />
-                            )}
-                        />
-                    }
-                    name={"LANGUAGES"}
-                />
-                <BoxSettings
-                    type={
-                        <textarea
-                            type="text"
-                            value={person.description}
-                            disabled
-                        />
-                    }
-                    name={"DESCRIPTION"}
-                />
-            </div>
-        </Wrapper>
+        person ?
+            <Wrapper handleOpen={handleOpen} type={"PROFILE"} onAdd={handleAdd}>
+                <div className="overflow">
+                    <BoxSettings
+                        type={<AvatarBox name={person.firstName} img={person.avatar} />}
+                        name={"AVATAR"}
+                    />
+                    <BoxSettings
+                        type={<p>{person.firstName.toUpperCase()}</p>}
+                        name={"FIRST NAME"}
+                    />
+                    <BoxSettings
+                        type={<p>{person.lastName.toUpperCase()}</p>}
+                        name={"LAST NAME"}
+                    />
+                    <BoxSettings type={<p>{person.age}</p>} name={"AGE"} />
+                    <BoxSettings
+                        type={
+                            <Autocomplete
+                                size="small"
+                                className="autocomplete_languages"
+                                multiple
+                                id="tags-outlined"
+                                options={languages}
+                                getOptionLabel={(option) => option.languageName}
+                                defaultValue={languages.filter(l => person.languages.includes(l.id))}
+                                filterSelectedOptions
+                                readOnly
+                                renderInput={(params) => (
+                                    <TextField {...params} />
+                                )}
+                            />
+                        }
+                        name={"LANGUAGES"}
+                    />
+                    <BoxSettings
+                        type={
+                            <textarea
+                                type="text"
+                                value={person.description}
+                                disabled
+                            />
+                        }
+                        name={"DESCRIPTION"}
+                    />
+                </div>
+            </Wrapper> : null
     );
 };
 

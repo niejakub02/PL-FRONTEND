@@ -30,7 +30,6 @@ function App() {
             <ModalComponent
                 setOpen={setOpen}
                 open={open}
-                friends={friends}
                 handleClose={handleClose}
             >
                 <Notification friends={friends} handleClose={handleClose} />

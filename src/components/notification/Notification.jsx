@@ -3,35 +3,48 @@ import AvatarBox from "../avatar/Avatar";
 import "../../pages/sign/Sign.css";
 import "../modal/Modal.css";
 import "./Notification.css";
+import { useEffect, useState } from "react";
+import client from "../../utils/API";
 
-const Notification = ({ friends, handleClose }) => {
+const Notification = ({ handleClose }) => {
+    const [invitations, setInvitations] = useState([]);
+
+    useEffect(() => {
+        client.get('User/Invitations')
+            .then(res => {
+                console.log(res.data)
+                setInvitations(res.data)
+            })
+    }, [])
+
     return (
-        <div className="box_modal">
-            <div className="box_header">
-                <div className="logo_modal_box flexCC">
-                    <img src="../assets/notification.svg" />
-                    <p>NOTIFICATIONS</p>
+        invitations ?
+            <div className="box_modal">
+                <div className="box_header">
+                    <div className="logo_modal_box flexCC">
+                        <img src="../assets/notification.svg" />
+                        <p>NOTIFICATIONS</p>
+                    </div>
+                    <img
+                        src="../assets/exit.svg"
+                        onClick={handleClose}
+                        className="exit_button"
+                    />
                 </div>
-                <img
-                    src="../assets/exit.svg"
-                    onClick={handleClose}
-                    className="exit_button"
-                />
-            </div>
-            <div className="notification_people">
-                {friends.map((el) => {
-                    return (
-                        <OnePersonNotification friend={el} key={el.user_id} />
-                    );
-                })}
-            </div>
-            <div className="panel_buttons">
-                <button className="buttons">ACCEPT ALL</button>
-                <button className="button_not_border buttons">
-                    REJECT ALL
-                </button>
-            </div>
-        </div>
+                <div className="notification_people">
+                    {invitations.map((el) => {
+                        return (
+                            <OnePersonNotification friend={el} key={el.id} />
+                        );
+                    })}
+                </div>
+                <div className="panel_buttons">
+                    <button className="buttons">ACCEPT ALL</button>
+                    <button className="button_not_border buttons">
+                        REJECT ALL
+                    </button>
+                </div>
+            </div> : null
     );
 };
 
@@ -39,9 +52,9 @@ const OnePersonNotification = ({ friend }) => {
     return (
         <div className="one_person_notification" key={friend.user_id}>
             <div className="flexCC">
-                <AvatarBox name={friend.name} img={friend.avatar} />
+                <AvatarBox name={friend.firstName} img={friend.avatar} />
                 <p>
-                    <b>PERSON {friend.user_id + 1}</b> IS TRYING TO REACH OUT TO
+                    <b>{friend.firstName || 'STRANGER'}</b> IS TRYING TO REACH OUT TO
                     YOU
                 </p>
             </div>
