@@ -28,6 +28,7 @@ function App() {
         setOpen(true);
         setIsNotification(false);
         setIdReview(id);
+        console.log(id);
     };
     const handleClose = () => setOpen(false);
 

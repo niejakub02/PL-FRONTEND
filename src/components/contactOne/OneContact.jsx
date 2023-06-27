@@ -52,7 +52,7 @@ const OneContact = ({
                             changeStar();
                             {
                                 star === "../assets/star.svg" &&
-                                    handleOpenReview(friend.id);
+                                    handleOpenReview(friend.user_id);
                             }
                         }}
                     />

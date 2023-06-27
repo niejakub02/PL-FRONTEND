@@ -9,7 +9,7 @@ import "./Review.css";
 const Review = ({ friends, handleClose, idReview }) => {
     const [value, setValue] = useState(0);
     const friend = friends.find((el) => {
-        return el.id === idReview;
+        return el.user_id === idReview;
     });
     return (
         <div className="box_modal">
@@ -27,7 +27,7 @@ const Review = ({ friends, handleClose, idReview }) => {
             <div className="review">
                 <div className="full_width review_personal_information">
                     <div className="flexCC">
-                        <AvatarBox name={friend.name} img={friend.img} />
+                        <AvatarBox name={friend.name} img={friend.avatar} />
                         <p>
                             {friend.name} {/*| met <b>17-07-2023</b>*/}
                         </p>
