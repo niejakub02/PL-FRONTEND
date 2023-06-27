@@ -10,8 +10,8 @@ import client from "../../utils/API.js";
 import "../../styles/Styles.css";
 import "./Home.css";
 
-const Home = ({ position, countries, handleOpen, Users }) => {
-    const [friends, setFriends] = useState([]);
+const Home = ({ position, countries, handleOpen, Users, handleOpenReview }) => {
+    const [friends, setFriends] = useState(Users);
     const [showPopup, setShowPopup] = useState(false);
     const [positionPopupX, setPositionPopupX] = useState(null);
     const [positionPopupY, setPositionPopupY] = useState(null);
@@ -89,6 +89,7 @@ const Home = ({ position, countries, handleOpen, Users }) => {
                 friends={friends}
                 setFriends={setFriends}
                 showChat={showChat}
+                handleOpenReview={handleOpenReview}
             />
             <TabPanel
                 position={position}

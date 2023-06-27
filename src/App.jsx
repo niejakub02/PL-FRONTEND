@@ -17,7 +17,19 @@ import "./App.css";
 
 function App() {
     const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
+    const [isNotification, setIsNotification] = useState(true);
+    const [idReview, setIdReview] = useState(null);
+
+    const handleOpenNotification = () => {
+        setOpen(true);
+        setIsNotification(true);
+    };
+    const handleOpenReview = (id) => {
+        setOpen(true);
+        setIsNotification(false);
+        setIdReview(id);
+        console.log(id);
+    };
     const handleClose = () => setOpen(false);
 
     const idI = 0;
@@ -32,8 +44,15 @@ function App() {
                 open={open}
                 handleClose={handleClose}
             >
-                <Notification friends={friends} handleClose={handleClose} />
-                {/* <Review friends={friends} handleClose={handleClose} /> */}
+                {isNotification ? (
+                    <Notification friends={friends} handleClose={handleClose} />
+                ) : (
+                    <Review
+                        friends={friends}
+                        handleClose={handleClose}
+                        idReview={idReview}
+                    />
+                )}
             </ModalComponent>
             <Router>
                 <Routes>
@@ -50,7 +69,8 @@ function App() {
                                     Users={friends}
                                     position={marker}
                                     countries={countries}
-                                    handleOpen={handleOpen}
+                                    handleOpen={handleOpenNotification}
+                                    handleOpenReview={handleOpenReview}
                                 />
                             }
                         />
@@ -59,7 +79,7 @@ function App() {
                             element={
                                 <Settings
                                     languages={languages}
-                                    handleOpen={handleOpen}
+                                    handleOpen={handleOpenNotification}
                                     user={I}
                                 />
                             }
@@ -69,7 +89,8 @@ function App() {
                             element={
                                 <Profile
                                     languages={languages}
-                                    handleOpen={handleOpen}
+                                    handleOpen={handleOpenNotification}
+                                    person={friends[0]}
                                 />
                             }
                         />

@@ -6,9 +6,11 @@ import "../../pages/sign/Sign.css";
 import "../modal/Modal.css";
 import "./Review.css";
 
-const Review = ({ friends, handleClose }) => {
+const Review = ({ friends, handleClose, idReview }) => {
     const [value, setValue] = useState(0);
-
+    const friend = friends.find((el) => {
+        return el.user_id === idReview;
+    });
     return (
         <div className="box_modal">
             <div className="box_header">
@@ -25,12 +27,9 @@ const Review = ({ friends, handleClose }) => {
             <div className="review">
                 <div className="full_width review_personal_information">
                     <div className="flexCC">
-                        <AvatarBox
-                            name={friends[0].name}
-                            img={friends[0].avatar}
-                        />
+                        <AvatarBox name={friend.name} img={friend.avatar} />
                         <p>
-                            {friends[0].name} | met <b>17-07-2023</b>
+                            {friend.name} {/*| met <b>17-07-2023</b>*/}
                         </p>
                     </div>
                     <Rating
@@ -42,11 +41,13 @@ const Review = ({ friends, handleClose }) => {
                     />
                 </div>
                 <textarea
-                    placeholder={`What are your thoughts about ${friends[0].name}?`}
+                    placeholder={`What are your thoughts about ${friend.name}?`}
                 ></textarea>
             </div>
             <div className="panel_buttons">
-                <button className="buttons">Send</button>
+                <button className="buttons pointer" onClick={handleClose}>
+                    Send
+                </button>
             </div>
         </div>
     );
