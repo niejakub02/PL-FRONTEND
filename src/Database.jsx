@@ -5,7 +5,7 @@ export const Marker = [
         latitude: 51.7760881,
         longitude: 19.4552,
         offers_help: true,
-        city: "Lodz",
+        city: "Berlin",
     },
     {
         user_id: 1,
@@ -33,7 +33,7 @@ export const Marker = [
         latitude: 51.7760881,
         longitude: 19.49,
         offers_help: false,
-        city: "Lodz",
+        city: "Berlin",
     },
     {
         user_id: 5,
@@ -69,6 +69,16 @@ export const languages = [
     { id: 4, title: "Russian" },
     { id: 5, title: "Turkish" },
     { id: 6, title: "Japanese" },
+];
+
+export const User_languages = [
+    { marker_language_id: 0, language_id: 0, user_id: 0 },
+    { marker_language_id: 1, language_id: 0, user_id: 1 },
+    { marker_language_id: 6, language_id: 4, user_id: 1 },
+    { marker_language_id: 2, language_id: 0, user_id: 2 },
+    { marker_language_id: 3, language_id: 1, user_id: 3 },
+    { marker_language_id: 4, language_id: 1, user_id: 4 },
+    { marker_language_id: 5, language_id: 1, user_id: 5 },
 ];
 
 export const Users = [
