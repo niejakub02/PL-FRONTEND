@@ -29,17 +29,35 @@ const Map = ({
         setOfferHelp(event.target.checked);
     };
 
+    const sortMarkersSelectedOptions = (markers) => {
+        if (selectedOptions.length != 0) {
+            let array = [];
+            selectedOptions.forEach((option, i) => {
+                array[i] = option.value;
+            });
+            const sort2 = markers.filter((el) => {
+                if (array.includes(el.city)) {
+                    return el;
+                }
+            });
+            return sort2;
+        } else {
+            return markers;
+        }
+    };
+
     useEffect(() => {
         if (offerHelp && !needHelp) {
             const sort = position.filter((el) => !el.offers_help);
-            setSortPosition(sort);
+            setSortPosition(sortMarkersSelectedOptions(sort));
         } else if (needHelp && !offerHelp) {
             const sort = position.filter((el) => el.offers_help);
-            setSortPosition(sort);
+            setSortPosition(sortMarkersSelectedOptions(sort));
         } else {
-            setSortPosition(position);
+            const sort = position;
+            setSortPosition(sortMarkersSelectedOptions(sort));
         }
-    }, [offerHelp, needHelp]);
+    }, [offerHelp, needHelp, selectedOptions]);
 
     useEffect(() => {
         setPositionMap(map.current.getBoundingClientRect());
