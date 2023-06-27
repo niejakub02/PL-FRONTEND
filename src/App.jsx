@@ -11,7 +11,7 @@ import Notification from "../src/components/notification/Notification";
 import Review from "../src/components/review/Review";
 import Profile from "./pages/profile/Profile";
 import ProtectedRoute from "./utils/ProtectedRoute";
-import { position, countries, friends, languages, user } from "./Database.jsx";
+import { Marker, countries, Users, languages } from "./Database.jsx";
 
 import "./App.css";
 
@@ -30,6 +30,11 @@ function App() {
         setIdReview(id);
     };
     const handleClose = () => setOpen(false);
+
+    const idI = 0;
+    const I = Users.find((el) => el.user_id == idI);
+    const friends = Users.filter((el) => el.user_id != idI);
+    const marker = Marker.filter((el) => el.user_id != idI);
 
     return (
         <>
@@ -61,7 +66,8 @@ function App() {
                             path="/"
                             element={
                                 <Home
-                                    position={position}
+                                    Users={friends}
+                                    position={marker}
                                     countries={countries}
                                     handleOpen={handleOpenNotification}
                                     handleOpenReview={handleOpenReview}
@@ -73,8 +79,8 @@ function App() {
                             element={
                                 <Settings
                                     languages={languages}
-                                    handleOpen={handleOpenNotification}
-                                    user={user}
+                                    handleOpen={handleOpen}
+                                    user={I}
                                 />
                             }
                         />
@@ -83,8 +89,7 @@ function App() {
                             element={
                                 <Profile
                                     languages={languages}
-                                    handleOpen={handleOpenNotification}
-                                    person={friends[0]}
+                                    handleOpen={handleOpen}
                                 />
                             }
                         />

@@ -36,6 +36,7 @@
 
 .link {
     cursor: pointer;
+    text-decoration: none;
 }
 
 .link p {

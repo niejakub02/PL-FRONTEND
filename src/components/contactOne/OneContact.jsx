@@ -28,20 +28,20 @@ const OneContact = ({
     return (
         <div className="one_person ">
             <div className="flexCC">
-                <AvatarBox name={friend.name} img={friend.img} />
+                <AvatarBox name={friend.name} img={friend.avatar} />
                 <p>{friend.name}</p>
             </div>
             <div className="markers">
                 <div className="flexCC">
                     <img
                         src={
-                            chat === friend.id
+                            chat === friend.user_id
                                 ? "../assets/chat.svg"
                                 : "../assets/chat2.svg"
                         }
                         onClick={() => {
-                            changeChat(friend.id);
-                            showChat(friend.id);
+                            changeChat(friend.user_id);
+                            showChat(friend.user_id);
                         }}
                     />
                 </div>
@@ -60,7 +60,7 @@ const OneContact = ({
                 <div className="flexCC">
                     <img
                         src="../assets/tresh.svg"
-                        onClick={() => deleteContact(friend.id)}
+                        onClick={() => deleteContact(friend.user_id)}
                     />
                 </div>
             </div>

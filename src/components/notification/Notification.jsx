@@ -20,7 +20,9 @@ const Notification = ({ friends, handleClose }) => {
             </div>
             <div className="notification_people">
                 {friends.map((el) => {
-                    return <OnePersonNotification friend={el} key={el.id} />;
+                    return (
+                        <OnePersonNotification friend={el} key={el.user_id} />
+                    );
                 })}
             </div>
             <div className="panel_buttons">
@@ -35,11 +37,12 @@ const Notification = ({ friends, handleClose }) => {
 
 const OnePersonNotification = ({ friend }) => {
     return (
-        <div className="one_person_notification" key={friend.id}>
+        <div className="one_person_notification" key={friend.user_id}>
             <div className="flexCC">
-                <AvatarBox name={friend.name} img={friend.img} />
+                <AvatarBox name={friend.name} img={friend.avatar} />
                 <p>
-                    <b>PERSON {friend.id + 1}</b> IS TRYING TO REACH OUT TO YOU
+                    <b>PERSON {friend.user_id + 1}</b> IS TRYING TO REACH OUT TO
+                    YOU
                 </p>
             </div>
             <div className="markers_notification">

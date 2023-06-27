@@ -24,8 +24,8 @@ const AllContacts = ({
     };
 
     const deleteContact = (id) => {
-        setFriends((f) => f.filter((el) => el.id !== id));
-        setFriendsBase((f) => f.filter((el) => el.id !== id));
+        setFriends((f) => f.filter((el) => el.user_id !== id));
+        setFriendsBase((f) => f.filter((el) => el.user_id !== id));
     };
 
     const [chat, setChat] = useState(1);
@@ -57,7 +57,7 @@ const AllContacts = ({
                     return (
                         <OneContact
                             friend={friend}
-                            key={friend.id}
+                            key={friend.user_id}
                             deleteContact={deleteContact}
                             showChat={showChat}
                             changeChat={changeChat}
