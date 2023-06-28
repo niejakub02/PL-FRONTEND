@@ -1,9 +1,11 @@
+import { useState } from "react";
+
 import Header from "../header/Header";
 
 import "../../styles/Styles.css";
 import "./Wrapper.css";
 
-const Wrapper = ({ children, handleOpen, type }) => {
+const Wrapper = ({ children, handleOpen, type, saveData }) => {
     const img =
         type === "SETTINGS" ? (
             <img src="../assets/settings.svg" />
@@ -13,7 +15,9 @@ const Wrapper = ({ children, handleOpen, type }) => {
     const panel =
         type === "SETTINGS" ? (
             <div className="panel_buttons">
-                <button className="buttons">Save</button>
+                <button className="buttons pointer" onClick={saveData}>
+                    Save
+                </button>
             </div>
         ) : (
             <div className="panel_buttons">
