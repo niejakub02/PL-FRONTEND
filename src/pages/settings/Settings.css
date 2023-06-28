@@ -29,7 +29,14 @@
     width: 30%;
     background: none;
     border: none;
+}
+
+.inputno_no_active {
     color: #9c9c9c;
+}
+
+.inputno_active {
+    color: black;
 }
 
 .block_settings input:focus {
@@ -48,7 +55,6 @@
     height: 100px;
     background: none;
     border: none;
-    color: #9c9c9c;
     resize: none;
     text-align: justify;
 }
