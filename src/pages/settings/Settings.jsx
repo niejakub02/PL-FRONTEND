@@ -1,13 +1,20 @@
+import { useState, useRef, useEffect } from "react";
 import { TextField } from "@mui/material";
-import AvatarBox from "../../components/avatar/Avatar.jsx";
 import Autocomplete from "@mui/material/Autocomplete";
+
+import AvatarBox from "../../components/avatar/Avatar.jsx";
+import Wrapper from "../../components/wrapper/Wrapper.jsx";
+import { User_languages, languages } from "../../Database.jsx";
+
 import "../../styles/Styles.css";
 import "../../pages/sign/Sign.css";
 import "./Settings.css";
-import Wrapper from "../../components/wrapper/Wrapper.jsx";
-import { useState, useRef } from "react";
 
-const Settings = ({ languages, handleOpen, user }) => {
+const Settings = ({ handleOpen, user }) => {
+    const name = useRef();
+    const surname = useRef();
+    const age = useRef();
+    const description = useRef();
     const [disabled, setDisabled] = useState({
         name: true,
         surname: true,
@@ -15,6 +22,35 @@ const Settings = ({ languages, handleOpen, user }) => {
         languages: true,
         description: true,
     });
+    const [values, setValues] = useState({
+        avatar: user.avatar,
+        name: user.name,
+        surname: user.surname,
+        age: user.age,
+        languages: [],
+        description: user.description,
+    });
+
+    useEffect(() => {
+        const arrayLanguages = searchLanguages(user.user_id);
+        setValues({ ...values, languages: arrayLanguages });
+    }, []);
+
+    const objectToArray = (object, value) => {
+        const array = [];
+        object.forEach((el, i) => {
+            array[i] = el[value];
+        });
+        return array;
+    };
+
+    const searchLanguages = (userId) => {
+        const languagesUser = User_languages.filter(
+            (l) => l.user_id === userId
+        );
+        const idLanguages = objectToArray(languagesUser, "language_id");
+        return languages.filter((el) => idLanguages.includes(el.id));
+    };
 
     const changeDisabled = (value) => {
         setDisabled((el) => ({
@@ -23,17 +59,28 @@ const Settings = ({ languages, handleOpen, user }) => {
         }));
     };
 
-    const [fileInput, setFileInput] = useState(user.avatar);
     const changeImg = (file) => {
         console.log(file.current.value); // The picture needs to be sent to the server and then changed
-        setFileInput(file.current.value);
+        setValues({ ...values, avatar: file.current.value });
+    };
+
+    const changeValues = (ref, type) => {
+        setValues({ ...values, [type]: ref.current.value });
+    };
+
+    const onChangeEvent = (event, value) => {
+        setValues({ ...values, languages: value });
+    };
+
+    const saveData = () => {
+        console.log(values);
     };
 
     return (
-        <Wrapper handleOpen={handleOpen} type={"SETTINGS"}>
+        <Wrapper handleOpen={handleOpen} type={"SETTINGS"} saveData={saveData}>
             <div className="overflow">
                 <BoxSettings
-                    type={<AvatarBox name={user.name} img={fileInput} />}
+                    type={<AvatarBox name={values.name} img={values.avatar} />}
                     name={"AVATAR"}
                     nameInput={"avatar"}
                     change={changeDisabled}
@@ -43,13 +90,15 @@ const Settings = ({ languages, handleOpen, user }) => {
                     type={
                         <input
                             type="text"
-                            defaultValue={user.name}
+                            defaultValue={values.name}
                             disabled={disabled.name}
                             className={
                                 disabled.name
                                     ? "inputno_no_active"
                                     : "inputno_active"
                             }
+                            ref={name}
+                            onChange={() => changeValues(name, "name")}
                         />
                     }
                     name={"FIRST NAME"}
@@ -60,13 +109,15 @@ const Settings = ({ languages, handleOpen, user }) => {
                     type={
                         <input
                             type="text"
-                            defaultValue={user.surname}
+                            defaultValue={values.surname}
                             disabled={disabled.surname}
                             className={
                                 disabled.surname
                                     ? "inputno_no_active"
                                     : "inputno_active"
                             }
+                            ref={surname}
+                            onChange={() => changeValues(surname, "surname")}
                         />
                     }
                     nameInput={"surname"}
@@ -77,13 +128,15 @@ const Settings = ({ languages, handleOpen, user }) => {
                     type={
                         <input
                             type="number"
-                            defaultValue={user.age}
+                            defaultValue={values.age}
                             disabled={disabled.age}
                             className={
                                 disabled.age
                                     ? "inputno_no_active"
                                     : "inputno_active"
                             }
+                            ref={age}
+                            onChange={() => changeValues(age, "age")}
                         />
                     }
                     name={"AGE"}
@@ -97,9 +150,10 @@ const Settings = ({ languages, handleOpen, user }) => {
                             className="autocomplete_languages"
                             multiple
                             id="tags-outlined"
+                            onChange={onChangeEvent}
                             options={languages}
                             getOptionLabel={(option) => option.title}
-                            defaultValue={[languages[0]]}
+                            value={values.languages}
                             filterSelectedOptions
                             readOnly={disabled.languages}
                             renderInput={(params) => (
@@ -115,12 +169,16 @@ const Settings = ({ languages, handleOpen, user }) => {
                     type={
                         <textarea
                             type="text"
-                            defaultValue={user.description}
+                            defaultValue={values.description}
                             disabled={disabled.description}
                             className={
                                 disabled.description
                                     ? "inputno_no_active"
                                     : "inputno_active"
+                            }
+                            ref={description}
+                            onChange={() =>
+                                changeValues(description, "description")
                             }
                         />
                     }
