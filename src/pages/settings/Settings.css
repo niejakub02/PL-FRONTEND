@@ -47,6 +47,8 @@
 .block_settings p {
     background: none;
     border: none;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
     color: #9c9c9c;
 }
 
@@ -62,4 +64,17 @@
 .block_settings textarea:focus {
     outline: none;
     color: black;
+}
+
+.input__wrapper {
+    width: 100%;
+    position: relative;
+    margin: 15px 0;
+    text-align: center;
+}
+
+.input__file {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
 }

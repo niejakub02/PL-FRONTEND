@@ -95,6 +95,7 @@
     align-items: center;
     justify-content: space-evenly;
     margin-left: 5px;
+    box-sizing: border-box;
 }
 
 .buttons img {

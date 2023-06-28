@@ -5,11 +5,10 @@ import "../../styles/Styles.css";
 import "../../pages/sign/Sign.css";
 import "./Settings.css";
 import Wrapper from "../../components/wrapper/Wrapper.jsx";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const Settings = ({ languages, handleOpen, user }) => {
     const [disabled, setDisabled] = useState({
-        avatar: true,
         name: true,
         surname: true,
         age: true,
@@ -24,14 +23,21 @@ const Settings = ({ languages, handleOpen, user }) => {
         }));
     };
 
+    const [fileInput, setFileInput] = useState(user.avatar);
+    const changeImg = (file) => {
+        console.log(file.current.value); // The picture needs to be sent to the server and then changed
+        setFileInput(file.current.value);
+    };
+
     return (
         <Wrapper handleOpen={handleOpen} type={"SETTINGS"}>
             <div className="overflow">
                 <BoxSettings
-                    type={<AvatarBox name={user.name} img={user.avatar} />}
+                    type={<AvatarBox name={user.name} img={fileInput} />}
                     name={"AVATAR"}
                     nameInput={"avatar"}
                     change={changeDisabled}
+                    changeImg={changeImg}
                 />
                 <BoxSettings
                     type={
@@ -127,10 +133,10 @@ const Settings = ({ languages, handleOpen, user }) => {
     );
 };
 
-const BoxSettings = ({ type, name, change, nameInput }) => {
-    return (
-        <div className="block_settings flexCC">
-            {type}
+const BoxSettings = ({ type, name, change, nameInput, changeImg }) => {
+    const file = useRef(null);
+    const buttonChange =
+        nameInput !== "avatar" ? (
             <button
                 className="buttons pointer"
                 onClick={() => change(nameInput)}
@@ -138,6 +144,27 @@ const BoxSettings = ({ type, name, change, nameInput }) => {
                 <p>CHANGE</p>
                 <img src="../assets/pencil.png" />
             </button>
+        ) : (
+            <div>
+                <input
+                    name="file"
+                    type="file"
+                    id="input__file"
+                    className="input__file"
+                    multiple
+                    ref={file}
+                    onChange={() => changeImg(file)}
+                />
+                <label htmlFor="input__file" className="buttons pointer">
+                    <p>CHANGE</p>
+                    <img src="../assets/pencil.png" />
+                </label>
+            </div>
+        );
+    return (
+        <div className="block_settings flexCC">
+            {type}
+            {buttonChange}
             <p className="name_settings">{name}</p>
         </div>
     );
