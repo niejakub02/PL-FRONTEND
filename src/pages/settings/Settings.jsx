@@ -131,7 +131,10 @@ const BoxSettings = ({ type, name, change, nameInput }) => {
     return (
         <div className="block_settings flexCC">
             {type}
-            <button className="buttons" onClick={() => change(nameInput)}>
+            <button
+                className="buttons pointer"
+                onClick={() => change(nameInput)}
+            >
                 <p>CHANGE</p>
                 <img src="../assets/pencil.png" />
             </button>
