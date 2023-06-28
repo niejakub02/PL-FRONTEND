@@ -52,10 +52,6 @@ const Settings = ({ handleOpen }) => {
             })
     }
 
-    useEffect(() => {
-        console.log(user);
-    }, [user])
-
     return (
         user ?
             <Wrapper handleOpen={handleOpen} type={"SETTINGS"} onSave={handleSave}>

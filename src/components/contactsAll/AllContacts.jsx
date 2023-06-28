@@ -4,6 +4,7 @@ import { InputAdornment, TextField } from "@mui/material";
 import OneContact from "../contactOne/OneContact.jsx";
 
 import "./AllContacts.css";
+import client from "../../utils/API.js";
 
 const AllContacts = ({
     friends,
@@ -24,8 +25,12 @@ const AllContacts = ({
     };
 
     const deleteContact = (id) => {
-        setFriends((f) => f.filter((el) => el.user_id !== id));
-        setFriendsBase((f) => f.filter((el) => el.user_id !== id));
+        setFriends((f) => f.filter((el) => el.id !== id));
+        setFriendsBase((f) => f.filter((el) => el.id !== id));
+        client.delete(`User/${id}/DeclineInvitation`)
+            .then(res => {
+                console.log('decline');
+            })
     };
 
     const [chat, setChat] = useState(1);
@@ -57,7 +62,7 @@ const AllContacts = ({
                     return (
                         <OneContact
                             friend={friend}
-                            key={friend.user_id}
+                            key={friend.id}
                             deleteContact={deleteContact}
                             showChat={showChat}
                             changeChat={changeChat}

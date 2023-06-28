@@ -1,8 +1,10 @@
+import { Box, CircularProgress } from "@mui/material";
 import AllContacts from "../contactsAll/AllContacts.jsx";
 
 import "./Contacts.css";
+import LoaderFill from "../loaderFill/loaderFill.jsx";
 
-const Contacts = ({ friends, setFriends, showChat, handleOpenReview }) => {
+const Contacts = ({ friends, setFriends, showChat, handleOpenReview, isLoading }) => {
     const noContacts = (
         <div className="no-contacts flexCC">
             <img src="../assets/no-contacts.svg" />
@@ -23,18 +25,22 @@ const Contacts = ({ friends, setFriends, showChat, handleOpenReview }) => {
                 <div className="dots" />
             </div>
             <div className="all_contacts">
-                {!true ? (
-                    noContacts
-                ) : (
-                    <AllContacts
-                        friends={friends}
-                        setFriends={setFriends}
-                        showChat={showChat}
-                        handleOpenReview={handleOpenReview}
-                    />
-                )}
+                {
+                    isLoading ?
+                        <LoaderFill />
+                        : (
+                            friends.length ?
+                                <AllContacts
+                                    friends={friends}
+                                    setFriends={setFriends}
+                                    showChat={showChat}
+                                    handleOpenReview={handleOpenReview}
+                                />
+                                : noContacts
+                        )
+                }
             </div>
-        </div>
+        </div >
     );
 };
 

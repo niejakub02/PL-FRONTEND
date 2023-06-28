@@ -1,6 +1,13 @@
-import { Marker } from "react-leaflet";
+import { useEffect, useState } from "react";
+import { Marker, useMapEvents } from "react-leaflet";
+import client from "../../utils/API";
 
-const Markers = ({ position, MarkerInformation }) => {
+const Markers = ({ position, MarkerInformation, addMarker }) => {
+    const map = useMapEvents({
+        click: (e) =>
+            addMarker(e)
+    })
+
     var redIcon = new L.Icon({
         iconUrl:
             "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
@@ -21,23 +28,27 @@ const Markers = ({ position, MarkerInformation }) => {
         popupAnchor: [1, -34],
         shadowSize: [41, 41],
     });
-    const markers = position.map((el) => {
-        return (
-            <div key={el.user_id}>
-                <Marker
-                    position={[el.latitude, el.longitude]}
-                    icon={el.offers_help ? redIcon : blueIcon}
-                    eventHandlers={{
-                        click: (e) => {
-                            MarkerInformation(e, el.user_id);
-                        },
-                    }}
-                />
-            </div>
-        );
-    });
 
-    return <>{markers}</>;
+
+    return (
+        <>
+            {
+                position.map((el) => (
+                    <div key={el.marker.id}>
+                        <Marker
+                            position={[el.marker.latitude, el.marker.longitude]}
+                            icon={el.marker.offersHelp ? redIcon : blueIcon}
+                            eventHandlers={{
+                                click: (e) => {
+                                    MarkerInformation(e, el.marker.id);
+                                },
+                            }}
+                        />
+                    </div>
+                ))
+            }
+        </>
+    )
 };
 
 export default Markers;

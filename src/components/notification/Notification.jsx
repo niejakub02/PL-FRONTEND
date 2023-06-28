@@ -5,15 +5,20 @@ import "../modal/Modal.css";
 import "./Notification.css";
 import { useEffect, useState } from "react";
 import client from "../../utils/API";
+import LoaderFill from "../loaderFill/loaderFill";
 
-const Notification = ({ handleClose }) => {
+const Notification = ({ handleClose, onAccept, onDecline }) => {
     const [invitations, setInvitations] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        setIsLoading(true);
         client.get('User/Invitations')
             .then(res => {
-                console.log(res.data)
                 setInvitations(res.data)
+            })
+            .finally(() => {
+                setIsLoading(false);
             })
     }, [])
 
@@ -32,11 +37,17 @@ const Notification = ({ handleClose }) => {
                     />
                 </div>
                 <div className="notification_people">
-                    {invitations.map((el) => {
-                        return (
-                            <OnePersonNotification friend={el} key={el.id} />
-                        );
-                    })}
+                    {
+                        isLoading ?
+                            <LoaderFill />
+                            : invitations.length ?
+                                invitations.map((el) => {
+                                    return (
+                                        <OnePersonNotification friend={el} key={el.id} onAccept={onAccept} onDecline={onDecline} setInvitations={setInvitations} />
+                                    );
+                                })
+                                : 'no invitations'
+                    }
                 </div>
                 <div className="panel_buttons">
                     <button className="buttons">ACCEPT ALL</button>
@@ -48,19 +59,24 @@ const Notification = ({ handleClose }) => {
     );
 };
 
-const OnePersonNotification = ({ friend }) => {
+const OnePersonNotification = ({ friend, setInvitations, onAccept, onDecline }) => {
     return (
-        <div className="one_person_notification" key={friend.user_id}>
+        <div className="one_person_notification" key={friend.id}>
             <div className="flexCC">
                 <AvatarBox name={friend.firstName} img={friend.avatar} />
                 <p>
-                    <b>{friend.firstName || 'STRANGER'}</b> IS TRYING TO REACH OUT TO
-                    YOU
+                    <b>{friend.firstName || 'STRANGER'}</b> IS TRYING TO REACH OUT TO YOU
                 </p>
             </div>
             <div className="markers_notification">
-                <img src="../assets/ok.svg" />
-                <img src="../assets/no.svg" />
+                <img src="../assets/ok.svg" onClick={() => {
+                    onAccept(friend.id);
+                    setInvitations((i) => i.filter((el) => el.id !== friend.id));
+                }} />
+                <img src="../assets/no.svg" onClick={() => {
+                    onDecline(friend.id);
+                    setInvitations((i) => i.filter((el) => el.id !== friend.id));
+                }} />
             </div>
         </div>
     );

@@ -15,6 +15,9 @@
     border-radius: 10px;
     padding: 10px;
     border: solid 1px #DFDFDF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hint {
@@ -22,10 +25,10 @@
     text-align: center;
 }
 
-.autocomplete_countries{
+.autocomplete_countries {
     width: 100%;
 }
 
-.autocomplete_countries button{
+.autocomplete_countries button {
     width: 35px;
 }

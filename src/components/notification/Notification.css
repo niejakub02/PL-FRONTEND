@@ -1,6 +1,11 @@
 .notification_people {
     overflow: auto;
     padding: 0 23px;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .one_person_notification {

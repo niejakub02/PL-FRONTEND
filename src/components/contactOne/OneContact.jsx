@@ -29,7 +29,7 @@ const OneContact = ({
         <div className="one_person ">
             <div className="flexCC">
                 <AvatarBox name={friend.name} img={friend.avatar} />
-                <p>{friend.name}</p>
+                <p>{friend.firstName ? friend.firstName : 'stranger'}</p>
             </div>
             <div className="markers">
                 <div className="flexCC">
@@ -60,7 +60,7 @@ const OneContact = ({
                 <div className="flexCC">
                     <img
                         src="../assets/tresh.svg"
-                        onClick={() => deleteContact(friend.user_id)}
+                        onClick={() => deleteContact(friend.id)}
                     />
                 </div>
             </div>

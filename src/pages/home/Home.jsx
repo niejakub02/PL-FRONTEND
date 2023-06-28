@@ -10,8 +10,8 @@ import client from "../../utils/API.js";
 import "../../styles/Styles.css";
 import "./Home.css";
 
-const Home = ({ position, countries, handleOpen, Users, handleOpenReview }) => {
-    const [friends, setFriends] = useState(Users);
+const Home = ({ position, countries, handleOpen, handleOpenReview }) => {
+    const [friends, setFriends] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
     const [positionPopupX, setPositionPopupX] = useState(null);
     const [positionPopupY, setPositionPopupY] = useState(null);
@@ -21,17 +21,24 @@ const Home = ({ position, countries, handleOpen, Users, handleOpenReview }) => {
     const [isMap, setIsMap] = useState(true);
     const [valueTabPanel, setValueTabPanel] = useState(0);
     const [idPopup, setIdPopup] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState({
+        contacts: false
+    });
 
     useEffect(() => {
-        setIsLoading(true);
+        setIsLoading({
+            ...isLoading,
+            contacts: true
+        });
         client.get('User/Contacts')
             .then(res => {
-                console.log(res.data);
                 setFriends(res.data)
             })
             .finally(() => {
-                setIsLoading(false);
+                setIsLoading({
+                    ...isLoading,
+                    contacts: false
+                });
             })
     }, [])
 
@@ -51,11 +58,12 @@ const Home = ({ position, countries, handleOpen, Users, handleOpenReview }) => {
     const MarkerInformation = (e, id) => {
         setPositionPopupX(e.containerPoint.x + positionMapX);
         setPositionPopupY(e.containerPoint.y + positionMapY);
-        const personPopup = Users.find((el) => {
-            return el.user_id === id;
-        });
-        setIdPopup(personPopup);
-        popupOpen();
+
+        client.get(`Marker/${id}/Owner`)
+            .then(res => {
+                setIdPopup(res.data);
+                popupOpen();
+            })
     };
 
     const showChat = (id) => {
@@ -90,6 +98,7 @@ const Home = ({ position, countries, handleOpen, Users, handleOpenReview }) => {
                 setFriends={setFriends}
                 showChat={showChat}
                 handleOpenReview={handleOpenReview}
+                isLoading={isLoading.contacts}
             />
             <TabPanel
                 position={position}

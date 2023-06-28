@@ -14,11 +14,17 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import { Marker, countries, Users, languages } from "./Database.jsx";
 
 import "./App.css";
+import client from "./utils/API";
 
 function App() {
     const [open, setOpen] = useState(false);
     const [isNotification, setIsNotification] = useState(true);
     const [idReview, setIdReview] = useState(null);
+
+    const idI = 0;
+    const I = Users.find((el) => el.user_id == idI);
+    const friends = Users.filter((el) => el.user_id != idI);
+    const marker = Marker.filter((el) => el.user_id != idI);
 
     const handleOpenNotification = () => {
         setOpen(true);
@@ -28,14 +34,22 @@ function App() {
         setOpen(true);
         setIsNotification(false);
         setIdReview(id);
-        console.log(id);
     };
     const handleClose = () => setOpen(false);
 
-    const idI = 0;
-    const I = Users.find((el) => el.user_id == idI);
-    const friends = Users.filter((el) => el.user_id != idI);
-    const marker = Marker.filter((el) => el.user_id != idI);
+    const acceptInvitation = (id) => {
+        client.post(`User/${id}/invite`)
+            .then(res => {
+                console.log('add');
+            })
+    }
+
+    const declineInvitation = (id) => {
+        client.delete(`User/${id}/DeclineInvitation`)
+            .then(res => {
+                console.log('decline');
+            })
+    }
 
     return (
         <>
@@ -45,7 +59,7 @@ function App() {
                 handleClose={handleClose}
             >
                 {isNotification ? (
-                    <Notification friends={friends} handleClose={handleClose} />
+                    <Notification friends={friends} handleClose={handleClose} onAccept={acceptInvitation} onDecline={declineInvitation} />
                 ) : (
                     <Review
                         friends={friends}
