@@ -32,7 +32,7 @@ const PopupPerson = ({
                 <div className="logo_popup_box flexCC">
                     <img src="../assets/vector.svg" />
                     <p>
-                        {idPopup.firstName} ({idPopup.id})
+                        {idPopup.firstName ? idPopup.firstName : 'stranger'} ({idPopup.age ? idPopup.age : 'unknown'})
                     </p>
                 </div>
                 <img

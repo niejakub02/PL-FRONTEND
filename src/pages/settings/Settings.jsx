@@ -19,6 +19,7 @@ const Settings = ({ handleOpen }) => {
                 client.get('User/Informations')
                     .then(res => {
                         const userData = res.data;
+                        console.log(userData);
                         userData.languages = userData.languages.map(l => l.languageId)
                         setUser(userData)
                     })
@@ -32,10 +33,17 @@ const Settings = ({ handleOpen }) => {
     }, [])
 
     const updateUser = (e) => {
-        setUser({
-            ...user,
-            [e.target.name]: e.target.value
-        })
+        if (e.target.name == "avatar") {
+            setUser({
+                ...user,
+                ImageFile: e.target.files[0]
+            })
+        } else {
+            setUser({
+                ...user,
+                [e.target.name]: e.target.value
+            })
+        }
     }
 
     const updateUsersLanguages = (e, value) => {
@@ -46,7 +54,11 @@ const Settings = ({ handleOpen }) => {
     }
 
     const handleSave = () => {
-        client.put(`User`, user)
+        client.put(`User`, user, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        })
             .then(res => {
                 console.log('UPDATED');
             })
@@ -55,9 +67,14 @@ const Settings = ({ handleOpen }) => {
     return (
         user ?
             <Wrapper handleOpen={handleOpen} type={"SETTINGS"} onSave={handleSave}>
-                <div className="overflow">
+                <div className="overflow fill">
                     <BoxSettings
-                        type={<AvatarBox name={user.firstName} img={user.avatar} />}
+                        type={
+                            <>
+                                <AvatarBox name={user.firstName} img={user.avatar} htmlFor="file-upload" ></AvatarBox>
+                                <input type="file" name="avatar" accept="image/png, image/jpeg" onChange={updateUser} />
+                            </>
+                        }
                         name={"AVATAR"}
                     />
                     <BoxSettings
@@ -111,10 +128,10 @@ const BoxSettings = (props) => {
     return (
         <div className="block_settings flexCC">
             {props.type}
-            <button className="buttons">
+            {/* <button className="buttons">
                 <p>CHANGE</p>
                 <img src="../assets/pencil.png" />
-            </button>
+            </button> */}
             <p className="name_settings">{props.name}</p>
         </div>
     );

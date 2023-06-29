@@ -43,7 +43,7 @@
     justify-content: space-around;
 }
 
-.panel input {
+.panel input[type="text"] {
     width: 70%;
     height: 40px;
     border: solid 1px #dfdfdf;
@@ -54,7 +54,7 @@
     outline: none;
 }
 
-.panel button {
+.panel input[type="submit"] {
     width: 20%;
     height: 40px;
     background: white;

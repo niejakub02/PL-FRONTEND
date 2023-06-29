@@ -9,6 +9,7 @@ import { Chat } from "../../Database.jsx";
 import client from "../../utils/API.js";
 import "../../styles/Styles.css";
 import "./Home.css";
+import { HubConnectionBuilder } from "@microsoft/signalr";
 
 const Home = ({ position, countries, handleOpen, handleOpenReview }) => {
     const [friends, setFriends] = useState([]);
@@ -67,18 +68,23 @@ const Home = ({ position, countries, handleOpen, handleOpenReview }) => {
     };
 
     const showChat = (id) => {
-        const chat = Chat.find((el) => {
-            return el.inviting_user_id === 0 && el.invited_user_id === id;
-        });
-        setChatId(chat.chat_id);
+        setChatId(id);
         if (isMap) {
-            changeValueTabPanel();
+            changeValueTabPanel(id);
         }
     };
 
-    const changeValueTabPanel = () => {
-        setValueTabPanel((el) => (el == 1 ? 0 : 1));
-        setIsMap((el) => !el);
+    const changeValueTabPanel = (e) => {
+        if (friends) {
+            setValueTabPanel((el) => (el == 1 ? 0 : 1));
+            setIsMap((el) => !el);
+
+            if (!Number.isInteger(e)) {
+                setChatId(valueTabPanel ? null : friends[0]?.id);
+            }
+        } else {
+            console.log('friends not yet loaded / no friends');
+        }
     };
 
     return (
@@ -96,11 +102,13 @@ const Home = ({ position, countries, handleOpen, handleOpenReview }) => {
             <Contacts
                 friends={friends}
                 setFriends={setFriends}
+                chatId={chatId}
                 showChat={showChat}
                 handleOpenReview={handleOpenReview}
                 isLoading={isLoading.contacts}
             />
             <TabPanel
+                friends={friends}
                 position={position}
                 countries={countries}
                 chatId={chatId}

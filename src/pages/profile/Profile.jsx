@@ -41,7 +41,7 @@ const Profile = ({ handleOpen }) => {
     return (
         person ?
             <Wrapper handleOpen={handleOpen} type={"PROFILE"} onAdd={handleAdd}>
-                <div className="overflow">
+                <div className="overflow fill">
                     <BoxSettings
                         type={<AvatarBox name={person.firstName} img={person.avatar} />}
                         name={"AVATAR"}

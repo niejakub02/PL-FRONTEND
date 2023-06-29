@@ -12,6 +12,7 @@ const AllContacts = ({
     showChat,
     handleOpenReview,
     star,
+    chatId
 }) => {
     const [friendsBase, setFriendsBase] = useState(friends);
     const searchInput = useRef(null);
@@ -19,7 +20,7 @@ const AllContacts = ({
     const debouncedHandler = () => {
         setFriends(
             friendsBase.filter((friend) =>
-                friend.name.toLowerCase().includes(searchInput?.current?.value)
+                friend.firstName.toLowerCase().includes(searchInput?.current?.value)
             )
         );
     };
@@ -31,11 +32,6 @@ const AllContacts = ({
             .then(res => {
                 console.log('decline');
             })
-    };
-
-    const [chat, setChat] = useState(1);
-    const changeChat = (id) => {
-        setChat(id);
     };
 
     return (
@@ -57,22 +53,29 @@ const AllContacts = ({
                     ),
                 }}
             />
-            <div className="people">
-                {friends.map((friend) => {
-                    return (
-                        <OneContact
-                            friend={friend}
-                            key={friend.id}
-                            deleteContact={deleteContact}
-                            showChat={showChat}
-                            changeChat={changeChat}
-                            chat={chat}
-                            handleOpenReview={handleOpenReview}
-                            star={star}
-                        />
-                    );
-                })}
-            </div>
+            {!!friends.length ?
+                <div className="people">
+                    {friends.map((friend) => {
+                        return (
+                            <OneContact
+                                friend={friend}
+                                key={friend.id}
+                                deleteContact={deleteContact}
+                                showChat={showChat}
+                                chatId={chatId}
+                                handleOpenReview={handleOpenReview}
+                                star={star}
+                            />
+                        );
+                    })}
+                </div> : <div className="no-contacts flexCC">
+                    <img src="../assets/no-contacts.svg" />
+                    <p>
+                        You have not reached out to anyone yet! Use the map beside to
+                        find people.
+                    </p>
+                </div>
+            }
         </>
     );
 };

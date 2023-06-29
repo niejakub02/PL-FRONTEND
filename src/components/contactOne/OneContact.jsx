@@ -11,6 +11,7 @@ const OneContact = ({
     chat,
     changeChat,
     handleOpenReview,
+    chatId
 }) => {
     // const favorite = friend.favorite
     //     ? "../assets/starMarked.svg"
@@ -28,20 +29,19 @@ const OneContact = ({
     return (
         <div className="one_person ">
             <div className="flexCC">
-                <AvatarBox name={friend.name} img={friend.avatar} />
+                <AvatarBox name={friend.firstName} img={friend.avatar} />
                 <p>{friend.firstName ? friend.firstName : 'stranger'}</p>
             </div>
             <div className="markers">
                 <div className="flexCC">
                     <img
                         src={
-                            chat === friend.user_id
+                            chatId === friend.id
                                 ? "../assets/chat.svg"
                                 : "../assets/chat2.svg"
                         }
                         onClick={() => {
-                            changeChat(friend.user_id);
-                            showChat(friend.user_id);
+                            showChat(friend.id);
                         }}
                     />
                 </div>
@@ -49,11 +49,7 @@ const OneContact = ({
                     <img
                         src={star}
                         onClick={() => {
-                            changeStar();
-                            {
-                                star === "../assets/star.svg" &&
-                                    handleOpenReview(friend.user_id);
-                            }
+                            handleOpenReview(friend.id);
                         }}
                     />
                 </div>

@@ -4,16 +4,7 @@ import AllContacts from "../contactsAll/AllContacts.jsx";
 import "./Contacts.css";
 import LoaderFill from "../loaderFill/loaderFill.jsx";
 
-const Contacts = ({ friends, setFriends, showChat, handleOpenReview, isLoading }) => {
-    const noContacts = (
-        <div className="no-contacts flexCC">
-            <img src="../assets/no-contacts.svg" />
-            <p>
-                You have not reached out to anyone yet! Use the map beside to
-                find people.
-            </p>
-        </div>
-    );
+const Contacts = ({ friends, setFriends, showChat, handleOpenReview, isLoading, chatId }) => {
 
     return (
         <div className="contacts">
@@ -29,18 +20,17 @@ const Contacts = ({ friends, setFriends, showChat, handleOpenReview, isLoading }
                     isLoading ?
                         <LoaderFill />
                         : (
-                            friends.length ?
-                                <AllContacts
-                                    friends={friends}
-                                    setFriends={setFriends}
-                                    showChat={showChat}
-                                    handleOpenReview={handleOpenReview}
-                                />
-                                : noContacts
+                            <AllContacts
+                                friends={friends}
+                                setFriends={setFriends}
+                                showChat={showChat}
+                                chatId={chatId}
+                                handleOpenReview={handleOpenReview}
+                            />
                         )
                 }
             </div>
-        </div >
+        </div>
     );
 };
 

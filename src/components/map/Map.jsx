@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import { Backdrop, Switch } from "@mui/material";
 import InitMap from "../initMap/initMap.jsx";
 import { autocompleteOptions } from "../../utils/mockData.js";
-import { difference, flatten, sortBy, uniq } from "lodash";
+import { difference, flatten, sortBy, uniq, uniqBy } from "lodash";
 
 import "./Map.css";
 import client from "../../utils/API.js";
@@ -54,11 +54,13 @@ const Map = ({
             setIsLoading(true);
             client.get(`https://nominatim.openstreetmap.org/reverse?lat=${e.latlng.lat}&lon=${e.latlng.lng}&format=json`)
                 .then(res => {
+                    const { city, town, village } = res.data.address;
+                    const place = village ? village : (town ? town : city);
                     client.post('User/AddMarker', {
                         latitude: e.latlng.lat,
                         longitude: e.latlng.lng,
                         offersHelp: !e.originalEvent.ctrlKey,
-                        city: res.data.address.city
+                        city: place
                     })
                         .then(res2 => {
                             console.log('Marker')
@@ -90,7 +92,7 @@ const Map = ({
                 params: { city: '*' }
             })
                 .then(res => {
-                    const l = uniq((flatten(res.data.map(m => m.user.languages))).map(l => l.language));
+                    const l = uniqBy((flatten(res.data.map(m => m.user.languages))).map(l => l.language), (o) => o.id);
                     const c = uniq(res.data.map(m => m.marker.city));
                     setLanguages(l);
                     setCitites(c);
@@ -113,7 +115,7 @@ const Map = ({
                 params: { city: '*', offersHelp: false }
             })
                 .then(res => {
-                    const l = uniq((flatten(res.data.map(m => m.user.languages))).map(l => l.language));
+                    const l = uniqBy((flatten(res.data.map(m => m.user.languages))).map(l => l.language), (o) => o.id);
                     const c = uniq(res.data.map(m => m.marker.city));
                     setLanguages(l);
                     setCitites(c);
@@ -136,7 +138,7 @@ const Map = ({
                 params: { city: '*', offersHelp: true }
             })
                 .then(res => {
-                    const l = uniq((flatten(res.data.map(m => m.user.languages))).map(l => l.language));
+                    const l = uniqBy((flatten(res.data.map(m => m.user.languages))).map(l => l.language), (o) => o.id);
                     const c = uniq(res.data.map(m => m.marker.city));
                     setLanguages(l);
                     setCitites(c);
@@ -242,7 +244,7 @@ const Map = ({
             <div className="hint flexCC">
                 <p>
                     <strong>HINT</strong>: If you want to add a marker hold left
-                    ctrl and click on the map!
+                    ctrl/alt and click on the map!
                 </p>
                 <p>
                     <strong>WARNING</strong>: You can place only one marker at
