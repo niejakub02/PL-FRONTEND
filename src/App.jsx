@@ -12,9 +12,11 @@ import Review from "../src/components/review/Review";
 import Profile from "./pages/profile/Profile";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import { Marker, countries, Users, languages } from "./Database.jsx";
+import 'react-toastify/dist/ReactToastify.css';
 
 import "./App.css";
 import client from "./utils/API";
+import { ToastContainer, toast } from "react-toastify";
 
 function App() {
     const [open, setOpen] = useState(false);
@@ -40,6 +42,7 @@ function App() {
     const acceptInvitation = (id) => {
         client.post(`User/${id}/invite`)
             .then(res => {
+                toast("Invitation accepted!", { type: "success" });
                 console.log('add');
             })
     }
@@ -47,6 +50,7 @@ function App() {
     const declineInvitation = (id) => {
         client.delete(`User/${id}/DeclineInvitation`)
             .then(res => {
+                toast("Invitation declined!", { type: "success" });
                 console.log('decline');
             })
     }
@@ -111,6 +115,10 @@ function App() {
                     </Route>
                 </Routes>
             </Router>
+            <ToastContainer
+                position="bottom-left"
+                autoClose={2500}
+            />
         </>
     );
 }

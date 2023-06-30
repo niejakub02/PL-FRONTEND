@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { Rating, TextField } from "@mui/material";
 import AvatarBox from "../../components/avatar/Avatar.jsx";
 import Autocomplete from "@mui/material/Autocomplete";
 import "../../styles/Styles.css";
@@ -7,29 +7,43 @@ import "./Settings.css";
 import Wrapper from "../../components/wrapper/Wrapper.jsx";
 import { useEffect, useState } from "react";
 import client from "../../utils/API.js";
+import { toast } from "react-toastify";
 
 const Settings = ({ handleOpen }) => {
     const [user, setUser] = useState(null);
     const [languages, setLanguages] = useState([]);
 
     useEffect(() => {
-        client.get('Language/Languages')
-            .then(res => {
-                setLanguages(res.data);
-                client.get('User/Informations')
+        Promise.all([
+            client.get('Language/Languages'),
+            client.get(`User/Informations`),
+        ])
+            .then(([languagesRes, detailsRes]) => {
+                const languagesData = languagesRes.data;
+                const detailsData = detailsRes.data;
+
+                client.get(`User/${detailsData.id}/GetReviews`)
                     .then(res => {
-                        const userData = res.data;
-                        console.log(userData);
-                        userData.languages = userData.languages.map(l => l.languageId)
-                        setUser(userData)
+                        const reviewsData = res.data;
+                        detailsData.reviewsRating = reviewsData.map(r => r.rating);
+                        detailsData.languages = detailsData.languages.map(l => l.languageId);
+
+                        setLanguages(languagesData);
+                        setUser(detailsData);
                     })
             })
 
-        // Requests for some reason cant run concurrently
-        // Promise.all([
-        //     client.get('Language/Languages'),
-        //     client.get('User/Informations')
-        // ])
+        // client.get('Language/Languages')
+        //     .then(res => {
+        //         setLanguages(res.data);
+        //         client.get('User/Informations')
+        //             .then(res => {
+        //                 const userData = res.data;
+        //                 console.log(userData);
+        //                 userData.languages = userData.languages.map(l => l.languageId)
+        //                 setUser(userData)
+        //             })
+        //     })
     }, [])
 
     const updateUser = (e) => {
@@ -60,6 +74,7 @@ const Settings = ({ handleOpen }) => {
             },
         })
             .then(res => {
+                toast("Profile has been updated!", { type: "success" })
                 console.log('UPDATED');
             })
     }
@@ -76,6 +91,10 @@ const Settings = ({ handleOpen }) => {
                             </>
                         }
                         name={"AVATAR"}
+                    />
+                    <BoxSettings
+                        type={<Rating value={user.reviewsRating / user.reviewsRating.length} readOnly />}
+                        name={"RATING"}
                     />
                     <BoxSettings
                         type={<input type="text" name="firstName" value={user.firstName} onChange={updateUser} />}

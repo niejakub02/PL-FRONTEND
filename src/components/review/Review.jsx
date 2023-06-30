@@ -6,31 +6,41 @@ import "../../pages/sign/Sign.css";
 import "../modal/Modal.css";
 import "./Review.css";
 import client from "../../utils/API";
+import { toast } from "react-toastify";
+import LoaderFill from "../loaderFill/loaderFill";
 
 const Review = ({ handleClose, idReview }) => {
     const [value, setValue] = useState(0);
     const [descriptionValue, setDescriptionValue] = useState('');
     const [friend, setFriend] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        setIsLoading(true);
         client.get(`User/${idReview}`)
             .then(res => {
                 console.log(res.data);
                 setFriend(res.data)
             })
+            .finally(() => {
+                setIsLoading(false);
+            })
     }, [])
 
     const onReview = () => {
+        setIsLoading(true);
         client.post('User/AddReview', {
             rating: value,
             description: descriptionValue,
             toId: friend.id
         })
             .then(res => {
+                toast("Review has been added!", { type: "success" });
                 console.log('REVIEW');
             })
             .finally(() => {
                 handleClose();
+                setIsLoading(false);
             })
     }
     return (
@@ -47,7 +57,8 @@ const Review = ({ handleClose, idReview }) => {
                 />
             </div>
             <div className="review">
-                {friend ?
+                {isLoading ?
+                    <LoaderFill /> :
                     <>
                         <div className="full_width review_personal_information">
                             <div className="flexCC">
@@ -70,7 +81,7 @@ const Review = ({ handleClose, idReview }) => {
                             value={descriptionValue}
                         ></textarea>
                     </>
-                    : null}
+                }
 
             </div>
             <div className="panel_buttons">
@@ -78,7 +89,7 @@ const Review = ({ handleClose, idReview }) => {
                     Send
                 </button>
             </div>
-        </div >
+        </div>
     );
 };
 

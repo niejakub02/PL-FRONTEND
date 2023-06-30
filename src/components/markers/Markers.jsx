@@ -5,7 +5,7 @@ import client from "../../utils/API";
 const Markers = ({ position, MarkerInformation, addMarker }) => {
     const map = useMapEvents({
         click: (e) =>
-            addMarker(e)
+            addMarker(e),
     })
 
     var redIcon = new L.Icon({

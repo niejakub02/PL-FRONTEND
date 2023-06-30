@@ -23,10 +23,6 @@ const Map = ({
     const [position, setPosition] = useState([])
     const [cities, setCitites] = useState([])
     const [languages, setLanguages] = useState([])
-    const [selectedOptions, setSelectedOptions] = useState({
-        city: [],
-        languages: []
-    });
     const [positionMap, setPositionMap] = useState({});
     const [helpOffers, setHelpOffers] = useState({
         need: true,
