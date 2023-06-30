@@ -19,7 +19,8 @@
     max-width: 40%;
     margin: 10px 0;
     border-radius: 5px;
-    padding: 5px;
+    padding: 0.8rem;
+    word-break: break-word;
     font-size: 15px;
 }
 

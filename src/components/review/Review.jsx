@@ -19,7 +19,6 @@ const Review = ({ handleClose, idReview }) => {
         setIsLoading(true);
         client.get(`User/${idReview}`)
             .then(res => {
-                console.log(res.data);
                 setFriend(res.data)
             })
             .finally(() => {

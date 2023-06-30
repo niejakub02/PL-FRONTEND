@@ -1,4 +1,4 @@
-import { Rating, TextField } from "@mui/material";
+import { Backdrop, CircularProgress, Rating, TextField } from "@mui/material";
 import AvatarBox from "../../components/avatar/Avatar.jsx";
 import Autocomplete from "@mui/material/Autocomplete";
 import "../../styles/Styles.css";
@@ -12,8 +12,10 @@ import { toast } from "react-toastify";
 const Settings = ({ handleOpen }) => {
     const [user, setUser] = useState(null);
     const [languages, setLanguages] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        setIsLoading(true);
         Promise.all([
             client.get('Language/Languages'),
             client.get(`User/Informations`),
@@ -30,6 +32,9 @@ const Settings = ({ handleOpen }) => {
 
                         setLanguages(languagesData);
                         setUser(detailsData);
+                    })
+                    .finally(() => {
+                        setIsLoading(false);
                     })
             })
 
@@ -139,7 +144,9 @@ const Settings = ({ handleOpen }) => {
                         name={"DESCRIPTION"}
                     />
                 </div>
-            </Wrapper> : null
+            </Wrapper> : <Backdrop open={isLoading} sx={{ color: '#fff' }}>
+                <CircularProgress color="inherit" />
+            </Backdrop>
     );
 };
 

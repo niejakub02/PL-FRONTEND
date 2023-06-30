@@ -20,9 +20,6 @@ const Chat = ({ chatId }) => {
                 .build();
 
             connection.on("GetThatMessage", (userId, message) => {
-                console.log(userId);
-                console.log(id);
-                console.log(otherId);
                 key++;
                 if (userId === id) {
                     setMessages((prev) => ([
@@ -31,7 +28,6 @@ const Chat = ({ chatId }) => {
                     ]))
                 }
                 if (userId === otherId) {
-                    console.log('test');
                     setMessages((prev) => ([
                         ...prev,
                         { mine: false, key, message }

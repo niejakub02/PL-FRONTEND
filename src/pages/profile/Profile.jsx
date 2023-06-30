@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Rating, TextField, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Backdrop, Box, CircularProgress, Rating, TextField, Typography } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Autocomplete from "@mui/material/Autocomplete";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -12,11 +12,13 @@ import "../settings/Settings.jsx";
 import { useEffect, useState } from "react";
 import client from "../../utils/API.js";
 import { toast } from "react-toastify";
+import LoaderFill from "../../components/loaderFill/loaderFill.jsx";
 
 const Profile = ({ handleOpen }) => {
     const [searchParams] = useSearchParams();
     const [person, setPerson] = useState(null);
     const [languages, setLanguages] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const id = searchParams.get("id");
@@ -33,6 +35,7 @@ const Profile = ({ handleOpen }) => {
     }
 
     useEffect(() => {
+        setIsLoading(true);
         Promise.all([
             client.get('Language/Languages'),
             client.get(`User/${id}`),
@@ -45,10 +48,12 @@ const Profile = ({ handleOpen }) => {
 
                 detailsData.languages = detailsData.languages.map(l => l.languageId);
                 detailsData.reviews = reviewsData;
-                console.log(detailsData);
 
                 setLanguages(languagesData);
                 setPerson(detailsData);
+            })
+            .finally(() => {
+                setIsLoading(false);
             })
 
         // client.get('Language/Languages')
@@ -138,7 +143,9 @@ const Profile = ({ handleOpen }) => {
                         name={"DESCRIPTION"}
                     />
                 </div>
-            </Wrapper> : null
+            </Wrapper> : <Backdrop open={isLoading} sx={{ color: '#fff' }}>
+                <CircularProgress color="inherit" />
+            </Backdrop>
     );
 };
 
