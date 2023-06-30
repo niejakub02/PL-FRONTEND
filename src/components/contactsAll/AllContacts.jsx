@@ -5,6 +5,7 @@ import OneContact from "../contactOne/OneContact.jsx";
 
 import "./AllContacts.css";
 import client from "../../utils/API.js";
+import { toast } from "react-toastify";
 
 const AllContacts = ({
     friends,
@@ -30,6 +31,7 @@ const AllContacts = ({
         setFriendsBase((f) => f.filter((el) => el.id !== id));
         client.delete(`User/${id}/DeclineInvitation`)
             .then(res => {
+                toast("Contact has been removed.", { type: "success" })
                 console.log('decline');
             })
     };

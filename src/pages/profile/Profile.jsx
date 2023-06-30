@@ -1,4 +1,5 @@
-import { Rating, TextField } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Rating, TextField, Typography } from "@mui/material";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Autocomplete from "@mui/material/Autocomplete";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
@@ -43,7 +44,8 @@ const Profile = ({ handleOpen }) => {
                 const reviewsData = reviewsRes.data;
 
                 detailsData.languages = detailsData.languages.map(l => l.languageId);
-                detailsData.reviewsRating = reviewsData.map(r => r.rating);
+                detailsData.reviews = reviewsData;
+                console.log(detailsData);
 
                 setLanguages(languagesData);
                 setPerson(detailsData);
@@ -70,11 +72,31 @@ const Profile = ({ handleOpen }) => {
                         name={"AVATAR"}
                     />
                     <BoxSettings
-                        type={<Rating
-                            value={person.reviewsRating.reduce((a, b) => a + b, 0) / person.reviewsRating.length}
-                            readOnly
-                            precision={0.5}
-                        />}
+                        type={
+                            <Accordion sx={{ backgroundColor: 'whitesmoke', boxShadow: 'none', width: '90%' }}>
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel1a-content"
+                                    id="panel1a-header"
+                                    sx={{ '& > div': { justifyContent: 'center' } }}
+                                >
+                                    <Rating
+                                        value={person.reviews.map(r => r.rating).reduce((a, b) => a + b, 0) / person.reviews?.length}
+                                        readOnly
+                                        precision={0.5} />
+
+                                </AccordionSummary>
+                                <AccordionDetails sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                    {
+                                        person.reviews.map(r => (
+                                            <Typography sx={{ display: 'flex', justifyContent: 'center' }}>
+                                                {r.description}
+                                            </Typography>
+                                        ))
+                                    }
+                                </AccordionDetails>
+                            </Accordion>
+                        }
                         name={"RATING"}
                     />
                     <BoxSettings

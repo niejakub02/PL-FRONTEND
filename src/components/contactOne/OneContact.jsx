@@ -3,6 +3,7 @@ import { useState } from "react";
 import AvatarBox from "../avatar/Avatar";
 
 import "./OneContact.css";
+import { Link } from "react-router-dom";
 
 const OneContact = ({
     friend,
@@ -29,7 +30,9 @@ const OneContact = ({
     return (
         <div className="one_person ">
             <div className="flexCC">
-                <AvatarBox name={friend.firstName} img={friend.avatar} />
+                <Link to={`/profile?id=${friend.id}`} style={{ textDecoration: 'none' }} >
+                    <AvatarBox name={friend.firstName} img={friend.avatar} />
+                </Link>
                 <p>{friend.firstName ? friend.firstName : 'stranger'}</p>
             </div>
             <div className="markers">

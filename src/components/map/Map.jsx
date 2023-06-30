@@ -26,7 +26,7 @@ const Map = ({
     const [positionMap, setPositionMap] = useState({});
     const [helpOffers, setHelpOffers] = useState({
         need: true,
-        offer: false
+        offer: true
     })
     const [isLoading, setIsLoading] = useState();
 
@@ -224,7 +224,7 @@ const Map = ({
                 <p>
                     <strong>I NEED HELP</strong> MARKERS
                 </p>
-                <Switch label="OFFER HELP" onChange={(e) => setHelpOffers({ ...helpOffers, offer: e.target.checked })} />
+                <Switch label="OFFER HELP" defaultChecked onChange={(e) => setHelpOffers({ ...helpOffers, offer: e.target.checked })} />
                 <p>
                     <strong>I OFFER HELP</strong> MARKERS
                 </p>
