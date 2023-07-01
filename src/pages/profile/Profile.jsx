@@ -93,11 +93,15 @@ const Profile = ({ handleOpen }) => {
                                 </AccordionSummary>
                                 <AccordionDetails sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                     {
-                                        person.reviews.map(r => (
-                                            <Typography sx={{ display: 'flex', justifyContent: 'center' }}>
-                                                {r.description}
+                                        !!person.reviews?.length ?
+                                            person.reviews.map(r => (
+                                                <Typography sx={{ display: 'flex', justifyContent: 'center' }}>
+                                                    {r.description}
+                                                </Typography>
+                                            ))
+                                            : <Typography sx={{ display: 'flex', justifyContent: 'center', fontWeight: 'bolder' }}>
+                                                no reviews
                                             </Typography>
-                                        ))
                                     }
                                 </AccordionDetails>
                             </Accordion>

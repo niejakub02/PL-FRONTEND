@@ -3,6 +3,7 @@ import { Button, TextField } from "@mui/material";
 
 import client from "../../utils/API";
 import "../../pages/sign/Sign";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
     const setIsLoading = useOutletContext();
@@ -24,7 +25,11 @@ const SignUp = () => {
             Password: e.target.password.value
         })
             .then(res => {
+                toast("Account has been created!", { type: "success" });
                 navigate("/SignIn")
+            })
+            .catch((e) => {
+                toast("Something went wrong.", { type: "error" });
             })
             .finally(() => {
                 setIsLoading(false);

@@ -27,6 +27,10 @@ const Home = ({ position, countries, handleOpen, handleOpenReview }) => {
     });
 
     useEffect(() => {
+        loadContacts();
+    }, [])
+
+    const loadContacts = () => {
         setIsLoading({
             ...isLoading,
             contacts: true
@@ -41,8 +45,7 @@ const Home = ({ position, countries, handleOpen, handleOpenReview }) => {
                     contacts: false
                 });
             })
-    }, [])
-
+    }
     const popupOpen = () => setShowPopup(true);
     const popupClose = () => setShowPopup(false);
 
@@ -106,6 +109,7 @@ const Home = ({ position, countries, handleOpen, handleOpenReview }) => {
                 showChat={showChat}
                 handleOpenReview={handleOpenReview}
                 isLoading={isLoading.contacts}
+                loadContacts={loadContacts}
             />
             <TabPanel
                 friends={friends}

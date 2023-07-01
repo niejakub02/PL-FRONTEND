@@ -3,6 +3,7 @@ import { Button, TextField } from "@mui/material";
 
 import client from "../../utils/API";
 import "../../pages/sign/Sign";
+import { toast } from "react-toastify";
 
 const SignIn = () => {
     const setIsLoading = useOutletContext();
@@ -19,6 +20,9 @@ const SignIn = () => {
             .then(res => {
                 localStorage.setItem("access_token", res.data);
                 navigate("/")
+            })
+            .catch((e) => {
+                toast("Something went wrong.", { type: "error" });
             })
             .finally(() => {
                 setIsLoading(false);

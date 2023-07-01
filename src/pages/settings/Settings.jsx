@@ -110,7 +110,7 @@ const Settings = ({ handleOpen }) => {
                         name={"LAST NAME"}
                     />
                     <BoxSettings
-                        type={<input type="number" name="age" value={user.age} onChange={updateUser} />}
+                        type={<input type="number" name="age" value={user.age} min={0} max={150} onChange={updateUser} />}
                         name={"AGE"}
                     />
                     <BoxSettings
