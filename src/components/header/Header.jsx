@@ -23,7 +23,7 @@ const Header = ({ show, handleOpen }) => {
     const button = (
         <>
             <div className="button_header">
-                <Badge color="primary" variant={notifications ? "dot" : null}>
+                <Badge color="primary">
                     <img src="../assets/bell.svg" onClick={handleOpen} />
                 </Badge>
                 <img

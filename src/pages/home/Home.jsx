@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Header from "../../components/header/Header.jsx";
 import Contacts from "../../components/contacts/Contacts.jsx";
@@ -6,11 +6,13 @@ import TabPanel from "../../components/tabPanel/TabPanel.jsx";
 import PopupPerson from "../../components/popup/Popup.jsx";
 import { Chat } from "../../Database.jsx";
 
+import client from "../../utils/API.js";
 import "../../styles/Styles.css";
 import "./Home.css";
+import { HubConnectionBuilder } from "@microsoft/signalr";
 
-const Home = ({ position, countries, handleOpen, Users, handleOpenReview }) => {
-    const [friends, setFriends] = useState(Users);
+const Home = ({ position, countries, handleOpen, handleOpenReview }) => {
+    const [friends, setFriends] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
     const [positionPopupX, setPositionPopupX] = useState(null);
     const [positionPopupY, setPositionPopupY] = useState(null);
@@ -20,7 +22,30 @@ const Home = ({ position, countries, handleOpen, Users, handleOpenReview }) => {
     const [isMap, setIsMap] = useState(true);
     const [valueTabPanel, setValueTabPanel] = useState(0);
     const [idPopup, setIdPopup] = useState(null);
+    const [isLoading, setIsLoading] = useState({
+        contacts: false
+    });
 
+    useEffect(() => {
+        loadContacts();
+    }, [])
+
+    const loadContacts = () => {
+        setIsLoading({
+            ...isLoading,
+            contacts: true
+        });
+        client.get('User/Contacts')
+            .then(res => {
+                setFriends(res.data)
+            })
+            .finally(() => {
+                setIsLoading({
+                    ...isLoading,
+                    contacts: false
+                });
+            })
+    }
     const popupOpen = () => setShowPopup(true);
     const popupClose = () => setShowPopup(false);
 
@@ -37,26 +62,32 @@ const Home = ({ position, countries, handleOpen, Users, handleOpenReview }) => {
     const MarkerInformation = (e, id) => {
         setPositionPopupX(e.containerPoint.x + positionMapX);
         setPositionPopupY(e.containerPoint.y + positionMapY);
-        const personPopup = friends.find((el) => {
-            return el.user_id === id;
-        });
-        setIdPopup(personPopup);
-        popupOpen();
+
+        client.get(`Marker/${id}/Owner`)
+            .then(res => {
+                setIdPopup(res.data);
+                popupOpen();
+            })
     };
 
     const showChat = (id) => {
-        const chat = Chat.find((el) => {
-            return el.inviting_user_id === 0 && el.invited_user_id === id;
-        });
-        setChatId(chat.chat_id);
+        setChatId(id);
         if (isMap) {
-            changeValueTabPanel();
+            changeValueTabPanel(id);
         }
     };
 
-    const changeValueTabPanel = () => {
-        setValueTabPanel((el) => (el == 1 ? 0 : 1));
-        setIsMap((el) => !el);
+    const changeValueTabPanel = (e) => {
+        if (friends) {
+            setValueTabPanel((el) => (el == 1 ? 0 : 1));
+            setIsMap((el) => !el);
+
+            if (!Number.isInteger(e)) {
+                setChatId(valueTabPanel ? null : friends[0]?.id);
+            }
+        } else {
+            console.log('friends not yet loaded / no friends');
+        }
     };
 
     return (
@@ -74,10 +105,14 @@ const Home = ({ position, countries, handleOpen, Users, handleOpenReview }) => {
             <Contacts
                 friends={friends}
                 setFriends={setFriends}
+                chatId={chatId}
                 showChat={showChat}
                 handleOpenReview={handleOpenReview}
+                isLoading={isLoading.contacts}
+                loadContacts={loadContacts}
             />
             <TabPanel
+                friends={friends}
                 position={position}
                 countries={countries}
                 chatId={chatId}

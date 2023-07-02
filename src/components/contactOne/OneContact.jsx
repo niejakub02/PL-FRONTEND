@@ -3,6 +3,7 @@ import { useState } from "react";
 import AvatarBox from "../avatar/Avatar";
 
 import "./OneContact.css";
+import { Link } from "react-router-dom";
 
 const OneContact = ({
     friend,
@@ -11,6 +12,7 @@ const OneContact = ({
     chat,
     changeChat,
     handleOpenReview,
+    chatId
 }) => {
     // const favorite = friend.favorite
     //     ? "../assets/starMarked.svg"
@@ -28,20 +30,21 @@ const OneContact = ({
     return (
         <div className="one_person ">
             <div className="flexCC">
-                <AvatarBox name={friend.name} img={friend.avatar} />
-                <p>{friend.name}</p>
+                <Link to={`/profile?id=${friend.id}`} style={{ textDecoration: 'none' }} >
+                    <AvatarBox name={friend.firstName} img={friend.avatar} />
+                </Link>
+                <p>{friend.firstName ? friend.firstName : 'stranger'}</p>
             </div>
             <div className="markers">
                 <div className="flexCC">
                     <img
                         src={
-                            chat === friend.user_id
+                            chatId === friend.id
                                 ? "../assets/chat.svg"
                                 : "../assets/chat2.svg"
                         }
                         onClick={() => {
-                            changeChat(friend.user_id);
-                            showChat(friend.user_id);
+                            showChat(friend.id);
                         }}
                     />
                 </div>
@@ -49,18 +52,14 @@ const OneContact = ({
                     <img
                         src={star}
                         onClick={() => {
-                            changeStar();
-                            {
-                                star === "../assets/star.svg" &&
-                                    handleOpenReview(friend.user_id);
-                            }
+                            handleOpenReview(friend.id);
                         }}
                     />
                 </div>
                 <div className="flexCC">
                     <img
                         src="../assets/tresh.svg"
-                        onClick={() => deleteContact(friend.user_id)}
+                        onClick={() => deleteContact(friend.id)}
                     />
                 </div>
             </div>

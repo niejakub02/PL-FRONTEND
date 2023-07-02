@@ -32,7 +32,7 @@ const PopupPerson = ({
                 <div className="logo_popup_box flexCC">
                     <img src="../assets/vector.svg" />
                     <p>
-                        {idPopup.name} ({idPopup.user_id})
+                        {idPopup.firstName ? idPopup.firstName : 'stranger'} ({idPopup.age ? idPopup.age : 'unknown'})
                     </p>
                 </div>
                 <img
@@ -43,9 +43,9 @@ const PopupPerson = ({
             </div>
             <div className="popup full_width overflow">
                 <div className="full_width flexCC">
-                    <AvatarBox name={idPopup.name} img={idPopup.avatar} />
+                    <AvatarBox name={idPopup.firstName} img={idPopup.avatar} />
                     <Link
-                        to={`/profile?id=${idPopup.user_id}`}
+                        to={`/profile?id=${idPopup.id}`}
                         className="flexCC link"
                     >
                         <p>VIEW PROFILE</p>

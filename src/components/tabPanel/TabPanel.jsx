@@ -17,6 +17,7 @@ const TabPanel = ({
     isMap,
     changeValueTabPanel,
     valueTabPanel,
+    friends
 }) => {
     return (
         <div className="block_map">
@@ -30,9 +31,8 @@ const TabPanel = ({
                                     <p>MAP</p>
                                 </>
                             }
-                            className={`logo_header ${
-                                isMap ? "active" : "not_active"
-                            }`}
+                            className={`logo_header ${isMap ? "active" : "not_active"
+                                }`}
                         />
                         <Tab
                             label={
@@ -41,9 +41,9 @@ const TabPanel = ({
                                     <p>CHAT</p>
                                 </>
                             }
-                            className={`logo_header ${
-                                !isMap ? "active" : "not_active"
-                            }`}
+                            className={`logo_header ${!isMap ? "active" : "not_active"
+                                }`}
+                            disabled={!friends.length}
                         />
                     </Tabs>
                 </Box>
@@ -58,7 +58,7 @@ const TabPanel = ({
                     setPositionMapY={setPositionMapY}
                 />
             ) : (
-                <Chat chat_id={chatId} />
+                <Chat chatId={chatId} />
             )}
         </div>
     );

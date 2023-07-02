@@ -4,6 +4,8 @@ import { InputAdornment, TextField } from "@mui/material";
 import OneContact from "../contactOne/OneContact.jsx";
 
 import "./AllContacts.css";
+import client from "../../utils/API.js";
+import { toast } from "react-toastify";
 
 const AllContacts = ({
     friends,
@@ -11,6 +13,7 @@ const AllContacts = ({
     showChat,
     handleOpenReview,
     star,
+    chatId
 }) => {
     const [friendsBase, setFriendsBase] = useState(friends);
     const searchInput = useRef(null);
@@ -18,19 +21,19 @@ const AllContacts = ({
     const debouncedHandler = () => {
         setFriends(
             friendsBase.filter((friend) =>
-                friend.name.toLowerCase().includes(searchInput?.current?.value)
+                friend.firstName.toLowerCase().includes(searchInput?.current?.value)
             )
         );
     };
 
     const deleteContact = (id) => {
-        setFriends((f) => f.filter((el) => el.user_id !== id));
-        setFriendsBase((f) => f.filter((el) => el.user_id !== id));
-    };
-
-    const [chat, setChat] = useState(1);
-    const changeChat = (id) => {
-        setChat(id);
+        setFriends((f) => f.filter((el) => el.id !== id));
+        setFriendsBase((f) => f.filter((el) => el.id !== id));
+        client.delete(`User/${id}/DeclineInvitation`)
+            .then(res => {
+                toast("Contact has been removed.", { type: "success" })
+                console.log('decline');
+            })
     };
 
     return (
@@ -52,22 +55,29 @@ const AllContacts = ({
                     ),
                 }}
             />
-            <div className="people">
-                {friends.map((friend) => {
-                    return (
-                        <OneContact
-                            friend={friend}
-                            key={friend.user_id}
-                            deleteContact={deleteContact}
-                            showChat={showChat}
-                            changeChat={changeChat}
-                            chat={chat}
-                            handleOpenReview={handleOpenReview}
-                            star={star}
-                        />
-                    );
-                })}
-            </div>
+            {!!friends.length ?
+                <div className="people">
+                    {friends.map((friend) => {
+                        return (
+                            <OneContact
+                                friend={friend}
+                                key={friend.id}
+                                deleteContact={deleteContact}
+                                showChat={showChat}
+                                chatId={chatId}
+                                handleOpenReview={handleOpenReview}
+                                star={star}
+                            />
+                        );
+                    })}
+                </div> : <div className="no-contacts flexCC">
+                    <img src="../assets/no-contacts.svg" />
+                    <p>
+                        You have not reached out to anyone yet! Use the map beside to
+                        find people.
+                    </p>
+                </div>
+            }
         </>
     );
 };
